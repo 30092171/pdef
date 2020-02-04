@@ -1,4 +1,4 @@
-package pdef;
+package runner;
 
 public class TestClass {
 	public static void main(String[] args) {
