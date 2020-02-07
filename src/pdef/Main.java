@@ -8,8 +8,11 @@ public class Main {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		PlayerPlanet p = new PlayerPlanet();
+		
+		PlayerInput pi = new PlayerInput(p);
 		while(true) {
 			System.out.println("player stats here");
+			
 			String input = sc.nextLine();
 			//if(p.isGameOver){break;}
 		}
