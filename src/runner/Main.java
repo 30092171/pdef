@@ -1,11 +1,16 @@
 package runner;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("pog");
-		System.out.println("pogger");
+		Scanner kbReader = new Scanner(System.in);
+		while(true) {
+			System.out.println("player stats here");
+			String input = kbReader.nextLine();
+		}
 	}
 
 }
