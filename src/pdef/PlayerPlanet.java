@@ -45,5 +45,9 @@ public class PlayerPlanet {
 	public int getYPos() {
 		return yCoordinate;
 	}
+	
+	public int getLives() {
+		return numLives;
+	}
 
 }
