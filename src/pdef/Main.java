@@ -56,6 +56,9 @@ public class Main {
 					projectiles.remove(i);
 				}
 			}
+			
+			//Projectile spawning after the rest of the turn's game logic has occured. 
+			//If there are no projectiles left, then more will always be spawned
 			if(projectiles.size() < 1) {
 				projectiles.add(SpawnHandler.spawnProjectile());
 				projectiles.add(SpawnHandler.spawnProjectile());
@@ -67,6 +70,8 @@ public class Main {
 				}
 			}
 		}
+		
+		//Game over messages, execute if the main game loop is broken by running out of lives
 		System.out.println("----------------------------------");
 		System.out.println("Game Over!");
 		System.out.println("Final Score: " + p.getScore());
