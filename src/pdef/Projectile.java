@@ -1,7 +1,6 @@
 package pdef;
 
 public class Projectile {
-	
 	private int health = 100;
 	private int iDistance = 0;
 	private int currentDistance = 0;
@@ -42,5 +41,4 @@ public class Projectile {
 	public int setY() {
 		
 	}*/
-	
 }
