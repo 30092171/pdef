@@ -27,7 +27,7 @@ public class Main {
 			}
 			
 			System.out.print("Enter projectile to shoot:");
-			String input = sc.nextLine();
+			String input = sc.nextLine().toUpperCase();
 			System.out.println("----------------------------------");
 			
 			//Checks hit or miss
