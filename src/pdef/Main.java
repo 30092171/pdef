@@ -23,18 +23,18 @@ public class Main {
 			System.out.println("Current Score: " + p.getScore());
 			
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
-				System.out.println("Projectile " + projectiles.get(projectile).name + " is " + projectiles.get(projectile).distance + " units away.");
+				System.out.println("Projectile " + projectiles.get(projectile).getName() + " is " + projectiles.get(projectile).getDistance() + " units away.");
 			}
 			
 			System.out.print("Enter projectile to shoot:");
-			String input = sc.nextLine();
+			String input = sc.nextLine().toUpperCase();
 			System.out.println("----------------------------------");
 			
 			//Checks hit or miss
 			int projectilesBefore = projectiles.size(); //Used to compare if projectile is destroyed later
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
-				if (input.contentEquals(projectiles.get(projectile).name)) {
-					System.out.println("Projectile " + projectiles.get(projectile).name + " Destroyed!");
+				if (input.contentEquals(projectiles.get(projectile).getName())) {
+					System.out.println("Projectile " + projectiles.get(projectile).getName() + " Destroyed!");
 					projectiles.remove(projectile);
 					p.addScore(100);
 					break;
@@ -47,10 +47,10 @@ public class Main {
 			
 			//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
 			for (int i = 0 ; i < projectiles.size(); i++) {
-				int distance = projectiles.get(i).distance;
-				projectiles.get(i).distance = (int)( distance - ( 7 + (Math.random()*10)));
+				int distance = projectiles.get(i).getDistance();
+				projectiles.get(i).setDistance((int)( distance - ( 7 + (Math.random()*10))));
 				 
-				if (projectiles.get(i).distance <= 0){
+				if (projectiles.get(i).getDistance() <= 0){
 					System.out.println("Impact Detected, -1 Life!");
 					p.lostLife();
 					projectiles.remove(i);

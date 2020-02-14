@@ -1,44 +1,47 @@
 package pdef;
 
 public class Projectile {
-	private int health = 100;
-	private int iDistance = 0;
-	private int currentDistance = 0;
-	private String projName = ""; 
+	//private int health;
+	private int distance;
+	private String name; 
 	//private int spawnAngle = 0;
 	//private int spawnLocation = 0;
 	//private int projTipXCoord = 0;
 	//private int projTipYCoord = 0;
 	
-	// Constructor that gets a initial distance from spawn handler class and a unique name
-	public Projectile(int distance, String aName) {
-		iDistance = distance;
-		projName = aName;
+	// Constructor that sets initial health
+	/*public Projectile() {
+		health = 100;
+	}*/
+	
+	// This constructor gets a distance and a name from SpawnHandler
+	public Projectile(int aDistance, String aName) {
+		setDistance(aDistance);
+		setName(aName);
 	}
 	
-	public String getName() {
-		return projName;
+	// Setter methods for distance and name
+	public void setDistance(int aDistance) {
+		distance = aDistance;
 	}
 	
 	public void setName(String aName) {
-		projName = aName;
+		name = aName;
 	}
 	
-	
-	//Stuff for GUI version
-	/*public void getX() {
-		
+	// Getter methods for distance, name and health
+	public int getDistance() {
+		return distance;
 	}
 	
-	public void getY() {
-		
+	public String getName() {
+		return name;
 	}
 	
-	public int setX() {
-		
-	}
-	
-	public int setY() {
-		
+	// Method for projectile losing health
+	/*public void loseLife() {
+		health -= 50;
 	}*/
+	
+	
 }
