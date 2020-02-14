@@ -8,9 +8,11 @@ public class SpawnHandler {
 	static int nameIndex = 0;
 	
 	public static Projectile spawnProjectile() {
-		Projectile newProjectile = new Projectile();
-		newProjectile.name = namesList[nameIndex];
-		newProjectile.distance = (int) (10 + Math.random() * 100);
+		int distance = (int) (10 + Math.random() * 100);
+		String name = namesList[nameIndex];
+		Projectile newProjectile = new Projectile(distance, name);
+		//newProjectile.name = namesList[nameIndex];
+		//newProjectile.distance = (int) (10 + Math.random() * 100);
 		if ((nameIndex + 1) > (namesList.length - 1)) {
 			nameIndex = 0;
 		}
