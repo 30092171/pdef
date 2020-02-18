@@ -43,7 +43,7 @@ public class Main {
 			System.out.println("----------------------------------");
 			// add public void playAgain() method --> playerInput
 			
-			//Checks hit or miss.
+			//Checks hit or miss
 			// public int checkHit() --> playerInput()
 			int projectilesBefore = projectiles.size(); //Used to compare if projectile is destroyed later
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
