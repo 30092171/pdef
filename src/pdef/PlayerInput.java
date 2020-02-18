@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class PlayerInput {
 	
-	private PlayerPlanet p;
+	private ArrayList<Projectile> p;
 	
-	public PlayerInput(PlayerPlanet p) {
+	public PlayerInput(ArrayList<Projectile> p) {
 		this.p = p;
 	}
 	
-	public void command(String input) {
+	public String command(String input) {
 		input = input.toUpperCase();
-		if (input.length() == 1) {
+		if (input.length() == 1) { // check if its a character
 			String projUser = input;
-			for (int count = 0 ; count < Main.projectiles.size() ; count++) {
-				String projName = Main.projectiles.get(count).name;
+			for (Projectile t : p) {
+				String projName = t.getName();
 				if (projUser.equals(projName)) {
-				//projUser.tryDamage();
+				//p.tryDamage();
 				}
 				//if projectile named not in play
 				else {
@@ -35,7 +35,8 @@ public class PlayerInput {
 		else {
 			
 		}
-	
+		
+		return "";
 	}
 
 }
