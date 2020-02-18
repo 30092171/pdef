@@ -10,6 +10,14 @@ public class PlayerInput {
 		this.p = p;
 	}
 	
+	public String printProjectileStatus() {
+		String c = "";
+		for (Projectile t : p) {
+			c += "Projectile" + t.getName() + " is " + t.getDistance() + " away.\n";
+		}
+		return c;
+	}
+	
 	public String command(String input) {
 		input = input.toUpperCase();
 		if (input.length() == 1) { // check if its a character
@@ -25,7 +33,6 @@ public class PlayerInput {
 				}
 			}
 		}
-
 		//to reset/start new game
 		if(input.equals("RESET")) {
 		
