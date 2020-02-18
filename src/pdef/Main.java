@@ -6,6 +6,7 @@ import java.lang.Math;
 
 public class Main {
 	
+
 	private static Scanner sc = new Scanner(System.in);
 	private static PlayerPlanet p = new PlayerPlanet();
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -13,6 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		//Initial projectile list 
 		// public void initialSpawn() --> Spawn Handler class
+
 		projectiles.add(SpawnHandler.spawnProjectile());
 		projectiles.add(SpawnHandler.spawnProjectile());
 		projectiles.add(SpawnHandler.spawnProjectile());
@@ -77,8 +79,6 @@ public class Main {
 		}
 		//Prints game over messages, execute if the main game loop is broken by running out of lives
 		p.printGameOver(); // --> in playerPlanet
-		
-		
 	}
 
 }

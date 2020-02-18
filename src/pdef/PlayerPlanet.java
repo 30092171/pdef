@@ -37,7 +37,6 @@ public class PlayerPlanet {
 	public int getPlanetRadius() {
 		return planetRadius;
 	}
-	
 	public void addScore(int givenScore) {
 		score += givenScore;
 	}
