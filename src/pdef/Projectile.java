@@ -42,4 +42,6 @@ public class Projectile {
 	/*public void loseLife() {
 		health -= 50;
 	}*/
+	
+	
 }
