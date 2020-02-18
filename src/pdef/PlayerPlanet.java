@@ -3,7 +3,7 @@ package pdef;
 public class PlayerPlanet {
 	private int numLives;
 	private int score;
-	private double planetRadius;
+	private int planetRadius;
 	private int xCoordinate;
 	private int yCoordinate;
 	
@@ -34,6 +34,9 @@ public class PlayerPlanet {
 		return score;
 	}
 	
+	public int getPlanetRadius() {
+		return planetRadius;
+	}
 	public void addScore(int givenScore) {
 		score += givenScore;
 	}
@@ -48,6 +51,18 @@ public class PlayerPlanet {
 	
 	public int getLives() {
 		return numLives;
+	}
+	
+	public void printStatus() {
+		System.out.println("----------------------------------");
+		System.out.println("You have " + getLives() + " lives remaining");
+		System.out.println("Current Score: " + getScore());
+	}
+	
+	public void printGameOver() {
+		System.out.println("----------------------------------");
+		System.out.println("Game Over!");
+		System.out.println("Final Score: " + getScore());
 	}
 
 }
