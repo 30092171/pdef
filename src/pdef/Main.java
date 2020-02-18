@@ -6,9 +6,9 @@ import java.lang.Math;
 
 public class Main {
 	
-	static Scanner sc = new Scanner(System.in);
-	static PlayerPlanet p = new PlayerPlanet();
-	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	private static Scanner sc = new Scanner(System.in);
+	private static PlayerPlanet p = new PlayerPlanet();
+	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public static void main(String[] args) {
 		//Initial projectile list
@@ -18,16 +18,14 @@ public class Main {
 		
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
-			System.out.println("----------------------------------");
-			System.out.println("You have " + p.getLives() + " lives remaining");
-			System.out.println("Current Score: " + p.getScore());
+			p.printStatus();
 			
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
 				System.out.println("Projectile " + projectiles.get(projectile).name + " is " + projectiles.get(projectile).distance + " units away.");
 			}
 			
 			System.out.print("Enter projectile to shoot:");
-			String input = sc.nextLine();
+			String input = sc.nextLine().toUpperCase();
 			System.out.println("----------------------------------");
 			
 			//Checks hit or miss
@@ -70,11 +68,8 @@ public class Main {
 				}
 			}
 		}
-		
-		//Game over messages, execute if the main game loop is broken by running out of lives
-		System.out.println("----------------------------------");
-		System.out.println("Game Over!");
-		System.out.println("Final Score: " + p.getScore());
+		//Prints game over messages, execute if the main game loop is broken by running out of lives
+		p.printGameOver();
 	}
 
 }
