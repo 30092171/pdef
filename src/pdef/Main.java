@@ -47,8 +47,8 @@ public class Main {
 			// public int checkHit() --> playerInput()
 			int projectilesBefore = projectiles.size(); //Used to compare if projectile is destroyed later
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
-				if (input.contentEquals(projectiles.get(projectile).getName())) {
-					System.out.println("Projectile " + projectiles.get(projectile).getName() + " Destroyed!");
+				if (input.contentEquals(projectiles.get(projectile).name)) {
+					System.out.println("Projectile " + projectiles.get(projectile).name + " Destroyed!");
 					projectiles.remove(projectile);
 					p.addScore(100);
 					break;
@@ -62,9 +62,9 @@ public class Main {
 			//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
 			// public void updateProjectile() --> stay in main
 			for (int i = 0 ; i < projectiles.size(); i++) {
-				int distance = projectiles.get(i).getDistance();
-				projectiles.get(i).setDistance((int)( distance - ( 7 + (Math.random()*10))));
-				 
+				int distance = projectiles.get(i).distance;
+				projectiles.get(i).distance = (int)( distance - ( 7 + (Math.random()*10)));
+
 				if (projectiles.get(i).getDistance() - p.getPlanetRadius() <= 0 ){
 					System.out.println("Impact Detected, -1 Life!");
 					p.lostLife();
