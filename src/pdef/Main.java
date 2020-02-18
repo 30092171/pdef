@@ -9,15 +9,15 @@ public class Main {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static PlayerPlanet p = new PlayerPlanet();
+	private static SpawnHandler sp;
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-
+	
 	public static void main(String[] args) {
-		//Initial projectile list 
-		// public void initialSpawn() --> Spawn Handler class
-
-		projectiles.add(SpawnHandler.spawnProjectile());
-		projectiles.add(SpawnHandler.spawnProjectile());
-		projectiles.add(SpawnHandler.spawnProjectile());
+		//Create the spawn handler
+		sp = new SpawnHandler(projectiles);
+		
+		//Initial projectile list
+		sp.initialSpawn();
 		
 		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");
@@ -30,7 +30,7 @@ public class Main {
 		
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
-			p.printStatus(); // --> into playerPlanet class
+			p.printStatus();
 			
 			// public void printProjectileStatus() --> playerPlanet
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
@@ -72,19 +72,8 @@ public class Main {
 				}
 			}
 			
-			//Projectile spawning after the rest of the turn's game logic has occured. 
-			//If there are no projectiles left, then more will always be spawned
-			// public void trySpawn() --> in Spawn Handler class
-			if(projectiles.size() < 1) {
-				projectiles.add(SpawnHandler.spawnProjectile());
-				projectiles.add(SpawnHandler.spawnProjectile());
-			}
-			if(projectiles.size() < 4) {
-				if (Math.random() > 0.5) {
-					projectiles.add(SpawnHandler.spawnProjectile());
-					projectiles.add(SpawnHandler.spawnProjectile());
-				}
-			}
+		//Spawn more projectiles if needed
+		sp.trySpawn();
 		}
 		//Prints game over messages, execute if the main game loop is broken by running out of lives
 		p.printGameOver(); // --> in playerPlanet
