@@ -11,24 +11,29 @@ public class Main {
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public static void main(String[] args) {
-		//Initial projectile list
+		//Initial projectile list 
+		// public void initialSpawn() --> Spawn Handler class
 		projectiles.add(SpawnHandler.spawnProjectile());
 		projectiles.add(SpawnHandler.spawnProjectile());
 		projectiles.add(SpawnHandler.spawnProjectile());
 		
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
-			p.printStatus();
+			p.printStatus(); // --> into playerPlanet class
 			
+			// public void printProjectileStatus() --> playerPlanet
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
-				System.out.println("Projectile " + projectiles.get(projectile).name + " is " + projectiles.get(projectile).distance + " units away.");
+				System.out.println("Projectile " + projectiles.get(projectile).name + " is " + (projectiles.get(projectile).distance - p.getPlanetRadius()) + " units away.");
 			}
 			
+			// public void promptInput() --> playerInput class
 			System.out.print("Enter projectile to shoot:");
 			String input = sc.nextLine().toUpperCase();
 			System.out.println("----------------------------------");
+			// add public void playAgain() method --> playerInput
 			
 			//Checks hit or miss
+			// public int checkHit() --> playerInput()
 			int projectilesBefore = projectiles.size(); //Used to compare if projectile is destroyed later
 			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
 				if (input.contentEquals(projectiles.get(projectile).name)) {
@@ -44,11 +49,12 @@ public class Main {
 			}
 			
 			//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
+			// public void updateProjectile() --> stay in main
 			for (int i = 0 ; i < projectiles.size(); i++) {
 				int distance = projectiles.get(i).distance;
 				projectiles.get(i).distance = (int)( distance - ( 7 + (Math.random()*10)));
 				 
-				if (projectiles.get(i).distance <= 0){
+				if (projectiles.get(i).distance - p.getPlanetRadius() <= 0 ){
 					System.out.println("Impact Detected, -1 Life!");
 					p.lostLife();
 					projectiles.remove(i);
@@ -57,6 +63,7 @@ public class Main {
 			
 			//Projectile spawning after the rest of the turn's game logic has occured. 
 			//If there are no projectiles left, then more will always be spawned
+			// public void trySpawn() --> in Spawn Handler class
 			if(projectiles.size() < 1) {
 				projectiles.add(SpawnHandler.spawnProjectile());
 				projectiles.add(SpawnHandler.spawnProjectile());
@@ -69,7 +76,9 @@ public class Main {
 			}
 		}
 		//Prints game over messages, execute if the main game loop is broken by running out of lives
-		p.printGameOver();
+		p.printGameOver(); // --> in playerPlanet
+		
+		
 	}
 
 }
