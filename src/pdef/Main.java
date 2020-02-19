@@ -10,11 +10,13 @@ public class Main {
 	private static Scanner sc = new Scanner(System.in);
 	private static PlayerPlanet p = new PlayerPlanet();
 	private static SpawnHandler sp;
+	private static PlayerInput pi;
 	private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	public static void main(String[] args) {
 		//Create the spawn handler
 		sp = new SpawnHandler(projectiles);
+		pi = new PlayerInput(projectiles);
 		
 		//Initial projectile list
 		sp.initialSpawn();
@@ -37,27 +39,13 @@ public class Main {
 				System.out.println("Projectile " + projectiles.get(projectile).getName() + " is " + (projectiles.get(projectile).getDistance() - p.getPlanetRadius()) + " units away.");
 			}
 			
-			// public void promptInput() --> playerInput class
-			System.out.print("Enter projectile to shoot:");
-			String input = sc.nextLine().toUpperCase();
-			System.out.println("----------------------------------");
-			// add public void playAgain() method --> playerInput
-			
-			//Checks hit or miss.
-			// public int checkHit() --> playerInput()
-			int projectilesBefore = projectiles.size(); //Used to compare if projectile is destroyed later
-			for(int projectile = 0; projectile < projectiles.size(); projectile++) {
-				if (input.contentEquals(projectiles.get(projectile).getName())) {
-					System.out.println("Projectile " + projectiles.get(projectile).getName() + " Destroyed!");
-					projectiles.remove(projectile);
-					p.addScore(100);
-					break;
-				}
-			}
-			//If the number of projectiles hasn't changed, a miss has occured.
-			if (projectiles.size() == projectilesBefore) {
-				System.out.println("Miss!");
-			}
+			//Input prompt
+			pi.promptInput();
+			//Determine the input of user and print line + modify projectiles list accordingly
+			//Also adds to score if projectile was destroyed
+			p.addScore(pi.command(sc.nextLine()));
+
+			// add RESET command in command method --> playerInput
 			
 			//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
 			// public void updateProjectile() --> stay in main
