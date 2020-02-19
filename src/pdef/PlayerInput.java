@@ -10,14 +10,14 @@ public class PlayerInput {
 		this.projectiles = projectiles;
 	}
 	
-	//this part maybe be done by player planet
-	/*public String printProjectileStatus() {
+	
+	public void printProjectileStatus() {
 		String status = "";
 		for (Projectile t : projectiles) {
-			status += "Projectile" + t.getName() + " is " + t.getDistance() + " away.\n";
+			status += "Projectile " + t.getName() + " is " + t.getDistance() + " units away.\n";
 		}
-		return status;
-	}*/
+		System.out.print(status);
+	}
 	
 	//Input prompt message
 	public void promptInput() {
