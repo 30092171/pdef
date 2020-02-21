@@ -53,7 +53,7 @@ public class PlayerPlanet {
 		return numLives;
 	}
 	
-	public void printStatus() {
+	public void printPlayerStatus() {
 		System.out.println("----------------------------------");
 		System.out.println("You have " + getLives() + " lives remaining");
 		System.out.println("Current Score: " + getScore());
