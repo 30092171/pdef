@@ -2,7 +2,7 @@
 
 ## Created By: Peter Bignold, Richard Harder, Aiden Taylor, Alex Tran, Nick Zhao
 
-Planet Defenders is a 2D arcade-styled defense game. The player must defend their home planet from projectilles by mouse-click.  
+Planet Defenders is a 2D arcade-styled defense game. The player must defend their home planet from projectiles.  
 
 ###### How to run
 1. Download the executable JAR file.
