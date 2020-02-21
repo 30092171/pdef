@@ -5,11 +5,12 @@
 Planet Defenders is a 2D arcade-styled defense game. The player must defend their home planet from projectiles.  
 
 ###### How to run
-1. Download the executable JAR file.
-2. Place JAR file in desired directory
-3. Open command line
-4. java -jar <path>\release.jar
-5. Enjoy!
+1. Navigate to the "first demo" release
+2. Download the executable JAR file.
+3. Place JAR file in desired directory
+4. Open command line
+5. java -jar <path>\release.jar
+6. Enjoy!
 
 ###### Game Instructions
 1. Increase your score by destroying projectiles, and survive as long as possible
