@@ -4,47 +4,67 @@ import java.util.ArrayList;
 
 public class PlayerInput {
 	
-	private ArrayList<Projectile> p;
+	public ArrayList<Projectile> projectiles;
 	
-	public PlayerInput(ArrayList<Projectile> p) {
-		this.p = p;
+	public PlayerInput(ArrayList<Projectile> projectiles) {
+		this.projectiles = projectiles;
 	}
 	
-	public String printProjectileStatus() {
-		String c = "";
-		for (Projectile t : p) {
-			c += "Projectile" + t.getName() + " is " + t.getDistance() + " away.\n";
+	//this part maybe be done by player planet
+	/*public String printProjectileStatus() {
+		String status = "";
+		for (Projectile t : projectiles) {
+			status += "Projectile" + t.getName() + " is " + t.getDistance() + " away.\n";
 		}
-		return c;
+		return status;
+	}*/
+	
+	//Input prompt message
+	public void promptInput() {
+	System.out.print("Enter projectile to shoot:");
 	}
 	
-	public String command(String input) {
+	//Does task user imputed
+	public int command(String input) {
+		int scoreToAdd = 0;
+		//If input is potentially valid projectile name
 		input = input.toUpperCase();
-		if (input.length() == 1) { // check if its a character
-			String projUser = input;
-			for (Projectile t : p) {
-				String projName = t.getName();
-				if (projUser.equals(projName)) {
-				//p.tryDamage();
-				}
-				//if projectile named not in play
-				else {
-					
+		int initalP = projectiles.size();
+		if (input.length() == 1) {
+			for (int projectile = 0; projectile < projectiles.size(); projectile++) {
+				//If input corresponds to projectile in play
+				if (input.contentEquals(projectiles.get(projectile).getName())) {
+					System.out.println("Projectile " + projectiles.get(projectile).getName() + " Destroyed!");
+					projectiles.remove(projectile);
+					scoreToAdd += 100;
 				}
 			}
+			//If input doesen't corresponds to projectile in play
+			if (initalP == projectiles.size()) {
+				System.out.println("Miss!");
+			}
 		}
+		
+		//UNFINISHED PART START
 		//to reset/start new game
 		if(input.equals("RESET")) {
-		
+			System.out.println("RESET command unfinised");
+			//NEED TO IMPLIMENT
+		//UNFINISHED PART END
 		}
 		
-		//for invalid input
+		//if input isn't potentially a projectile name and isn't valid command
 		else {
-			
+			if(input.length() != 1) {
+				System.out.println("Invalid input");
+			}
 		}
-		
-		return "";
+		System.out.println("----------------------------------\n");
+		return scoreToAdd;
 	}
 
 }
+
+
+
 
