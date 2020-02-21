@@ -12,9 +12,9 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 5. Enjoy!
 
 ###### Game Instructions
-– Increase your score by destroying projectiles, and survive as long as possible
-– If a projectile gets too close, you will get hit and lose 1 of 3 lives
-– Type the character of the projectile you want to destroy (Ex. <A>)"
-– Type <Reset> at any time to start over"
+1. Increase your score by destroying projectiles, and survive as long as possible
+2. If a projectile gets too close, you will get hit and lose 1 of 3 lives
+3. Type the character of the projectile you want to destroy (Ex. <A>)"
+4. Type <Reset> at any time to start over"
 
 Written By: Alex Tran
