@@ -50,5 +50,12 @@ public class SpawnHandler {
 			}
 		}
 	}
+	
+	public static void main(String[] args) {
+		ArrayList<Projectile> proj = new ArrayList<>();
+		SpawnHandler sp = new SpawnHandler(proj);
+		sp.trySpawn();
+		System.out.println(sp.projectiles);
+	}
 }
 

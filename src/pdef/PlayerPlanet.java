@@ -64,5 +64,11 @@ public class PlayerPlanet {
 		System.out.println("Game Over!");
 		System.out.println("Final Score: " + getScore());
 	}
+	
+	public static void main(String[] args) {
+		PlayerPlanet player = new PlayerPlanet();
+		player.printPlayerStatus();
+		
+	}
 
 }

@@ -42,4 +42,9 @@ public class Projectile {
 	/*public void loseLife() {
 		health -= 50;
 	}*/
+	
+	public static void main(String[] args) {
+		Projectile proj = new Projectile(100, "A");
+		System.out.println(proj.getName());
+	}
 }
