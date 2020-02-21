@@ -19,7 +19,7 @@ public class Main {
 		
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
-			p.printStatus(); //print status every beginning of loop
+			p.printPlayerStatus(); //print status every beginning of loop
 			for(Projectile element : projectiles) {
 				System.out.println("Projectile " + element.getName() 
 						+ " is " + (element.getDistance() - p.getPlanetRadius()) + " units away.");
