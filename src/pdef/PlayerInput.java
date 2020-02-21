@@ -9,62 +9,40 @@ public class PlayerInput {
 	public PlayerInput(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
-	
-	
-	public void printProjectileStatus() {
-		String status = "";
-		for (Projectile t : projectiles) {
-			status += "Projectile " + t.getName() + " is " + t.getDistance() + " units away.\n";
-		}
-		System.out.print(status);
-	}
-	
-	//Input prompt message
-	public void promptInput() {
-	System.out.print("Enter projectile to shoot:");
-	}
-	
-	//Does task user imputed
+
+	//Does task user inputed
 	public int command(String input) {
 		int scoreToAdd = 0;
 		//If input is potentially valid projectile name
 		input = input.toUpperCase();
 		int initalP = projectiles.size();
-		if (input.length() == 1) {
-			for (int projectile = 0; projectile < projectiles.size(); projectile++) {
-				//If input corresponds to projectile in play
-				if (input.contentEquals(projectiles.get(projectile).getName())) {
-					System.out.println("Projectile " + projectiles.get(projectile).getName() + " Destroyed!");
-					projectiles.remove(projectile);
+		if (input.length() == 1) { //it's a character
+			for (int projectile = 0; projectile < projectiles.size(); projectile++) { //search for said projectile
+				Projectile t = projectiles.get(projectile);
+				if (input.equals(t.getName())) { //If we find it
+					System.out.println("----------------------------------");
+					System.out.println("Projectile " + t.getName() + " Destroyed!");
+					projectiles.remove(t);
 					scoreToAdd += 100;
+					break;
 				}
 			}
 			//If input doesen't corresponds to projectile in play
-			if (initalP == projectiles.size()) {
+			if (initalP == projectiles.size()) { //check if we destroyed anything
+				System.out.println("----------------------------------");
 				System.out.println("Miss!");
 			}
 		}
-		
-		//UNFINISHED PART START
-		//to reset/start new game
-		if(input.equals("RESET")) {
-			System.out.println("RESET command unfinised");
-			//NEED TO IMPLIMENT
-		//UNFINISHED PART END
-		}
-		
 		//if input isn't potentially a projectile name and isn't valid command
-		else {
-			if(input.length() != 1) {
-				System.out.println("Invalid input");
-			}
+		else { //empty or length > 1
+			System.out.println("----------------------------------");
+			System.out.println("Invalid input");
+			return -1; //invalid command code***
 		}
-		System.out.println("----------------------------------\n");
 		return scoreToAdd;
 	}
 
 }
-
 
 
 
