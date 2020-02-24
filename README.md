@@ -21,9 +21,9 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 Follow these steps if you wish to compile the game files yourself.
 1. Download and extract game .zip file into desired directory\
 <https://github.com/30092171/pdef/archive/master.zip>
-2. Compile the following files: Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java
-\<javac Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java>\
-3. \<java pdef.Main>\ Enter the following in the command line after entering the subfolder outside of the pdef folder
+2. Compile the following files: Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java\
+\<javac Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java>
+3. Enter the following in the command line after entering the subfolder outside of the pdef folder: \<java pdef.Main>.
 
 ###### JUnit Testing
 Currently our JUnit test for the Projectile class only works within Eclipse. After installing Eclipse, follow these steps to run the JUnit test.
