@@ -1,7 +1,5 @@
 package fxapplication;
 
-import java.awt.Point;
-
 import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Group;
@@ -48,6 +46,7 @@ public class Game extends Application {
 		
 		int radius = 100;
 		//**topleft x,y, width height
-		gc.strokeOval(SIZE.getWidth()/2 - radius, SIZE.getHeight()/2 - radius, radius * 2, radius * 2);
+		gc.fillOval(SIZE.getWidth()/2 - radius, SIZE.getHeight()/2 - radius, radius * 2, radius * 2);
+		gc.strokeText("SCORE", SIZE.getWidth() / 2 - 20, 20);
 	}
 }
