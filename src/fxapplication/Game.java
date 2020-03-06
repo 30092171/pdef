@@ -21,10 +21,20 @@ import javafx.stage.Stage;
 
 public class Game extends Application {
 	
+	//Root Components and Formatting Elements
 	private static Dimension2D SIZE = new Dimension2D(720, 720);
 	private static Canvas CANVAS = new Canvas(SIZE.getWidth(), SIZE.getHeight());
 	private static BorderPane root = new BorderPane();
 	private static Scene scene = new Scene(root);
+	
+	//Screen Elements
+	private static Label scoreValue = new Label("0");
+	private static int LIFESIZE = 35;
+	private static Rectangle life1 = new Rectangle(LIFESIZE,LIFESIZE);
+	private static Rectangle life2 = new Rectangle(LIFESIZE,LIFESIZE);
+	private static Rectangle life3 = new Rectangle(LIFESIZE,LIFESIZE);
+	private static Button pauseButton = new Button("Pause");
+	
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -63,25 +73,28 @@ public class Game extends Application {
 			root.setRight(controlsBox);
 		
 		//Populate Lives HBox
-		int LIFESIZE = 35;
-		Rectangle life1 = new Rectangle(LIFESIZE,LIFESIZE);
-			livesBox.getChildren().add(life1);
-		Rectangle life2 = new Rectangle(LIFESIZE,LIFESIZE);
-			livesBox.getChildren().add(life2);
-		Rectangle life3 = new Rectangle(LIFESIZE,LIFESIZE);
-			livesBox.getChildren().add(life3);
+		livesBox.getChildren().add(life1);
+		livesBox.getChildren().add(life2);
+		livesBox.getChildren().add(life3);
 			
 		//Populate Score VBox
 		Label scoreText = new Label("SCORE");
+			//Header Text
 			scoreText.setFont(new Font("Arial", 14));
 			scoreBox.getChildren().add(scoreText);
-		Label scoreValue = new Label("0");
+			//Score Value
 			scoreValue.setFont(new Font("Arial", 48));
 			scoreBox.getChildren().add(scoreValue);
 		
 		//Populate Controls HBox
-		Button pauseButton = new Button("Pause");
-			controlsBox.getChildren().add(pauseButton);
+		controlsBox.getChildren().add(pauseButton);
+	}
+	
+	public static void drawPlanet() {
+		GraphicsContext gc = CANVAS.getGraphicsContext2D();
+		int radius = 65;
+		//**topleft x,y, width height
+		gc.fillOval(SIZE.getWidth()/2 - radius, SIZE.getHeight()/2 - radius, radius * 2, radius * 2);
 	}
 	
 	public void start(Stage mainStage) throws Exception {
@@ -91,12 +104,32 @@ public class Game extends Application {
 		mainStage.show();
 	}
 	
-	
-	public static void drawPlanet() {
-		GraphicsContext gc = CANVAS.getGraphicsContext2D();
-		
-		int radius = 65;
-		//**topleft x,y, width height
-		gc.fillOval(SIZE.getWidth()/2 - radius, SIZE.getHeight()/2 - radius, radius * 2, radius * 2);
+	public void setScoreText(String aScore) {
+		scoreValue.setText(aScore);
 	}
+	
+	public void setLivesDisplay(int lifeCount) {
+		if(lifeCount >= 3) {
+			life1.setOpacity(1.0);
+			life2.setOpacity(1.0);
+			life3.setOpacity(1.0);
+		}
+		else if(lifeCount == 2) {
+			life1.setOpacity(1.0);
+			life2.setOpacity(1.0);
+			life3.setOpacity(.35);
+		}
+		else if(lifeCount == 1) {
+			life1.setOpacity(1.0);
+			life2.setOpacity(0.35);
+			life3.setOpacity(.35);
+		}
+		else if(lifeCount <= 0) {
+			life1.setOpacity(0.35);
+			life2.setOpacity(0.35);
+			life3.setOpacity(.35);
+		}
+	}
+
 }
+
