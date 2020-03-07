@@ -1,19 +1,27 @@
 package fxapplication;
 
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.event.EventHandler;
 
 public class GUI {
     //this class provides all the necessary elements to update and control the gui.
@@ -53,6 +61,17 @@ public class GUI {
     	
     	drawTopHUD();
         drawPlanet();
+    	drawProjectile();
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler <ActionEvent>(){
+			public void handle(ActionEvent event) {
+				updateProjectile();
+			}
+		}
+		)
+		);
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+		mainStage.show();
     }
 
     public void setLivesDisplay(int lifeCount) {
@@ -126,4 +145,32 @@ public class GUI {
         planet.setTranslateX(-planetRadius/2);
         planet.setTranslateY(-planetRadius/2);
     }
+    
+    //projectile Elements + projectile creation
+	int xP = 100;
+	int yP = 100;
+	int rP = 20;
+	Color pC = Color.HOTPINK;
+	Circle projectile = new Circle();
+	
+	
+	//inital projectile draw (spawn)
+	public void drawProjectile() {
+       	projectile.setCenterX(xP);
+    	projectile.setCenterY(yP);
+    	projectile.setRadius(rP);
+    	projectile.setFill(pC);
+    	
+    	root.getChildren().add (projectile);
+	}
+	
+	//makes projectile move
+	public void updateProjectile() {
+		xP = xP + 1;
+		yP = yP + 1;
+		projectile.setCenterX(xP);
+		projectile.setCenterY(yP);
+    	projectile.setRadius(rP);
+    	projectile.setFill(pC);
+	}
 }
