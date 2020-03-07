@@ -1,4 +1,4 @@
-package pdef;
+/*package pdef;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -81,4 +81,4 @@ public class Main {
 		System.out.println("- Type <Reset> at any time to start over");
 	}
 
-}
+}*/
