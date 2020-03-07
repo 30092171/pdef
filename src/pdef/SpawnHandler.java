@@ -5,14 +5,26 @@ import java.util.ArrayList;
 public class SpawnHandler {
 	//Instance variables
 	private int nameIndex = 0;
-	public ArrayList<Projectile> projectiles;
+	private ArrayList<Projectile> projectiles;
+	private PlayerPlanet playerPlanet;
 	static private String[] namesList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 		
 										"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
 										"U", "V", "W", "X", "Y", "Z"};
 	
 	//Constructor, gets reference to projectile list
-	public SpawnHandler(ArrayList<Projectile> projectiles) {
+	public SpawnHandler(ArrayList<Projectile> projectiles, PlayerPlanet playerPlanet) {
 		this.projectiles = projectiles;
+		this.playerPlanet = playerPlanet;
+	}
+	
+	//Get Projectile List
+	public ArrayList<Projectile> getProjectileList(){
+		return this.projectiles;
+	}
+	
+	//Add to Projectile List
+	public void addProjectile(Projectile newProjectile) {
+		projectiles.add(newProjectile);
 	}
 	
 	//Spawn projectile with randomness
@@ -52,10 +64,10 @@ public class SpawnHandler {
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<Projectile> proj = new ArrayList<>();
-		SpawnHandler sp = new SpawnHandler(proj);
-		sp.trySpawn();
-		System.out.println(sp.projectiles);
+		//ArrayList<Projectile> proj = new ArrayList<>();
+		//SpawnHandler sp = new SpawnHandler(proj);
+		//sp.trySpawn();
+		//System.out.println(sp.projectiles);
 	}
 }
 

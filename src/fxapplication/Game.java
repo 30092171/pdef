@@ -1,27 +1,17 @@
 package fxapplication;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.geometry.*;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pdef.PlayerPlanet;
+import pdef.Projectile;
+import pdef.SpawnHandler;
+import pdef.PlayerInput;
 
 public class Game extends Application {
 	//root class.
-	
+	public ArrayList<Projectile> projectiles;
 	
 	
 	public static void main(String[] args) {
@@ -31,7 +21,9 @@ public class Game extends Application {
 	public void start(Stage mainStage) throws Exception {
 		PlayerPlanet player = new PlayerPlanet();//make new model
 		GUI gui = new GUI(mainStage); //frontend
-		Controller c = new Controller(player, gui); //logic
+		SpawnHandler spawnHandler = new SpawnHandler(projectiles, player);
+		PlayerInput playerInput = new PlayerInput(projectiles);
+		Controller c = new Controller(player, gui, spawnHandler, playerInput); //logic
 		
 		mainStage.setTitle("Planet Defenders");
 		mainStage.show();
