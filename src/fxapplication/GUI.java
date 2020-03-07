@@ -147,8 +147,8 @@ public class GUI {
     }
     
     //projectile Elements + projectile creation
-	int xP = 100;
-	int yP = 100;
+	int xP = 10;
+	int yP = 10;
 	int rP = 20;
 	Color pC = Color.HOTPINK;
 	Circle projectile = new Circle();
