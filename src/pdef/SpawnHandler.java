@@ -5,33 +5,27 @@ import java.util.ArrayList;
 public class SpawnHandler {
 	//Instance variables
 	private int nameIndex = 0;
-	private ArrayList<Projectile> projectiles;
-	private PlayerPlanet playerPlanet;
+	public ArrayList<Projectile> projectiles;
 	static private String[] namesList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 		
 										"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
 										"U", "V", "W", "X", "Y", "Z"};
+	private PlayerPlanet player;
 	
-	//Constructor, gets reference to projectile list
-	public SpawnHandler(ArrayList<Projectile> projectiles, PlayerPlanet playerPlanet) {
+	
+	//Constructor, gets reference to projectile list and PlayerPlanet
+	public SpawnHandler(ArrayList<Projectile> projectiles, PlayerPlanet player) {
 		this.projectiles = projectiles;
-		this.playerPlanet = playerPlanet;
+		this.player = player;
 	}
 	
-	//Get Projectile List
-	public ArrayList<Projectile> getProjectileList(){
-		return this.projectiles;
-	}
-	
-	//Add to Projectile List
-	public void addProjectile(Projectile newProjectile) {
-		projectiles.add(newProjectile);
-	}
-	
-	//Spawn projectile with randomness
 	public Projectile spawnProjectile() {
+		int initialDistance = 800; // Spawns outside of screen 
 		String name = (namesList[nameIndex]);
-		int distance = ((int) (10 + Math.random() * 100));
-		Projectile newProjectile = new Projectile(distance, name);
+		int spawnAngle = (int)(Math.random() * 360);
+		int xCoord = (int)(initialDistance * Math.cos(spawnAngle));
+		int yCoord = (int)(initialDistance * Math.sin(spawnAngle));
+		
+		Projectile newProjectile = new Projectile(initialDistance, name, spawnAngle, xCoord, yCoord);
 		if ((nameIndex + 1) > (namesList.length - 1)) {
 			nameIndex = 0;
 		}
@@ -39,6 +33,7 @@ public class SpawnHandler {
 			nameIndex = nameIndex + 1;
 		}
 		return  newProjectile;
+		
 	}
 	
 	//Initially spawns 3 projectiles
@@ -63,11 +58,38 @@ public class SpawnHandler {
 		}
 	}
 	
+	public void updateProjectiles() {
+		// Decreases projectile distance after each turn and removes projectile/life if
+		// distance is 0.
+		// public void updateProjectile() --> stay in main
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).setXCoord(projectiles.get(i).getSpawnAngle(), 5); // Moving 5 units away
+			projectiles.get(i).setYCoord(projectiles.get(i).getSpawnAngle(), 5); // Moving 5 units away
+			projectiles.get(i).setDistance(projectiles.get(i).getxCoordinate(),projectiles.get(i).getyCoordinate(), player);
+			
+
+			if (projectiles.get(i).getDistance() - player.getPlanetRadius() <= 0) {
+				System.out.println("Impact Detected, -1 Life!");
+				player.lostLife();
+				projectiles.remove(i);
+			}
+		}
+	}
+	
+	public void printProjectileStatus(PlayerPlanet player) {
+		for(Projectile element : projectiles) {
+			System.out.println("Projectile " + element.getName() 
+					+ " is " + (element.getDistance() - player.getPlanetRadius()) + " units away at" +
+					" (" + element.getxCoordinate() + "," + element.getyCoordinate() + ").");
+		}
+	}
+	
 	public static void main(String[] args) {
-		//ArrayList<Projectile> proj = new ArrayList<>();
-		//SpawnHandler sp = new SpawnHandler(proj);
-		//sp.trySpawn();
-		//System.out.println(sp.projectiles);
+		ArrayList<Projectile> proj = new ArrayList<>();
+		PlayerPlanet player = new PlayerPlanet();
+		SpawnHandler sp = new SpawnHandler(proj, player);
+		sp.trySpawn();
+		System.out.println(sp.projectiles);
 	}
 }
 

@@ -1,36 +1,37 @@
 package pdef;
 
-public class Projectile {
-	//private int health;
-	private int distance;
-	private String name; 
-	//private int spawnAngle = 0;
-	//private int spawnLocation = 0;
-	//private int projTipXCoord = 0;
-	//private int projTipYCoord = 0;
+public class Projectile extends ScreenElements {
 	
-	// Constructor that sets initial health
-	/*public Projectile() {
-		health = 100;
-	}*/
+	private double distance;
+	private String name; 
+	private int spawnAngle;
 	
 	// This constructor gets a distance and a name from SpawnHandler
-	public Projectile(int aDistance, String aName) {
-		setDistance(aDistance);
+	public Projectile(double initialDistance, String aName, int spawnAngle, int xCoord, int yCoord) {
+		super(xCoord, yCoord);
+		this.distance = initialDistance;
 		setName(aName);
+		setSpawnAngle(spawnAngle);
 	}
 	
-	// Setter methods for distance and name
-	public void setDistance(int aDistance) {
-		distance = aDistance;
+	// Setter methods for distance, name, and spawnAngle
+	public void setDistance(int xCoord, int yCoord, PlayerPlanet player) {
+		// Takes the x and y of the projectile and computes distance between planet's center
+		this.distance = Math.sqrt(Math.pow(xCoord, 2) + Math.pow(yCoord, 2))-player.getPlanetRadius();
 	}
 	
 	public void setName(String aName) {
 		name = aName;
 	}
 	
-	// Getter methods for distance, name and health
-	public int getDistance() {
+	public void setSpawnAngle(int spawnAngle) {
+		if (spawnAngle >= 0 && spawnAngle <= 360) {
+			this.spawnAngle = spawnAngle;
+		}
+	}
+	
+	// Getter methods for distance, name, spawnAngle, and coordinates
+	public double getDistance() {
 		return distance;
 	}
 	
@@ -38,13 +39,22 @@ public class Projectile {
 		return name;
 	}
 	
-	// Method for projectile losing health
-	/*public void loseLife() {
-		health -= 50;
-	}*/
+	public int getSpawnAngle() {
+		return spawnAngle;
+	}
+	
+	public void setXCoord(int spawnAngle, int distanceToMove) {
+		// Changes the xCoord to move based on the distanceToMove parameter
+		super.setxCoordinate((int)((this.distance-distanceToMove) * Math.cos(spawnAngle)));
+	}
+	
+	public void setYCoord(int spawnAngle, int distanceToMove) {
+		// Changes the yCoord to move based on the distanceToMove parameter
+		super.setyCoordinate((int)((this.distance-distanceToMove) * Math.sin(spawnAngle)));
+	}
 	
 	public static void main(String[] args) {
-		Projectile proj = new Projectile(100, "A");
+		Projectile proj = new Projectile(100, "A", 90, 0, 100);
 		System.out.println(proj.getName());
 	}
 }

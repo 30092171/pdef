@@ -1,4 +1,4 @@
-/*package pdef;
+package pdef;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,22 +8,18 @@ public class Main {
 	static Scanner sc = new Scanner(System.in); //string input
 	static PlayerPlanet p = new PlayerPlanet(); //player model
 	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>(); //proj list
-	static SpawnHandler sp = new SpawnHandler(projectiles); //Create the spawn handler
+	static SpawnHandler sp = new SpawnHandler(projectiles, p); //Create the spawn handler
 	static PlayerInput pi = new PlayerInput(projectiles); //Input handler
 	
 	public static void main(String[] args) {
 		//Initial projectile list
 		sp.initialSpawn();
-		
 		printInstructions();
 		
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
 			p.printPlayerStatus(); //print status every beginning of loop
-			for(Projectile element : projectiles) {
-				System.out.println("Projectile " + element.getName() 
-						+ " is " + (element.getDistance() - p.getPlanetRadius()) + " units away.");
-			}
+			sp.printProjectileStatus(p);
 			
 			//Input prompt
 			System.out.print("Enter projectile to shoot:");
@@ -31,7 +27,7 @@ public class Main {
 			if (input.toUpperCase().equals("RESET")) {
 				p = new PlayerPlanet();
 				projectiles.clear();
-				sp = new SpawnHandler(projectiles);
+				sp = new SpawnHandler(projectiles, p);
 				sp.initialSpawn();
 				printInstructions();
 				continue;
@@ -46,28 +42,13 @@ public class Main {
 					p.addScore(result);
 			}
 			
-			updateProjectiles(); //update projectiles every turn
+			sp.updateProjectiles(); //update projectiles every turn
 			
 			//Spawn more projectiles if needed
 			sp.trySpawn();
 			}
 			//Prints game over messages, execute if the main game loop is broken by running out of lives
 			p.printGameOver(); // --> in playerPlanet
-	}
-	
-	public static void updateProjectiles() {
-		//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
-		// public void updateProjectile() --> stay in main
-		for (int i = 0 ; i < projectiles.size(); i++) {
-			int distance = projectiles.get(i).getDistance();
-			projectiles.get(i).setDistance((int)( distance - ( 7 + (Math.random()*10))));
-			 
-			if (projectiles.get(i).getDistance() - p.getPlanetRadius() <= 0 ){
-				System.out.println("Impact Detected, -1 Life!");
-				p.lostLife();
-				projectiles.remove(i);
-			}
-		}
 	}
 	
 	public static void printInstructions() {
@@ -81,4 +62,4 @@ public class Main {
 		System.out.println("- Type <Reset> at any time to start over");
 	}
 
-}*/
+}

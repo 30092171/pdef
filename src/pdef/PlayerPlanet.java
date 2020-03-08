@@ -1,18 +1,15 @@
 package pdef;
 
-public class PlayerPlanet {
+public class PlayerPlanet extends ScreenElements {
 	private int numLives;
 	private int score;
 	private int planetRadius;
-	private int xCoordinate;
-	private int yCoordinate;
 	
 	public PlayerPlanet() {
+		super(0,0); // Sets xCoord and yCoord to (0,0)
 		numLives = 3;
 		score = 0;
-		planetRadius = 10; 
-		xCoordinate = 0;
-		yCoordinate = 0;
+		planetRadius = 65; 
 	}
 	
 	public void lostLife() {
@@ -39,14 +36,6 @@ public class PlayerPlanet {
 	}
 	public void addScore(int givenScore) {
 		score += givenScore;
-	}
-	
-	public int getXPos() {
-		return xCoordinate;
-	}
-	
-	public int getYPos() {
-		return yCoordinate;
 	}
 	
 	public int getLives() {
