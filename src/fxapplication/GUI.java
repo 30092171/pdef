@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -64,14 +65,31 @@ public class GUI {
     	this.pauseButton = new Button("Pause");
     	this.planet = new Circle(planetX,planetY,planetRadius);
     	this.projectiles = new ArrayList<>();
+    	this.barriers = new ArrayList<>();
     	
     	drawTopHUD();
         drawPlanet();
         drawProjectile();
+        
+        //draws the barriers where mouse is clicked
+    	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+    		barriers.add(barracade(event.getX(),event.getY()));
+    		for (int Barrier = 0; Barrier < barriers.size(); Barrier++) {
+				Barrier b = barriers.get(Barrier);
+				oldBarrier();
+				newBarrier(b);
+    		}
+        });
+    	
+    	
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler <ActionEvent>(){
 			public void handle(ActionEvent event) {
 				updateProjectile();
 				collideProjectile();
+				for (int Barrier = 0; Barrier < barriers.size(); Barrier++) {
+					Barrier b = barriers.get(Barrier);
+					collideExplsion(b);
+				}
 			}
 		}
 		)
@@ -110,7 +128,7 @@ public class GUI {
 
     public void drawTopHUD() {
 
-        //Define Boxes
+        //Define BoxBs
         HBox livesBox = new HBox();
         livesBox.setPadding(new Insets(-68, 0, 0, 20));
         livesBox.setAlignment(Pos.TOP_LEFT);
@@ -156,14 +174,13 @@ public class GUI {
     	root.getChildren().add (planet);
     }
 
-
-    int xP = 710;
-	int yP = 710;
+    //setup variables for projectile
+    double xP = 710;
+	double yP = 710;
 	int rP = 20;
 	Circle projectile = new Circle();
 	ArrayList<Projectile> projectiles;
-	
-	
+
 	//initial projectile draw (spawn)
 	public void drawProjectile() {
        	projectile.setCenterX(xP);
@@ -192,12 +209,12 @@ public class GUI {
 		double yPlC = planet.getCenterY();
 		double rPlC = planet.getRadius();
 		
-		//calculations to determine if projectile connects with planet
-		double distSq = Math.hypot(xPrC-xPlC, yPrC-yPlC);
-		double radSumSq = (rPrC + rPlC); 
+		//calculations to determine if projectile collides with planet
+		double dist = Math.hypot(xPrC-xPlC, yPrC-yPlC);
+		double radSum = (rPrC + rPlC); 
 		
 		//checking if projectile collides with planet
-		if (distSq < radSumSq) {
+		if (dist < radSum) {
 			root.getChildren().remove(projectile);
 			
 			//returns boolean so we can check if projectile hits(for removing lives)
@@ -205,6 +222,56 @@ public class GUI {
 		}
 		else {
 			return false;
+		}
+	}
+	
+	
+
+	//setup variables for barrier
+	double xB;
+	double yB;
+	int rB = 15;
+	Circle Barrier = new Circle();
+	ArrayList<Barrier> barriers;
+	
+	//Uses Barrier class to make a new barrier
+	public Barrier barracade(double eventXPos, double eventYPos) {
+		return new Barrier(eventXPos,eventYPos,rB);
+	}
+	
+	//draws new barrier
+	public void newBarrier(Barrier b) {
+		xB = b.xB;
+		yB = b.yB;
+		rB = b.rB;
+       	Barrier.setCenterX(xB);
+    	Barrier.setCenterY(yB);
+    	Barrier.setRadius(rB);
+    	root.getChildren().add (Barrier);
+	}
+	
+	//removes old barrier
+	public void oldBarrier() {
+		root.getChildren().remove (Barrier);
+	}
+	
+	//checks if barrier collides with barrier
+	public void collideExplsion(Barrier b) {
+		
+		double xBxC = b.xB;
+		double yBxC = b.yB;
+		double rBxC = b.rB;
+		double xPrC = projectile.getCenterX();
+		double yPrC = projectile.getCenterY();
+		double rPrC = projectile.getRadius();
+		
+		//calculations to determine if projectile collides with barrier
+		double dist = Math.hypot(xBxC-xPrC, yBxC-yPrC);
+		double radSum = (rBxC + rPrC); 
+		
+		//remove projectile if they do collide
+		if (dist < radSum) {
+			root.getChildren().remove(projectile);
 		}
 	}
 }
