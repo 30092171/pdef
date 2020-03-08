@@ -21,7 +21,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import pdef.Projectile;
 import javafx.event.EventHandler;
+import java.lang.Math;
+import java.util.ArrayList;
 
 public class GUI {
     //this class provides all the necessary elements to update and control the gui.
@@ -40,6 +43,8 @@ public class GUI {
     private Rectangle life1, life2, life3;
     private Circle planet;
     private int planetRadius = 65;
+    private double planetX = WINDOWSIZE.getHeight()/2;
+    private double planetY = WINDOWSIZE.getWidth()/2;
     private Button pauseButton;
 
     public GUI(Stage mainStage) {
@@ -57,14 +62,16 @@ public class GUI {
     	this.life2 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.life3 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.pauseButton = new Button("Pause");
-    	this.planet = new Circle(planetRadius);
+    	this.planet = new Circle(planetX,planetY,planetRadius);
+    	this.projectiles = new ArrayList<>();
     	
     	drawTopHUD();
         drawPlanet();
-    	drawProjectile();
+        drawProjectile();
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler <ActionEvent>(){
 			public void handle(ActionEvent event) {
 				updateProjectile();
+				collideProjectile();
 			}
 		}
 		)
@@ -141,36 +148,63 @@ public class GUI {
         //int radius = 65;
         //**topleft x,y, width height
         //gc.fillOval(WINDOWSIZE.getWidth() / 2 - radius, WINDOWSIZE.getHeight() / 2 - radius, radius * 2, radius * 2);
-        root.setCenter(planet);
+    	
+        /*root.setCenter(planet);
         planet.setTranslateX(-planetRadius/2);
-        planet.setTranslateY(-planetRadius/2);
+        planet.setTranslateY(-planetRadius/2);*/
+    	
+    	root.getChildren().add (planet);
     }
-    
-    //projectile Elements + projectile creation
-	int xP = 10;
-	int yP = 10;
+
+
+    int xP = 710;
+	int yP = 710;
 	int rP = 20;
-	Color pC = Color.HOTPINK;
 	Circle projectile = new Circle();
+	ArrayList<Projectile> projectiles;
 	
 	
-	//inital projectile draw (spawn)
+	//initial projectile draw (spawn)
 	public void drawProjectile() {
        	projectile.setCenterX(xP);
     	projectile.setCenterY(yP);
     	projectile.setRadius(rP);
-    	projectile.setFill(pC);
     	
     	root.getChildren().add (projectile);
 	}
 	
 	//makes projectile move
 	public void updateProjectile() {
-		xP = xP + 1;
-		yP = yP + 1;
+		xP = xP - 1;
+		yP = yP - 1;
 		projectile.setCenterX(xP);
 		projectile.setCenterY(yP);
     	projectile.setRadius(rP);
-    	projectile.setFill(pC);
+	}
+	
+	//checks if projectile collides with planet
+	public boolean collideProjectile() {
+		
+		double xPrC = projectile.getCenterX();
+		double yPrC = projectile.getCenterY();
+		double rPrC = projectile.getRadius();
+		double xPlC = planet.getCenterX();
+		double yPlC = planet.getCenterY();
+		double rPlC = planet.getRadius();
+		
+		//calculations to determine if projectile connects with planet
+		double distSq = Math.hypot(xPrC-xPlC, yPrC-yPlC);
+		double radSumSq = (rPrC + rPlC); 
+		
+		//checking if projectile collides with planet
+		if (distSq < radSumSq) {
+			root.getChildren().remove(projectile);
+			
+			//returns boolean so we can check if projectile hits(for removing lives)
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
