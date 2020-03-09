@@ -6,9 +6,9 @@ import javafx.scene.shape.Circle;
 
 public class Projectile {
 	
-	private PolarCoord pc;
+	protected PolarCoord pc;
 	private String name; 
-	private Circle projCircle;
+	protected Circle projCircle;
 	
 	// This constructor gets a distance and a name from SpawnHandler
 	public Projectile(String name, PolarCoord pc) {
@@ -20,6 +20,14 @@ public class Projectile {
 	public Projectile(String name, PolarCoord pc, Circle projCircle) {
 		this(name, pc);
 		this.projCircle = projCircle;
+		this.projCircle.setFill(Color.PINK);
+	}
+	
+	public void turn() {
+		this.pc.setDistance(this.pc.getDistance() - 1);
+		Point2D pos = this.pc.getJCoordinates();
+		projCircle.setCenterX(pos.getX());
+		projCircle.setCenterY(pos.getY());
 	}
 
 	public void setName(String aName) {
@@ -49,10 +57,6 @@ public class Projectile {
 	
 	public void setCircleRadius(int newRadius) {
 		this.projCircle.setRadius(newRadius);
-	}
-	
-	public void setCircleColorPink() {
-		this.projCircle.setFill(Color.PINK);
 	}
 	
 	public String toString() {

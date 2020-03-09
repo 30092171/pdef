@@ -70,6 +70,7 @@ public class GUI {
     	this.mainStage.setScene(this.scene);
     	this.root.getChildren().add(canvas);
     	this.root.setPrefSize(720, 720);
+    	this.root.setStyle("-fx-background-color: lightblue");
 
     	this.scoreValue = new Label("0");
     	this.LIFESIZE = 35;
@@ -116,7 +117,7 @@ public class GUI {
 			
 			//Move Projectile
 			for (Projectile proj : projectiles) {
-				moveProjectile(proj);
+				proj.turn();
 			}
 			
 			//Planet Collision Check
@@ -238,20 +239,8 @@ public class GUI {
 	public void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
-		newProj.setCircleColorPink();
 		System.out.println(newProj);
     	root.getChildren().add(newProj.getCircle());
-	}
-	
-	//Move projectiles in a specified amount/direction
-	public void moveProjectile(Projectile proj) {
-		PolarCoord p = proj.getPolarCoordinates();
-		PolarCoord translate = new PolarCoord(p.getDistance() - 1, p.getRadians(), ORIGIN);
-		proj.setPolarCoordinates(translate);
-		Circle c = proj.getCircle();
-		Point2D pos = p.getJCoordinates();
-		c.setCenterX(pos.getX());
-		c.setCenterY(pos.getY());
 	}
 	
 	//Removes a projectile from the screen and projectile list

@@ -19,7 +19,12 @@ public class SpawnHandler {
 		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(360,360));
 		Circle circle = new Circle(p.getRawX(), p.getRawY(), 10);
 		
-		Projectile newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
+		Projectile newProjectile;
+		if (Math.random() < 0.7) {
+			newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
+		} else {
+			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+		}
 		return  newProjectile;
 		
 	}
