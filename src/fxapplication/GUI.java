@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import pdef.PolarCoord;
@@ -128,6 +129,7 @@ public class GUI {
 					// Displays gameOver when lives = 0
 					if (lifeCount == 0) {
 						timeline.stop();
+						drawGameOver();
 					}
 				}
 			}
@@ -216,6 +218,20 @@ public class GUI {
 
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
+    }
+    
+    public void drawGameOver() {
+    	//Define VBox
+    	VBox gameOverBox = new VBox();
+    	gameOverBox.setPadding(new Insets(-95, 90, 0, 0));
+    	gameOverBox.setAlignment(Pos.CENTER);
+    	root.setCenter(gameOverBox);
+    	
+    	//Populate GameOver VBox
+    	Label gameOverText = new Label("GAME OVER");
+    	gameOverText.setFont(new Font("Arial", 60));
+    	gameOverText.setTextFill(Color.ORANGERED);
+    	gameOverBox.getChildren().add(gameOverText);
     }
 
 	//Draw a new projectile
