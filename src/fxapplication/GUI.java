@@ -99,7 +99,7 @@ public class GUI {
     
     
 	this.timeline = new Timeline();	
-	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(15), new EventHandler <ActionEvent>(){
+	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(20), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
 			
 			//Projectile respawning based on old trySpawn() method in spawnHandler
