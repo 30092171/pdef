@@ -40,8 +40,10 @@ public class GUI {
 
     //Screen Elements
     private Label scoreValue;
+    private int scoreCount = 0;
     private int LIFESIZE;
     private Rectangle life1, life2, life3;
+    private int lifeCount = 3;
     private Circle planet;
     private int planetRadius = 65;
     private double planetX = WINDOWSIZE.getHeight()/2;
@@ -69,13 +71,24 @@ public class GUI {
     	
     	drawTopHUD();
         drawPlanet();
-        drawProjectile();
+        
+        //first projectile spawn
+        projectiles.add(projectileSpawn(xP,yP,rP));
+        for (int projectileC = 0; projectileC < projectiles.size(); projectileC++) {
+        	ProjectileTemp p = projectiles.get(projectileC);
+        	newProjectile(p);
+        }
+        
+
         
         //draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+    		for (int barrierC = 0; barrierC < barriers.size(); barrierC++) {
+    			barriers.remove(barrierC);
+    		}
     		barriers.add(barracade(event.getX(),event.getY()));
-    		for (int Barrier = 0; Barrier < barriers.size(); Barrier++) {
-				Barrier b = barriers.get(Barrier);
+    		for (int barrierC = 0; barrierC < barriers.size(); barrierC++) {
+				Barrier b = barriers.get(barrierC);
 				oldBarrier();
 				newBarrier(b);
     		}
@@ -84,12 +97,52 @@ public class GUI {
     	
 		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler <ActionEvent>(){
 			public void handle(ActionEvent event) {
-				updateProjectile();
-				collideProjectile();
-				for (int Barrier = 0; Barrier < barriers.size(); Barrier++) {
-					Barrier b = barriers.get(Barrier);
-					collideExplsion(b);
+				//checks if projectile hits planet
+				for (int projectileC = 0; projectileC < projectiles.size(); projectileC++) {
+					ProjectileTemp p = projectiles.get(projectileC);
+					boolean hit = collideProjectile(p);
+					//if projectile hits planet destroys projectile and removes life
+					if (hit == true) {
+						oldProjectile();
+						lifeCount = lifeCount - 1;
+						projectiles.remove(projectileC);
+						//USED TO TEST
+						//spawns a new projectile when old one removed
+						projectiles.add(projectileSpawn(xP,yP,rP));
+				        for (int projectileC1 = 0; projectileC1 < projectiles.size(); projectileC1++) {
+				        	ProjectileTemp p1 = projectiles.get(projectileC1);
+				        	p1.xP = 710;
+							p1.yP = 710;
+							p1.rP = 20;
+				        	newProjectile(p1);
+				        }
+					}
+					//checks if projectile hits barrier
+					for (int barrierC = 0; barrierC < barriers.size(); barrierC++) {
+						Barrier b = barriers.get(barrierC);
+						boolean block = collideBarrier(b,p);
+						//if projectile hits barrier destroys projectile and adds to score
+						if (block == true){
+							scoreCount = scoreCount + 100;
+							oldProjectile();
+							projectiles.remove(projectileC);
+							//USED TO TEST
+							//spawns a new projectile when old one removed
+							projectiles.add(projectileSpawn(xP,yP,rP));
+					        for (int projectileC2 = 0; projectileC2 < projectiles.size(); projectileC2++) {
+					        	ProjectileTemp p2 = projectiles.get(projectileC2);
+								p2.xP = 710;
+								p2.yP = 710;
+								p2.rP = 20;
+					        	newProjectile(p2);
+					        }
+						}
+					}
+					updateProjectile(p);
 				}
+				setLivesDisplay(lifeCount);
+				String scoreCountS = Integer.toString(scoreCount);
+				setScoreText(scoreCountS);
 			}
 		}
 		)
@@ -128,7 +181,7 @@ public class GUI {
 
     public void drawTopHUD() {
 
-        //Define BoxBs
+        //Define Boxes
         HBox livesBox = new HBox();
         livesBox.setPadding(new Insets(-68, 0, 0, 20));
         livesBox.setAlignment(Pos.TOP_LEFT);
@@ -174,37 +227,53 @@ public class GUI {
     	root.getChildren().add (planet);
     }
 
+    
+    
+    
     //setup variables for projectile
     double xP = 710;
 	double yP = 710;
 	int rP = 20;
 	Circle projectile = new Circle();
-	ArrayList<Projectile> projectiles;
+	ArrayList<ProjectileTemp> projectiles;
+	
+	//uses Projectile class to make new projectile
+	//using ProjectileTemp till Projectile gets sorted out
+	public ProjectileTemp projectileSpawn(double aXP, double aYP, int aRP) {
+		xP = aXP;
+		yP = aYP;
+		rP = aRP;
+		return new ProjectileTemp(xP,yP,rP);
+	}
 
-	//initial projectile draw (spawn)
-	public void drawProjectile() {
-       	projectile.setCenterX(xP);
-    	projectile.setCenterY(yP);
-    	projectile.setRadius(rP);
+	//draw new projectile
+	public void newProjectile(ProjectileTemp p) {
+		xP = p.xP;
+		yP = p.yP;
+		rP = p.rP;
     	
     	root.getChildren().add (projectile);
 	}
 	
+	//removes old barrier
+	public void oldProjectile() {
+		root.getChildren().remove (projectile);
+	}
+	
 	//makes projectile move
-	public void updateProjectile() {
-		xP = xP - 1;
-		yP = yP - 1;
-		projectile.setCenterX(xP);
-		projectile.setCenterY(yP);
-    	projectile.setRadius(rP);
+	public void updateProjectile(ProjectileTemp p) {
+		p.xP = p.xP - 1;
+		p.yP = p.yP - 1;
+		projectile.setCenterX(p.xP);
+		projectile.setCenterY(p.yP);
+    	projectile.setRadius(p.rP);
 	}
 	
 	//checks if projectile collides with planet
-	public boolean collideProjectile() {
-		
-		double xPrC = projectile.getCenterX();
-		double yPrC = projectile.getCenterY();
-		double rPrC = projectile.getRadius();
+	public boolean collideProjectile(ProjectileTemp p) {
+		double xPrC = p.xP;
+		double yPrC = p.yP;
+		double rPrC = p.rP;
 		double xPlC = planet.getCenterX();
 		double yPlC = planet.getCenterY();
 		double rPlC = planet.getRadius();
@@ -215,7 +284,6 @@ public class GUI {
 		
 		//checking if projectile collides with planet
 		if (dist < radSum) {
-			root.getChildren().remove(projectile);
 			
 			//returns boolean so we can check if projectile hits(for removing lives)
 			return true;
@@ -231,7 +299,7 @@ public class GUI {
 	double xB;
 	double yB;
 	int rB = 15;
-	Circle Barrier = new Circle();
+	Circle barrier = new Circle();
 	ArrayList<Barrier> barriers;
 	
 	//Uses Barrier class to make a new barrier
@@ -244,26 +312,26 @@ public class GUI {
 		xB = b.xB;
 		yB = b.yB;
 		rB = b.rB;
-       	Barrier.setCenterX(xB);
-    	Barrier.setCenterY(yB);
-    	Barrier.setRadius(rB);
-    	root.getChildren().add (Barrier);
+       	barrier.setCenterX(xB);
+    	barrier.setCenterY(yB);
+    	barrier.setRadius(rB);
+    	root.getChildren().add (barrier);
 	}
 	
 	//removes old barrier
 	public void oldBarrier() {
-		root.getChildren().remove (Barrier);
+		root.getChildren().remove (barrier);
 	}
 	
 	//checks if barrier collides with barrier
-	public void collideExplsion(Barrier b) {
+	public boolean collideBarrier(Barrier b,ProjectileTemp p) {
 		
 		double xBxC = b.xB;
 		double yBxC = b.yB;
 		double rBxC = b.rB;
-		double xPrC = projectile.getCenterX();
-		double yPrC = projectile.getCenterY();
-		double rPrC = projectile.getRadius();
+		double xPrC = p.xP;
+		double yPrC = p.yP;
+		double rPrC = p.rP;
 		
 		//calculations to determine if projectile collides with barrier
 		double dist = Math.hypot(xBxC-xPrC, yBxC-yPrC);
@@ -271,7 +339,11 @@ public class GUI {
 		
 		//remove projectile if they do collide
 		if (dist < radSum) {
-			root.getChildren().remove(projectile);
+			
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }
