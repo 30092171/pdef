@@ -17,9 +17,7 @@ public class PolarCoord implements Cloneable {
 	}
 
 	public void setRadians(double radians) {
-		if (radians >= 0 && radians <= 2 * Math.PI) {
-			this.radians = radians;
-		}
+		this.radians = radians;
 	}
 
 	public double getDistance() {

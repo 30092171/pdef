@@ -21,15 +21,11 @@ public class SpawnHandler {
 		
 		Projectile newProjectile;
 		double projType = Math.random();
-		System.out.println(projType);
 		if (projType >= 0.8) {
 			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
-		}
-		
-		else if (projType >= 0.6 && projType < 0.8){
+		} else if (projType >= 0.6 && projType < 0.8){
 			newProjectile = new SpeedUpProjectile("Projectile " + (projectiles.size() + 1), p, circle);
-		}
-		else {
+		} else {
 			newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
 		}
 		return  newProjectile;
