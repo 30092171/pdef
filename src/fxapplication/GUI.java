@@ -90,8 +90,21 @@ public class GUI {
     	}
     	);
     
-	Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler <ActionEvent>(){	
+    
+	Timeline timeline = new Timeline();	
+	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(250), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
+			
+			//Projectile respawning based on old trySpawn() method in spawnHandler
+			if (projectiles.size()<1) {
+				addProjectile();
+				addProjectile();
+			}
+			
+			if(projectiles.size() < 5) {
+				addProjectile();
+				addProjectile();
+			}
 			
 			//Move Projectile
 			for (Projectile proj : projectiles) {
@@ -104,6 +117,11 @@ public class GUI {
 					lifeCount = lifeCount - 1;
 					setLivesDisplay(lifeCount);
 					removeProjectile(projectiles.get(projIndex), projIndex);
+					
+					// Displays gameOver when lives = 0
+					if (lifeCount == 0) {
+						timeline.stop();
+					}
 				}
 			}
 			

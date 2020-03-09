@@ -14,7 +14,7 @@ public class SpawnHandler {
 	}
 	
 	public Projectile spawnProjectile() {
-		int initialDistance = 200; // Spawns outside of screen 
+		int initialDistance = 800; // Spawns outside of screen 
 		int spawnAngle = (int)(Math.random() * 360);
 		int xCoord = (int)((initialDistance * Math.cos(spawnAngle)) + 360);
 		int yCoord = (int)((initialDistance * Math.sin(spawnAngle)) + 360);
@@ -55,6 +55,8 @@ public class SpawnHandler {
 					" (" + element.getxCoordinate() + "," + element.getyCoordinate() + ").");
 		}
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
