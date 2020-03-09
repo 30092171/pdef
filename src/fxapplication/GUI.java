@@ -150,12 +150,14 @@ public class GUI {
 	timeline.setCycleCount(Animation.INDEFINITE);
 	timeline.play();
 	this.pauseButton.setOnAction((ActionEvent e) -> {
-		if (this.timeline.getRate() > 0.0) {
-			this.timeline.setRate(0.0);
-			this.timeline.stop();
-		} else {
-			this.timeline.setRate(1.0);
-			this.timeline.play();
+		if (lifeCount != 0) {
+			if (this.timeline.getRate() > 0.0) {
+				this.timeline.setRate(0.0);
+				this.timeline.stop();
+			} else {
+				this.timeline.setRate(1.0);
+				this.timeline.play();
+			}
 		}
 	});
     }
