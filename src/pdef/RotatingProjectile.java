@@ -17,7 +17,7 @@ public class RotatingProjectile extends Projectile {
 	}
 	
 	public void turn() {
-		this.pc.setDistance(this.pc.getDistance() - 1);
+		this.pc.setDistance(this.pc.getDistance() - 0.8);
 		this.pc.setRadians(this.pc.getRadians() - 0.005);
 		Point2D pos = this.pc.getJCoordinates();
 		projCircle.setCenterX(pos.getX());

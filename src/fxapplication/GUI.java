@@ -70,7 +70,7 @@ public class GUI {
     	this.mainStage.setScene(this.scene);
     	this.root.getChildren().add(canvas);
     	this.root.setPrefSize(720, 720);
-    	this.root.setStyle("-fx-background-color: lightblue");
+    	this.root.setStyle("-fx-background-color: gray");
 
     	this.scoreValue = new Label("0");
     	this.LIFESIZE = 35;
@@ -99,7 +99,7 @@ public class GUI {
     
     
 	this.timeline = new Timeline();	
-	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(50), new EventHandler <ActionEvent>(){
+	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(15), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
 			
 			//Projectile respawning based on old trySpawn() method in spawnHandler

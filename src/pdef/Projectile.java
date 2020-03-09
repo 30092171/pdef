@@ -24,7 +24,7 @@ public class Projectile {
 	}
 	
 	public void turn() {
-		this.pc.setDistance(this.pc.getDistance() - 1);
+		this.pc.setDistance(this.pc.getDistance() - 0.8);
 		Point2D pos = this.pc.getJCoordinates();
 		projCircle.setCenterX(pos.getX());
 		projCircle.setCenterY(pos.getY());
