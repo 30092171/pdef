@@ -38,7 +38,7 @@ public class GUI {
 
     private Stage mainStage;
     private BorderPane root;
-    private Scene scene;
+    private Scene scene, gameOverScene;
     private Canvas canvas;
 
     //Screen Elements
@@ -92,7 +92,7 @@ public class GUI {
     
     
 	Timeline timeline = new Timeline();	
-	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(250), new EventHandler <ActionEvent>(){
+	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(400), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
 			
 			//Projectile respawning based on old trySpawn() method in spawnHandler
@@ -101,9 +101,11 @@ public class GUI {
 				addProjectile();
 			}
 			
-			if(projectiles.size() < 5) {
-				addProjectile();
-				addProjectile();
+			if (projectiles.size() < 5) {
+				if (Math.random() > 0.5) {
+					addProjectile();
+					addProjectile();
+				}
 			}
 			
 			//Move Projectile
