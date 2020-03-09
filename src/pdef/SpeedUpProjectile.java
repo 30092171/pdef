@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class SpeedUpProjectile extends Projectile {
+	
+	private double speed = 0;
 
 	public SpeedUpProjectile(String name, PolarCoord pc) {
 		super(name, pc);
@@ -15,8 +17,6 @@ public class SpeedUpProjectile extends Projectile {
 		super(name, pc, c);
 		this.projCircle.setFill(Color.GREEN);
 	}
-	
-	double speed = 0;
 	
 	public void turn() {
 		speed = speed + 0.01;
