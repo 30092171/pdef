@@ -5,9 +5,13 @@ import javafx.scene.shape.Circle;
 
 public class Projectile extends ScreenElements {
 	
-	private double distance;
+	/*
+	 * We need to stop representing the position of this object as a coordinate pair.
+	 */
+	
+	private double distance; //replace with polarcoord
 	private String name; 
-	private int spawnAngle;
+	private int spawnAngle; //replace with polarcoord
 	private Circle projCircle;
 	
 	// This constructor gets a distance and a name from SpawnHandler

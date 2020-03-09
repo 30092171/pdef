@@ -1,4 +1,4 @@
-package fxapplication;
+package pdef;
 
 import javafx.geometry.Point2D;
 
