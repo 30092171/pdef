@@ -55,6 +55,8 @@ public class GUI {
     private SpawnHandler spawnHandler;
     private Barrier barrier = new Barrier();
     private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    
+    private Timeline timeline;
 
     public GUI(Stage mainStage) {
     	this.mainStage = mainStage;
@@ -91,8 +93,8 @@ public class GUI {
     	);
     
     
-	Timeline timeline = new Timeline();	
-	timeline.getKeyFrames().add(new KeyFrame(Duration.millis(400), new EventHandler <ActionEvent>(){
+	this.timeline = new Timeline();	
+	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(800), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
 			
 			//Projectile respawning based on old trySpawn() method in spawnHandler
@@ -141,7 +143,13 @@ public class GUI {
 	);
 	timeline.setCycleCount(Animation.INDEFINITE);
 	timeline.play();
-	mainStage.show();
+	this.pauseButton.setOnAction((ActionEvent e) -> {
+		if (this.timeline.getRate() > 0.0) {
+			this.timeline.setRate(0.0);
+		} else {
+			this.timeline.setRate(1.0);
+		}
+	});
     }
     
     public void setLivesDisplay(int lifeCount) {
