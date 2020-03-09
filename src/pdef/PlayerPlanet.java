@@ -1,12 +1,11 @@
 package pdef;
 
-public class PlayerPlanet extends ScreenElements {
+public class PlayerPlanet {
 	private int numLives;
 	private int score;
 	private int planetRadius;
 	
 	public PlayerPlanet() {
-		super(0,0); // Sets xCoord and yCoord to (0,0)
 		numLives = 3;
 		score = 0;
 		planetRadius = 65; 

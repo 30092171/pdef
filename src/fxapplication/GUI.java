@@ -6,6 +6,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -22,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import pdef.PolarCoord;
 import pdef.Projectile;
 import javafx.event.EventHandler;
 
@@ -35,6 +37,7 @@ public class GUI {
 
     //Root Components and Formatting Elements
     private static Dimension2D WINDOWSIZE = new Dimension2D(720, 720);
+    private static Point2D ORIGIN = new Point2D(360, 360);
 
     private Stage mainStage;
     private BorderPane root;
@@ -94,7 +97,7 @@ public class GUI {
     
     
 	this.timeline = new Timeline();	
-	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(800), new EventHandler <ActionEvent>(){
+	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(50), new EventHandler <ActionEvent>(){
 		public void handle(ActionEvent event) {
 			
 			//Projectile respawning based on old trySpawn() method in spawnHandler
@@ -146,8 +149,10 @@ public class GUI {
 	this.pauseButton.setOnAction((ActionEvent e) -> {
 		if (this.timeline.getRate() > 0.0) {
 			this.timeline.setRate(0.0);
+			this.timeline.stop();
 		} else {
 			this.timeline.setRate(1.0);
+			this.timeline.play();
 		}
 	});
     }
@@ -216,22 +221,21 @@ public class GUI {
 	//Draw a new projectile
 	public void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
-		newProj.getCircle().setCenterX(newProj.getxCoordinate());
-		newProj.setCircleRadius(10);
-		newProj.setCircleX(newProj.getxCoordinate());
-		newProj.setCircleY(newProj.getyCoordinate());
-		newProj.setCircleColorPink();
 		this.projectiles.add(newProj);
+		newProj.setCircleColorPink();
+		System.out.println(newProj);
     	root.getChildren().add(newProj.getCircle());
 	}
 	
 	//Move projectiles in a specified amount/direction
 	public void moveProjectile(Projectile proj) {
-		proj.setXCoord(proj.getSpawnAngle(), 1);
-		proj.setYCoord(proj.getSpawnAngle(), 1);
-		proj.setCircleX(proj.getxCoordinate());
-		proj.setCircleY(proj.getyCoordinate());
-		proj.setDistance(proj.getxCoordinate(), proj.getyCoordinate(), planetRadius);
+		PolarCoord p = proj.getPolarCoordinates();
+		PolarCoord translate = new PolarCoord(p.getDistance() - 1, p.getRadians(), ORIGIN);
+		proj.setPolarCoordinates(translate);
+		Circle c = proj.getCircle();
+		Point2D pos = p.getJCoordinates();
+		c.setCenterX(pos.getX());
+		c.setCenterY(pos.getY());
 	}
 	
 	//Removes a projectile from the screen and projectile list

@@ -2,6 +2,8 @@ package pdef;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Point2D;
+
 public class PlayerInput {
 	
 	public ArrayList<Projectile> projectiles;
@@ -44,7 +46,8 @@ public class PlayerInput {
 	
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
-		proj.add(new Projectile(100, 0, 100, 0));
+		Point2D origin = new Point2D(400,300);
+		proj.add(new Projectile("A",new PolarCoord(100,10, origin)));
 		PlayerInput pi = new PlayerInput(proj);
 		System.out.println(pi.command("A"));
 	}

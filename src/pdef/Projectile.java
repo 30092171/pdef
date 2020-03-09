@@ -1,57 +1,41 @@
 package pdef;
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Projectile extends ScreenElements {
+public class Projectile {
 	
-	private double distance;
+	private PolarCoord pc;
 	private String name; 
-	private int spawnAngle;
 	private Circle projCircle;
 	
 	// This constructor gets a distance and a name from SpawnHandler
-	public Projectile(double initialDistance, int spawnAngle, int xCoord, int yCoord) {
-		super(xCoord, yCoord);
-		this.distance = initialDistance;
-		setSpawnAngle(spawnAngle);
+	public Projectile(String name, PolarCoord pc) {
+		this.setName(name);
+		this.setPolarCoordinates(pc);
 	}
 	
 	//
-	public Projectile(double initialDistance, int spawnAngle, int xCoord, int yCoord, Circle projCircle) {
-		super(xCoord, yCoord);
-		this.distance = initialDistance;
+	public Projectile(String name, PolarCoord pc, Circle projCircle) {
+		this(name, pc);
 		this.projCircle = projCircle;
-		setSpawnAngle(spawnAngle);
 	}
-	
-	// Setter methods for distance, name, and spawnAngle
-	public void setDistance(int xCoord, int yCoord, int planetRadius) {
-		// Takes the x and y of the projectile and computes distance between planet's center
-		this.distance = Math.sqrt(Math.pow(xCoord-360, 2) + Math.pow(yCoord-360, 2))-planetRadius;
-	}
-	
+
 	public void setName(String aName) {
 		name = aName;
-	}
-	
-	public void setSpawnAngle(int spawnAngle) {
-		if (spawnAngle >= 0 && spawnAngle <= 360) {
-			this.spawnAngle = spawnAngle;
-		}
-	}
-	
-	// Getter methods for distance, name, spawnAngle, and coordinates
-	public double getDistance() {
-		return distance;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public int getSpawnAngle() {
-		return spawnAngle;
+	public PolarCoord getPolarCoordinates() {
+		return pc;
+	}
+
+	public void setPolarCoordinates(PolarCoord pc) {
+		this.pc = pc;
 	}
 	
 	public Circle getCircle() {
@@ -60,15 +44,6 @@ public class Projectile extends ScreenElements {
 	
 	public double getCircleRadius() {
 		return this.projCircle.getRadius();
-	}
-	
-	public void setCircleX(int newX) {
-		this.projCircle.setCenterX(newX);
-	}
-	
-	
-	public void setCircleY(int newY) {
-		this.projCircle.setCenterY(newY);
 	}
 	
 	
@@ -80,18 +55,13 @@ public class Projectile extends ScreenElements {
 		this.projCircle.setFill(Color.PINK);
 	}
 	
-	public void setXCoord(int spawnAngle, int distanceToMove) {
-		// Changes the xCoord to move based on the distanceToMove parameter
-		super.setxCoordinate((int)((this.distance-distanceToMove) * Math.cos(spawnAngle))+360);
-	}
-	
-	public void setYCoord(int spawnAngle, int distanceToMove) {
-		// Changes the yCoord to move based on the distanceToMove parameter
-		super.setyCoordinate((int)((this.distance-distanceToMove) * Math.sin(spawnAngle))+360);
+	public String toString() {
+		return "Projectile: " + this.getPolarCoordinates();
 	}
 	
 	public static void main(String[] args) {
-		Projectile proj = new Projectile(100, 90, 0, 100);
+		Point2D origin = new Point2D(400,300);
+		Projectile proj = new Projectile("Proj A", new PolarCoord(100, Math.PI, origin));
 		System.out.println(proj.getName());
 	}
 }

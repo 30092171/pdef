@@ -1,7 +1,7 @@
 package pdef;
-import java.lang.Math;
 import java.util.ArrayList;
 
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 public class SpawnHandler {
@@ -14,15 +14,12 @@ public class SpawnHandler {
 	}
 	
 	public Projectile spawnProjectile() {
-		int initialDistance = 800; // Spawns outside of screen 
-		int spawnAngle = (int)(Math.random() * 360);
-		int xCoord = (int)((initialDistance * Math.cos(spawnAngle)) + 360);
-		int yCoord = (int)((initialDistance * Math.sin(spawnAngle)) + 360);
-		Circle circle = new Circle();
-		circle.setCenterX(xCoord);
-		circle.setCenterY(yCoord);
-		circle.setRadius(10);
-		Projectile newProjectile = new Projectile(initialDistance, spawnAngle, xCoord, yCoord, circle);
+		double initialDistance = 400; // Spawns outside of screen 
+		double spawnAngle = (Math.random() * Math.PI * 2);
+		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(360,360));
+		Circle circle = new Circle(p.getRawX(), p.getRawY(), 10);
+		
+		Projectile newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
 		return  newProjectile;
 		
 	}
@@ -50,9 +47,10 @@ public class SpawnHandler {
 	
 	public void printProjectileStatus(PlayerPlanet player) {
 		for(Projectile element : projectiles) {
+			PolarCoord p = element.getPolarCoordinates();
 			System.out.println("Projectile " + element.getName() 
-					+ " is " + (element.getDistance() - player.getPlanetRadius()) + " units away at" +
-					" (" + element.getxCoordinate() + "," + element.getyCoordinate() + ").");
+					+ " is " + p + " units away at" +
+					" (" + p.getRawCoordinates() + ").");
 		}
 	}
 	
