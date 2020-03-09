@@ -5,13 +5,9 @@ import javafx.scene.shape.Circle;
 
 public class Projectile extends ScreenElements {
 	
-	/*
-	 * We need to stop representing the position of this object as a coordinate pair.
-	 */
-	
-	private double distance; //replace with polarcoord
+	private double distance;
 	private String name; 
-	private int spawnAngle; //replace with polarcoord
+	private int spawnAngle;
 	private Circle projCircle;
 	
 	// This constructor gets a distance and a name from SpawnHandler
@@ -30,9 +26,9 @@ public class Projectile extends ScreenElements {
 	}
 	
 	// Setter methods for distance, name, and spawnAngle
-	public void setDistance(int xCoord, int yCoord, PlayerPlanet player) {
+	public void setDistance(int xCoord, int yCoord, int planetRadius) {
 		// Takes the x and y of the projectile and computes distance between planet's center
-		this.distance = Math.sqrt(Math.pow(xCoord, 2) + Math.pow(yCoord, 2))-player.getPlanetRadius();
+		this.distance = Math.sqrt(Math.pow(xCoord-360, 2) + Math.pow(yCoord-360, 2))-planetRadius;
 	}
 	
 	public void setName(String aName) {
@@ -70,9 +66,11 @@ public class Projectile extends ScreenElements {
 		this.projCircle.setCenterX(newX);
 	}
 	
+	
 	public void setCircleY(int newY) {
 		this.projCircle.setCenterY(newY);
 	}
+	
 	
 	public void setCircleRadius(int newRadius) {
 		this.projCircle.setRadius(newRadius);
@@ -84,12 +82,12 @@ public class Projectile extends ScreenElements {
 	
 	public void setXCoord(int spawnAngle, int distanceToMove) {
 		// Changes the xCoord to move based on the distanceToMove parameter
-		super.setxCoordinate((int)((this.distance-distanceToMove) * Math.cos(spawnAngle)));
+		super.setxCoordinate((int)((this.distance-distanceToMove) * Math.cos(spawnAngle))+360);
 	}
 	
 	public void setYCoord(int spawnAngle, int distanceToMove) {
 		// Changes the yCoord to move based on the distanceToMove parameter
-		super.setyCoordinate((int)((this.distance-distanceToMove) * Math.sin(spawnAngle)));
+		super.setyCoordinate((int)((this.distance-distanceToMove) * Math.sin(spawnAngle))+360);
 	}
 	
 	public static void main(String[] args) {

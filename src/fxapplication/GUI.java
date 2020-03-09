@@ -90,7 +90,7 @@ public class GUI {
     	}
     	);
     
-	Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler <ActionEvent>(){	
+	Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler <ActionEvent>(){	
 		public void handle(ActionEvent event) {
 			
 			//Move Projectile
@@ -199,10 +199,11 @@ public class GUI {
 	
 	//Move projectiles in a specified amount/direction
 	public void moveProjectile(Projectile proj) {
-		proj.setXCoord(proj.getSpawnAngle(), -1);
-		proj.setYCoord(proj.getSpawnAngle(), -1);
-		proj.setCircleX((int)(proj.getCircle().getCenterX()-1));
-		proj.setCircleY((int)(proj.getCircle().getCenterY()-1));
+		proj.setXCoord(proj.getSpawnAngle(), 1);
+		proj.setYCoord(proj.getSpawnAngle(), 1);
+		proj.setCircleX(proj.getxCoordinate());
+		proj.setCircleY(proj.getyCoordinate());
+		proj.setDistance(proj.getxCoordinate(), proj.getyCoordinate(), planetRadius);
 	}
 	
 	//Removes a projectile from the screen and projectile list
