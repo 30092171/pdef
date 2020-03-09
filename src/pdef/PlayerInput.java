@@ -44,7 +44,7 @@ public class PlayerInput {
 	
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
-		proj.add(new Projectile(100, "A", 0, 100, 0));
+		proj.add(new Projectile(100, 0, 100, 0));
 		PlayerInput pi = new PlayerInput(proj);
 		System.out.println(pi.command("A"));
 	}

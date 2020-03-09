@@ -11,7 +11,7 @@ import pdef.PlayerInput;
 
 public class Game extends Application {
 	//root class.
-	public ArrayList<Projectile> projectiles;
+	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	
 	public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class Game extends Application {
 	public void start(Stage mainStage) throws Exception {
 		PlayerPlanet player = new PlayerPlanet();//make new model
 		GUI gui = new GUI(mainStage); //frontend
-		SpawnHandler spawnHandler = new SpawnHandler(projectiles, player);
+		SpawnHandler spawnHandler = new SpawnHandler(projectiles);
 		PlayerInput playerInput = new PlayerInput(projectiles);
 		Controller c = new Controller(player, gui, spawnHandler, playerInput); //logic
 		

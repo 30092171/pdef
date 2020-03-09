@@ -1,14 +1,17 @@
 package fxapplication;
 
-public class Barrier {
-	
-	double xB;
-	double yB;
-	int rB;
+import javafx.scene.shape.Circle;
 
-	public Barrier(double aXB, double aYB, int aRB) {
-		this.xB = aXB;
-		this.yB = aYB;
-		this.rB = aRB;
+public class Barrier {
+
+	int radius;
+	Circle barrCircle = new Circle();
+	
+	public Circle getCircle() {
+		return this.barrCircle;
+	}	
+	
+	public double getCircleRadius() {
+		return this.barrCircle.getRadius();
 	}
 }

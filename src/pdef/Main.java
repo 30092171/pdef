@@ -8,12 +8,11 @@ public class Main {
 	static Scanner sc = new Scanner(System.in); //string input
 	static PlayerPlanet p = new PlayerPlanet(); //player model
 	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>(); //proj list
-	static SpawnHandler sp = new SpawnHandler(projectiles, p); //Create the spawn handler
+	static SpawnHandler sp = new SpawnHandler(projectiles); //Create the spawn handler
 	static PlayerInput pi = new PlayerInput(projectiles); //Input handler
 	
-	public static void main(String[] args) {
+	/* public static void main(String[] args) {
 		//Initial projectile list
-		sp.initialSpawn();
 		printInstructions();
 		
 		//Main game loop. continues until player runs out of lives
@@ -27,8 +26,7 @@ public class Main {
 			if (input.toUpperCase().equals("RESET")) {
 				p = new PlayerPlanet();
 				projectiles.clear();
-				sp = new SpawnHandler(projectiles, p);
-				sp.initialSpawn();
+				sp = new SpawnHandler(projectiles);
 				printInstructions();
 				continue;
 			}
@@ -43,14 +41,11 @@ public class Main {
 			}
 			
 			sp.updateProjectiles(); //update projectiles every turn
-			
-			//Spawn more projectiles if needed
-			sp.trySpawn();
 			}
 			//Prints game over messages, execute if the main game loop is broken by running out of lives
 			p.printGameOver(); // --> in playerPlanet
 	}
-	
+	*/
 	public static void printInstructions() {
 		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");
