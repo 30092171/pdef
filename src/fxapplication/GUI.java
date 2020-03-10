@@ -56,6 +56,7 @@ public class GUI {
     private double planetX = WINDOWSIZE.getHeight()/2;
     private double planetY = WINDOWSIZE.getWidth()/2;
     private Button pauseButton;
+    private Button resetButton;
     private SpawnHandler spawnHandler;
     private Barrier barrier = new Barrier();
     private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -78,6 +79,7 @@ public class GUI {
     	this.life2 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.life3 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.pauseButton = new Button("Pause");
+    	this.resetButton = new Button("Reset");
     	this.planet = new Circle(planetX,planetY,planetRadius);
     	this.projectiles = new ArrayList<Projectile>();
     	this.spawnHandler = new SpawnHandler(projectiles);
@@ -160,6 +162,23 @@ public class GUI {
 			}
 		}
 	});
+	
+	// Resets all variables back to starting state
+		this.resetButton.setOnAction((ActionEvent e) -> {
+			this.lifeCount = 3;
+			this.scoreCount = 0;
+			projectiles.clear();
+			root.getChildren().clear();
+			drawTopHUD();
+			this.root.getChildren().add (planet);
+			float full = 1.0f;
+			life1.setOpacity(full);
+	        life2.setOpacity(full);
+	        life3.setOpacity(full);
+			timeline.playFromStart();
+			
+		});
+	
     }
     
     public void setLivesDisplay(int lifeCount) {
@@ -221,6 +240,7 @@ public class GUI {
 
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
+        controlsBox.getChildren().add(resetButton);
     }
     
     public void drawGameOver() {
