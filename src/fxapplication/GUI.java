@@ -156,9 +156,11 @@ public class GUI {
 			if (this.timeline.getRate() > 0.0) {
 				this.timeline.setRate(0.0);
 				this.timeline.stop();
+				this.pauseButton.setText("Play");
 			} else {
 				this.timeline.setRate(1.0);
 				this.timeline.play();
+				this.pauseButton.setText("Pause");
 			}
 		}
 	});
