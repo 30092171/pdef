@@ -5,25 +5,24 @@
 Planet Defenders is a 2D arcade-styled defense game. The player must defend their home planet from incoming projectiles.  
 
 ###### How to Run
-1. Download release.jar from the releases tab under "first demo" (or click link to download) <https://github.com/30092171/pdef/releases/download/0.1/release.jar>
-2. Place release.jar in desired directory
-3. Open command line
-4. java -jar \<path\>\release.jar
-5. Enjoy!
+1. Download planetDefender.GUI.jar and planetDefender.TEXT.jar from the releases tab under "Demo 2" (or click link to download) <https://github.com/30092171/pdef/releases/download/0.2/planetDefenders.GUI.jar>
+<https://github.com/30092171/pdef/releases/download/0.2/planetDefenders.TEXT.jar>
+2. Place .jar files in desired directory
+3. Double-click planetDefenders(GUI).jar to open the GUI version.
+4. Otherwise, open command line
+5. java -jar \<path\>\planetDefenders(TEXT).jar
+6. Enjoy!
 
-###### Game Instructions
+###### Game Instructions (Text-Based)
 1. Increase your score by destroying projectiles, and survive as long as possible
 2. If a projectile gets too close, you will get hit and lose 1 of 3 lives
 3. Type the character of the projectile you want to destroy (Ex. \<A\>)
 4. Type \<Reset\> at any time to start over
 
-###### How to Compile Sperately
-Follow these steps if you wish to compile the game files yourself.
-1. Download and extract game .zip file into desired directory\
-<https://github.com/30092171/pdef/archive/master.zip>
-2. Compile the following files: Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java\
-\<javac Main.java PlayerInput.java PlayerPlanet.java Projectile.java SpawnHandler.java>
-3. Enter the following in the command line after entering the subfolder outside of the pdef folder: \<java pdef.Main>.
+###### Game Instructions (GUI-Based)
+1. Increase your score by destroying projectiles, and survive as long as possible
+2. If a projectile hits the planet, you will get hit and lose 1 of 3 lives
+3. Point and click on desired position to block projectiles from hitting the planet
 
 ###### JUnit Testing
 Currently our JUnit test for the Projectile class only works within Eclipse. After installing Eclipse, follow these steps to run the JUnit test.
