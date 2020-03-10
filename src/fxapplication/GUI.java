@@ -167,6 +167,7 @@ public class GUI {
 		this.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
+			this.scoreValue.setText("0");
 			projectiles.clear();
 			root.getChildren().clear();
 			drawTopHUD();
