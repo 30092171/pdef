@@ -253,7 +253,7 @@ public class GUI {
     	
     	//Populate GameOver VBox
     	Label gameOverText = new Label("GAME OVER");
-    	gameOverText.setFont(new Font("Arial", 60));
+    	gameOverText.setFont(new Font("Arial", 59));
     	gameOverText.setTextFill(Color.ORANGERED);
     	gameOverBox.getChildren().add(gameOverText);
     }
