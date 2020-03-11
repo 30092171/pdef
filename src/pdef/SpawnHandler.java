@@ -1,60 +1,85 @@
 package pdef;
-import java.lang.Math;
 import java.util.ArrayList;
+
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
 
 public class SpawnHandler {
 	//Instance variables
-	private int nameIndex = 0;
-	public ArrayList<Projectile> projectiles;
-	static private String[] namesList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", 		
-										"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", 
-										"U", "V", "W", "X", "Y", "Z"};
+	private static String names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private int counter = 0;
 	
-	//Constructor, gets reference to projectile list
+	public ArrayList<Projectile> projectiles;
+	
+	//Constructor, gets reference to projectile list and PlayerPlanet
 	public SpawnHandler(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
 	
-	//Spawn projectile with randomness
 	public Projectile spawnProjectile() {
-		String name = (namesList[nameIndex]);
-		int distance = ((int) (10 + Math.random() * 100));
-		Projectile newProjectile = new Projectile(distance, name);
-		if ((nameIndex + 1) > (namesList.length - 1)) {
-			nameIndex = 0;
-		}
-		else {
-			nameIndex = nameIndex + 1;
+		double initialDistance = 400; // Spawns outside of screen 
+		double spawnAngle = (Math.random() * Math.PI * 2);
+		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(360,360));
+		Circle circle = new Circle(p.getRawX(), p.getRawY(), 10);
+		
+		Projectile newProjectile;
+		double projType = Math.random();
+		if (projType >= 0.8) {
+			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+		} else if (projType >= 0.6 && projType < 0.8){
+			newProjectile = new SpeedUpProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+		} else {
+			newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
 		}
 		return  newProjectile;
+		
 	}
 	
-	//Initially spawns 3 projectiles
-	public void initialSpawn() {
-		projectiles.add(spawnProjectile());
-		projectiles.add(spawnProjectile());
-		projectiles.add(spawnProjectile());
+	public Projectile oldProjectile() {
+		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 
+		double spawnAngle = (Math.random() * Math.PI * 2);
+		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(0,0));
+		return new Projectile(names.charAt(counter++) + "", p);
+		
 	}
 	
 	//Projectile spawning after the rest of the turn's game logic has occured. 
 	//If there are no projectiles left, then more will always be spawned
 	public void trySpawn() {
 		if(projectiles.size() < 1) {
-			projectiles.add(spawnProjectile());
-			projectiles.add(spawnProjectile());
+			projectiles.add(oldProjectile());
+			projectiles.add(oldProjectile());
 		}
 		if(projectiles.size() < 4) {
 			if (Math.random() > 0.5) {
-				projectiles.add(spawnProjectile());
-				projectiles.add(spawnProjectile());
+				projectiles.add(oldProjectile());
+				projectiles.add(oldProjectile());
 			}
 		}
 	}
 	
+	//Initially spawns 3 projectiles
+	public void initialSpawn() {
+		projectiles.add(oldProjectile());
+		projectiles.add(oldProjectile());
+		projectiles.add(oldProjectile());
+	}
+	
+	public void printProjectileStatus(PlayerPlanet player) {
+		for(Projectile element : projectiles) {
+			PolarCoord p = element.getPolarCoordinates();
+			Point2D p2 = p.getRawCoordinates();
+			System.out.println("Projectile " + element.getName() 
+					+ " is " + p.getDistance() + " units away at" +
+					" (" + p2.getX() + ", " +p2.getY()+ ").");
+		}
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
 		SpawnHandler sp = new SpawnHandler(proj);
-		sp.trySpawn();
 		System.out.println(sp.projectiles);
 	}
 }

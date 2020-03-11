@@ -13,26 +13,21 @@ public class Main {
 	
 	public static void main(String[] args) {
 		//Initial projectile list
-		sp.initialSpawn();
-		
 		printInstructions();
-		
+		sp.initialSpawn();
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
 			p.printPlayerStatus(); //print status every beginning of loop
-			for(Projectile element : projectiles) {
-				System.out.println("Projectile " + element.getName() 
-						+ " is " + (element.getDistance() - p.getPlanetRadius()) + " units away.");
-			}
+			sp.printProjectileStatus(p);
 			
 			//Input prompt
 			System.out.print("Enter projectile to shoot:");
 			String input = sc.nextLine();
 			if (input.toUpperCase().equals("RESET")) {
 				p = new PlayerPlanet();
+				sp.initialSpawn();
 				projectiles.clear();
 				sp = new SpawnHandler(projectiles);
-				sp.initialSpawn();
 				printInstructions();
 				continue;
 			}
@@ -46,30 +41,21 @@ public class Main {
 					p.addScore(result);
 			}
 			
-			updateProjectiles(); //update projectiles every turn
-			
-			//Spawn more projectiles if needed
+			for (int i = 0; i < projectiles.size(); i++) {
+				Projectile pr = projectiles.get(i);
+				PolarCoord pc = pr.getPolarCoordinates();
+				pc.setDistance(pc.getDistance() - 5);
+				if (pc.getDistance() + p.getPlanetRadius() <= p.getPlanetRadius() + 5) {
+					System.out.println("Impact Detected, -1 Life!");
+					p.lostLife();
+					projectiles.remove(i);
+				}
+			}
 			sp.trySpawn();
 			}
 			//Prints game over messages, execute if the main game loop is broken by running out of lives
 			p.printGameOver(); // --> in playerPlanet
 	}
-	
-	public static void updateProjectiles() {
-		//Decreases projectile distance after each turn and removes projectile/life if distance is 0.
-		// public void updateProjectile() --> stay in main
-		for (int i = 0 ; i < projectiles.size(); i++) {
-			int distance = projectiles.get(i).getDistance();
-			projectiles.get(i).setDistance((int)( distance - ( 7 + (Math.random()*10))));
-			 
-			if (projectiles.get(i).getDistance() - p.getPlanetRadius() <= 0 ){
-				System.out.println("Impact Detected, -1 Life!");
-				p.lostLife();
-				projectiles.remove(i);
-			}
-		}
-	}
-	
 	public static void printInstructions() {
 		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");
