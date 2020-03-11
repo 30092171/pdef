@@ -58,7 +58,6 @@ public class GUI {
     private Button pauseButton;
     private Button resetButton;
     private SpawnHandler spawnHandler;
-    private Barrier barrier = new Barrier();
     private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
     
     private Timeline timeline;
@@ -91,11 +90,10 @@ public class GUI {
     	addProjectile();
     	addProjectile();
     	addProjectile();
-        
-        //draws the barriers where mouse is clicked
+    	
+    	//draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-    		removeBarrier();
-    		addBarrier((int)event.getX(), (int)event.getY());
+    		Barrier.moveBarrier((int)event.getX(), (int)event.getY(),root);
     	}
     	);
     
@@ -139,7 +137,7 @@ public class GUI {
 			
 			//Barrier Collision Check
 			for (int projIndex = 0; projIndex < projectiles.size(); projIndex++) {
-				if (barrierCollisionCheck(projectiles.get(projIndex)) == true) {
+				if (Barrier.barrierCollisionCheck(projectiles.get(projIndex)) == true) {
 					removeProjectile(projectiles.get(projIndex), projIndex);
 					scoreCount = scoreCount + 100;
 					setScoreText(Integer.toString(scoreCount));
@@ -288,38 +286,6 @@ public class GUI {
 		if (dist < radSum) {
 			
 			//Returns boolean so we can check if projectile hits (for removing lives)
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	//Draw a new barrier
-	public void addBarrier(int xCoord, int yCoord) {
-       	Barrier newBarrier = new Barrier();
-    	newBarrier.getCircle().setCenterX(xCoord);
-    	newBarrier.getCircle().setCenterY(yCoord);
-    	newBarrier.getCircle().setRadius(20);
-    	this.barrier = newBarrier;
-    	root.getChildren().add(newBarrier.getCircle());
-	}
-	
-	//Removes an old barrier
-	public void removeBarrier() {
-		root.getChildren().remove(this.barrier.getCircle());
-	}
-	
-	//Checks if the barrier collides with a projectile
-	public boolean barrierCollisionCheck(Projectile proj) {
-		
-		//Calculations to determine if projectile collides with barrier
-		double dist = Math.hypot(proj.getCircle().getCenterX() - barrier.getCircle().getCenterX(), proj.getCircle().getCenterY() - barrier.getCircle().getCenterY());
-		double radSum = (proj.getCircleRadius() + barrier.getCircleRadius());
-		
-		//Remove projectile if they do collide
-		if (dist < radSum) {
-			
 			return true;
 		}
 		else {
