@@ -4,11 +4,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Projectile {
+public abstract class Projectile {
 	
-	protected PolarCoord pc;
+	private PolarCoord pc;
 	private String name; 
-	protected Circle projCircle;
+	private Circle projCircle;
 	
 	// This constructor gets a distance and a name from SpawnHandler
 	public Projectile(String name, PolarCoord pc) {
@@ -65,7 +65,7 @@ public class Projectile {
 	
 	public static void main(String[] args) {
 		Point2D origin = new Point2D(400,300);
-		Projectile proj = new Projectile("Proj A", new PolarCoord(100, Math.PI, origin));
+		Projectile proj = new DefaultProjectile("Proj A", new PolarCoord(100, Math.PI, origin));
 		System.out.println(proj.getName());
 	}
 }
