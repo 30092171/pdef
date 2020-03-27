@@ -1,14 +1,39 @@
 package pdef;
 
+import fxapplication.GUI;
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
+
 public class PlayerPlanet {
+	private Circle circle;
+	
 	private int numLives;
 	private int score;
-	private int planetRadius;
 	
 	public PlayerPlanet() {
+		Point2D o = GUI.getOrigin();
+		this.circle = new Circle(o.getX(), o.getY(), 65);
 		numLives = 3;
 		score = 0;
-		planetRadius = 65; 
+	}
+	
+	public boolean checkCollision(Projectile p) {
+		Circle other = p.getCircle();
+		
+		//Calculations to determine if projectile collides with planet
+		double dist = Math.hypot(other.getCenterX() - circle.getCenterX(),
+				other.getCenterY() - circle.getCenterY());
+		double radSum = other.getRadius() + circle.getRadius();
+		
+		//Checking if the projectile clips with the planet
+		if (dist < radSum) {
+			
+			//Returns boolean so we can check if projectile hits (for removing lives)
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public void lostLife() {
@@ -19,20 +44,14 @@ public class PlayerPlanet {
 		numLives += 1;
 	}
 	
-	public boolean isGameOver() {
-		if (numLives <= 0) {
-			return true;
-		}
-		return false;
-	}
-	
 	public int getScore() {
 		return score;
 	}
 	
 	public int getPlanetRadius() {
-		return planetRadius;
+		return (int)this.circle.getRadius();
 	}
+	
 	public void addScore(int givenScore) {
 		score += givenScore;
 	}
@@ -57,6 +76,10 @@ public class PlayerPlanet {
 		PlayerPlanet player = new PlayerPlanet();
 		player.printPlayerStatus();
 		
+	}
+
+	public Circle getCircle() {
+		return this.circle;
 	}
 
 }

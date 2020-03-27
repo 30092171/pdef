@@ -1,16 +1,13 @@
 package fxapplication;
 
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -21,17 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import pdef.PolarCoord;
-import pdef.Projectile;
-import javafx.event.EventHandler;
-
-import java.awt.Event;
-import java.lang.Math;
-import java.util.ArrayList;
-import pdef.SpawnHandler;
+import pdef.PlayerPlanet;
 
 public class GUI {
     //this class provides all the necessary elements to update and control the gui.
@@ -39,26 +27,25 @@ public class GUI {
     //Root Components and Formatting Elements
     private static Dimension2D WINDOWSIZE = new Dimension2D(720, 720);
     private static Point2D ORIGIN = new Point2D(360, 360);
+    
+    public static Point2D getOrigin() {
+    	return new Point2D(ORIGIN.getX(), ORIGIN.getY());
+    }
 
     private Stage mainStage;
     private BorderPane root;
-    private Scene scene, gameOverScene;
+    private Scene scene;
     private Canvas canvas;
 
     //Screen Elements
-    private Label scoreValue;
-    private int scoreCount = 0;
+    Label scoreValue;
+    
     private int LIFESIZE;
     private Rectangle life1, life2, life3;
-    private int lifeCount = 3;
-    private Circle planet;
-    private int planetRadius = 65;
-    private double planetX = WINDOWSIZE.getHeight()/2;
-    private double planetY = WINDOWSIZE.getWidth()/2;
-    private Button pauseButton;
-    private SpawnHandler spawnHandler;
-    private Barrier barrier = new Barrier();
-    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    
+    private PlayerPlanet player;
+    Barrier barrier;
+    Button pauseButton, resetButton;
     
     private Timeline timeline;
 
@@ -69,7 +56,7 @@ public class GUI {
     	this.canvas = new Canvas();
     	this.mainStage.setScene(this.scene);
     	this.root.getChildren().add(canvas);
-    	this.root.setPrefSize(720, 720);
+    	this.root.setPrefSize(WINDOWSIZE.getWidth(), WINDOWSIZE.getHeight());
     	this.root.setStyle("-fx-background-color: gray");
 
     	this.scoreValue = new Label("0");
@@ -78,86 +65,22 @@ public class GUI {
     	this.life2 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.life3 = new Rectangle(LIFESIZE, LIFESIZE);
     	this.pauseButton = new Button("Pause");
-    	this.planet = new Circle(planetX,planetY,planetRadius);
-    	this.projectiles = new ArrayList<Projectile>();
-    	this.spawnHandler = new SpawnHandler(projectiles);
-    	this.root.getChildren().add (planet);
+    	this.resetButton = new Button("Reset");
+    	this.barrier = new Barrier(root);
     	
     	drawTopHUD();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
-        
-        //draws the barriers where mouse is clicked
+    	
+    	//draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-    		removeBarrier();
-    		addBarrier((int)event.getX(), (int)event.getY());
-    	}
+    		this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
+    		}
     	);
     
     
 	this.timeline = new Timeline();	
-	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(20), new EventHandler <ActionEvent>(){
-		public void handle(ActionEvent event) {
-			
-			//Projectile respawning based on old trySpawn() method in spawnHandler
-			if (projectiles.size()<1) {
-				addProjectile();
-				addProjectile();
-			}
-			
-			if (projectiles.size() < 5) {
-				if (Math.random() > 0.5) {
-					addProjectile();
-					addProjectile();
-				}
-			}
-			
-			//Move Projectile
-			for (Projectile proj : projectiles) {
-				proj.turn();
-			}
-			
-			//Planet Collision Check
-			for (int projIndex = 0; projIndex < projectiles.size(); projIndex++) {
-				if (planetCollisionCheck(projectiles.get(projIndex)) == true) {
-					lifeCount = lifeCount - 1;
-					setLivesDisplay(lifeCount);
-					removeProjectile(projectiles.get(projIndex), projIndex);
-					
-					// Displays gameOver when lives = 0
-					if (lifeCount == 0) {
-						timeline.stop();
-						drawGameOver();
-					}
-				}
-			}
-			
-			//Barrier Collision Check
-			for (int projIndex = 0; projIndex < projectiles.size(); projIndex++) {
-				if (barrierCollisionCheck(projectiles.get(projIndex)) == true) {
-					removeProjectile(projectiles.get(projIndex), projIndex);
-					scoreCount = scoreCount + 100;
-					setScoreText(Integer.toString(scoreCount));
-				}
-			}
-		}
-	}
-	)
-	);
 	timeline.setCycleCount(Animation.INDEFINITE);
-	timeline.play();
-	this.pauseButton.setOnAction((ActionEvent e) -> {
-		if (this.timeline.getRate() > 0.0) {
-			this.timeline.setRate(0.0);
-			this.timeline.stop();
-		} else {
-			this.timeline.setRate(1.0);
-			this.timeline.play();
-		}
-	});
+	//timeline.play();
+
     }
     
     public void setLivesDisplay(int lifeCount) {
@@ -219,6 +142,7 @@ public class GUI {
 
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
+        controlsBox.getChildren().add(resetButton);
     }
     
     public void drawGameOver() {
@@ -230,75 +154,29 @@ public class GUI {
     	
     	//Populate GameOver VBox
     	Label gameOverText = new Label("GAME OVER");
-    	gameOverText.setFont(new Font("Arial", 60));
+    	gameOverText.setFont(new Font("Arial", 59));
     	gameOverText.setTextFill(Color.ORANGERED);
     	gameOverBox.getChildren().add(gameOverText);
     }
 
-	//Draw a new projectile
-	public void addProjectile() {
-		Projectile newProj = spawnHandler.spawnProjectile();
-		this.projectiles.add(newProj);
-		System.out.println(newProj);
-    	root.getChildren().add(newProj.getCircle());
+
+	public Timeline getTimeline() {
+		return this.timeline;
 	}
 	
-	//Removes a projectile from the screen and projectile list
-	public void removeProjectile(Projectile proj, int index) {
-		root.getChildren().remove(proj.getCircle());
-		projectiles.remove(index);
+	public void resetGui() {
+		this.root.getChildren().clear();
+		this.drawTopHUD();
+		this.root.getChildren().add(player.getCircle());
+		this.setLivesDisplay(3);
+		timeline.playFromStart();
+	}
+
+	public void removeCircle(Circle circle) {
+		this.root.getChildren().remove(circle);
 	}
 	
-	//Checks if a projectile is clipping with the planet
-	public boolean planetCollisionCheck(Projectile proj) {
-		double planetXCoord = planet.getCenterX();
-		double planetYCoord = planet.getCenterY();
-		double planetRadius = planet.getRadius();
-		
-		//Calculations to determine if projectile collides with planet
-		double dist = Math.hypot(proj.getCircle().getCenterX() - planetXCoord, proj.getCircle().getCenterY() - planetYCoord);
-		double radSum = (proj.getCircleRadius() + planetRadius);
-		
-		//Checking if the projectile clips with the planet
-		if (dist < radSum) {
-			
-			//Returns boolean so we can check if projectile hits (for removing lives)
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	//Draw a new barrier
-	public void addBarrier(int xCoord, int yCoord) {
-       	Barrier newBarrier = new Barrier();
-    	newBarrier.getCircle().setCenterX(xCoord);
-    	newBarrier.getCircle().setCenterY(yCoord);
-    	newBarrier.getCircle().setRadius(20);
-    	this.barrier = newBarrier;
-    	root.getChildren().add(newBarrier.getCircle());
-	}
-	
-	//Removes an old barrier
-	public void removeBarrier() {
-		root.getChildren().remove(this.barrier.getCircle());
-	}
-	
-	//Checks if the barrier collides with a projectile
-	public boolean barrierCollisionCheck(Projectile proj) {
-		
-		//Calculations to determine if projectile collides with barrier
-		double dist = Math.hypot(proj.getCircle().getCenterX() - barrier.getCircle().getCenterX(), proj.getCircle().getCenterY() - barrier.getCircle().getCenterY());
-		double radSum = (proj.getCircleRadius() + barrier.getCircleRadius());
-		
-		//Remove projectile if they do collide
-		if (dist < radSum) {
-			
-			return true;
-		}
-		else {
-			return false;
-		}
+	public void addCircle(Circle circle) {
+		this.root.getChildren().add(circle);
 	}
 }

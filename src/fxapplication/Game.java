@@ -19,14 +19,13 @@ public class Game extends Application {
 	}
 	
 	public void start(Stage mainStage) throws Exception {
-		PlayerPlanet player = new PlayerPlanet();//make new model
 		GUI gui = new GUI(mainStage); //frontend
 		SpawnHandler spawnHandler = new SpawnHandler(projectiles);
-		PlayerInput playerInput = new PlayerInput(projectiles);
-		Controller c = new Controller(player, gui, spawnHandler, playerInput); //logic
+		Controller c = new Controller(gui, spawnHandler); //logic
 		
 		mainStage.setTitle("Planet Defenders");
 		mainStage.show();
+		c.postInit();
 	}
 }
 

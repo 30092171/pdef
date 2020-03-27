@@ -6,6 +6,9 @@ import javafx.scene.shape.Circle;
 
 public class SpawnHandler {
 	//Instance variables
+	private static String names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private int counter = 0;
+	
 	public ArrayList<Projectile> projectiles;
 	
 	//Constructor, gets reference to projectile list and PlayerPlanet
@@ -32,33 +35,43 @@ public class SpawnHandler {
 		
 	}
 	
+	public Projectile oldProjectile() {
+		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 
+		double spawnAngle = (Math.random() * Math.PI * 2);
+		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(0,0));
+		return new Projectile(names.charAt(counter++) + "", p);
+		
+	}
+	
 	//Projectile spawning after the rest of the turn's game logic has occured. 
 	//If there are no projectiles left, then more will always be spawned
+	public void trySpawn() {
+		if(projectiles.size() < 1) {
+			projectiles.add(oldProjectile());
+			projectiles.add(oldProjectile());
+		}
+		if(projectiles.size() < 4) {
+			if (Math.random() > 0.5) {
+				projectiles.add(oldProjectile());
+				projectiles.add(oldProjectile());
+			}
+		}
+	}
 	
-	public void updateProjectiles() {
-		// Decreases projectile distance after each turn and removes projectile/life if
-		// distance is 0.
-		// public void updateProjectile() --> stay in main
-		//for (int i = 0; i < projectiles.size(); i++) {
-			//projectiles.get(i).setXCoord(projectiles.get(i).getSpawnAngle(), 5); // Moving 5 units away
-			//projectiles.get(i).setYCoord(projectiles.get(i).getSpawnAngle(), 5); // Moving 5 units away
-			//projectiles.get(i).setDistance(projectiles.get(i).getxCoordinate(),projectiles.get(i).getyCoordinate(), player);
-			
-
-			//if (projectiles.get(i).getDistance() - player.getPlanetRadius() <= 0) {
-				//System.out.println("Impact Detected, -1 Life!");
-				//player.lostLife();
-				//projectiles.remove(i);
-			//}
-		//}
+	//Initially spawns 3 projectiles
+	public void initialSpawn() {
+		projectiles.add(oldProjectile());
+		projectiles.add(oldProjectile());
+		projectiles.add(oldProjectile());
 	}
 	
 	public void printProjectileStatus(PlayerPlanet player) {
 		for(Projectile element : projectiles) {
 			PolarCoord p = element.getPolarCoordinates();
+			Point2D p2 = p.getRawCoordinates();
 			System.out.println("Projectile " + element.getName() 
-					+ " is " + p + " units away at" +
-					" (" + p.getRawCoordinates() + ").");
+					+ " is " + p.getDistance() + " units away at" +
+					" (" + p2.getX() + ", " +p2.getY()+ ").");
 		}
 	}
 	

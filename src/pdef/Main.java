@@ -11,10 +11,10 @@ public class Main {
 	static SpawnHandler sp = new SpawnHandler(projectiles); //Create the spawn handler
 	static PlayerInput pi = new PlayerInput(projectiles); //Input handler
 	
-	/* public static void main(String[] args) {
+	public static void main(String[] args) {
 		//Initial projectile list
 		printInstructions();
-		
+		sp.initialSpawn();
 		//Main game loop. continues until player runs out of lives
 		while(p.getLives() > 0) {
 			p.printPlayerStatus(); //print status every beginning of loop
@@ -25,6 +25,7 @@ public class Main {
 			String input = sc.nextLine();
 			if (input.toUpperCase().equals("RESET")) {
 				p = new PlayerPlanet();
+				sp.initialSpawn();
 				projectiles.clear();
 				sp = new SpawnHandler(projectiles);
 				printInstructions();
@@ -40,12 +41,21 @@ public class Main {
 					p.addScore(result);
 			}
 			
-			sp.updateProjectiles(); //update projectiles every turn
+			for (int i = 0; i < projectiles.size(); i++) {
+				Projectile pr = projectiles.get(i);
+				PolarCoord pc = pr.getPolarCoordinates();
+				pc.setDistance(pc.getDistance() - 5);
+				if (pc.getDistance() + p.getPlanetRadius() <= p.getPlanetRadius() + 5) {
+					System.out.println("Impact Detected, -1 Life!");
+					p.lostLife();
+					projectiles.remove(i);
+				}
+			}
+			sp.trySpawn();
 			}
 			//Prints game over messages, execute if the main game loop is broken by running out of lives
 			p.printGameOver(); // --> in playerPlanet
 	}
-	*/
 	public static void printInstructions() {
 		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");
