@@ -167,8 +167,9 @@ public class GUI {
 	public void resetGui() {
 		this.root.getChildren().clear();
 		this.drawTopHUD();
-		this.root.getChildren().add(player.getCircle());
 		this.setLivesDisplay(3);
+		this.setScoreText("0");
+		this.barrier = new Barrier(root);
 		timeline.playFromStart();
 	}
 
