@@ -18,17 +18,13 @@ public abstract class Projectile {
 	
 	//
 	public Projectile(String name, PolarCoord pc, Circle projCircle) {
-		this(name, pc);
 		this.projCircle = projCircle;
+		this.setName(name);
+		this.setPolarCoordinates(pc);
 		this.projCircle.setFill(Color.PINK);
 	}
 	
-	public void turn() {
-		this.pc.setDistance(this.pc.getDistance() - 0.8);
-		Point2D pos = this.pc.getJCoordinates();
-		projCircle.setCenterX(pos.getX());
-		projCircle.setCenterY(pos.getY());
-	}
+	public abstract void turn();
 
 	public void setName(String aName) {
 		name = aName;
@@ -39,11 +35,16 @@ public abstract class Projectile {
 	}
 	
 	public PolarCoord getPolarCoordinates() {
-		return pc;
+		return pc.clone();
 	}
 
 	public void setPolarCoordinates(PolarCoord pc) {
 		this.pc = pc;
+		Point2D p = pc.getJCoordinates();
+		if (this.projCircle != null) {
+			this.projCircle.setCenterX(p.getX());
+			this.projCircle.setCenterY(p.getY());
+		}
 	}
 	
 	public Circle getCircle() {

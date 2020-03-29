@@ -2,6 +2,7 @@ package fxapplication;
 
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
@@ -183,11 +184,12 @@ public class GUI {
     	//Define VBox
     	VBox gameOverBox = new VBox();
     	gameOverBox.setPadding(new Insets(-95, 90, 0, 0));
-    	gameOverBox.setAlignment(Pos.CENTER);
+    	gameOverBox.setAlignment(Pos.CENTER_LEFT);
     	root.setCenter(gameOverBox);
     	
     	//Populate GameOver VBox
     	Label gameOverText = new Label("GAME OVER");
+    	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
     	gameOverText.setTextFill(Color.ORANGERED);
     	gameOverBox.getChildren().add(gameOverText);
@@ -209,10 +211,14 @@ public class GUI {
 	}
 
 	public void removeCircle(Circle circle) {
-		this.root.getChildren().remove(circle);
+		Platform.runLater(()->{
+			this.root.getChildren().remove(circle);
+		});
 	}
 	
 	public void addCircle(Circle circle) {
-		this.root.getChildren().add(circle);
+		Platform.runLater(()->{
+			this.root.getChildren().add(circle);
+		});
 	}
 }

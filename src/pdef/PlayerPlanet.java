@@ -4,7 +4,7 @@ import fxapplication.GUI;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
-public class PlayerPlanet {
+public class PlayerPlanet implements Collidable {
 	private Circle circle;
 	
 	private int numLives;

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -22,6 +24,8 @@ public class Controller {
 	private GUI gui;
 	private SpawnHandler spawnHandler;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	
+	private Thread spawnThread, projectileThread;
 
 	public Controller(GUI gui, SpawnHandler spawnHandler) {
 		this.planet = new PlayerPlanet();
@@ -34,40 +38,62 @@ public class Controller {
 	}
 
 	private void init() {
-		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(20), (ActionEvent event) -> {
-			// Projectile respawning based on old trySpawn() method in spawnHandler
-			if (projectiles.size() < 1) {
-				addProjectile();
-				addProjectile();
-			}
-
-			if (projectiles.size() < 5) {
-				if (Math.random() > 0.5) {
-					addProjectile();
-					addProjectile();
-				}
-			}
-
-			// Move Projectile
-			for (int i = projectiles.size() - 1; i >= 0; i--) {
-				Projectile proj = projectiles.get(i);
-				proj.turn();
-				// Barrier Collision Check
-				if (gui.barrier.barrierCollisionCheck(proj)) {
-					removeProjectile(proj);
-					scoreCount = scoreCount + 100;
-					gui.setScoreText(Integer.toString(scoreCount));
-					continue;
-				}
-				// Planet Collision Check
-				if (this.planet.checkCollision(proj)) {
-					lifeCount = lifeCount - 1;
-					gui.setLivesDisplay(lifeCount);
-					removeProjectile(proj);
-					// Displays gameOver when lives = 0
-					if (lifeCount == 0) {
-						gui.getTimeline().stop();
+		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+			@Override
+			public synchronized void handle(ActionEvent e) {
+				spawnThread = new Thread(()-> {
+					// Projectile respawning based on old trySpawn() method in spawnHandler
+					if (projectiles.size() < 1) {
+						addProjectile();
+						addProjectile();
 					}
+
+					if (projectiles.size() < 5) {
+						if (Math.random() > 0.5) {
+							addProjectile();
+							addProjectile();
+						}
+					}
+				});
+				projectileThread = new Thread(()->{
+					// Move Projectile
+					for (int i = projectiles.size() - 1; i >= 0; i--) {
+						Projectile proj = projectiles.get(i);
+						proj.turn();
+						// Barrier Collision Check
+						if (gui.barrier.barrierCollisionCheck(proj)) {
+							removeProjectile(proj);
+							scoreCount = scoreCount + 100;
+							Platform.runLater(()->{
+								gui.setScoreText(Integer.toString(scoreCount));
+							});
+							continue;
+						}
+						// Planet Collision Check
+						if (planet.checkCollision(proj)) {
+							lifeCount = lifeCount - 1;
+							gui.setLivesDisplay(lifeCount);
+							removeProjectile(proj);
+							// Displays gameOver when lives = 0
+							if (lifeCount == 0) {
+								Platform.runLater(()->{
+									gui.drawGameOver();
+								});
+							}
+						}
+					}
+				});
+				spawnThread.start();
+				projectileThread.start();
+				try {
+					spawnThread.join();
+				} catch (InterruptedException e1) {
+					
+				}
+				try {
+					projectileThread.join();
+				} catch (InterruptedException e2) {
+					
 				}
 			}
 		}));
