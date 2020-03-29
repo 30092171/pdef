@@ -49,28 +49,25 @@ public class Controller {
 			}
 
 			// Move Projectile
-			for (Projectile proj : projectiles) {
+			for (int i = projectiles.size() - 1; i >= 0; i--) {
+				Projectile proj = projectiles.get(i);
 				proj.turn();
 				// Barrier Collision Check
 				if (gui.barrier.barrierCollisionCheck(proj)) {
 					removeProjectile(proj);
 					scoreCount = scoreCount + 100;
 					gui.setScoreText(Integer.toString(scoreCount));
-					break;
+					continue;
 				}
 				// Planet Collision Check
 				if (this.planet.checkCollision(proj)) {
 					lifeCount = lifeCount - 1;
 					gui.setLivesDisplay(lifeCount);
 					removeProjectile(proj);
-
 					// Displays gameOver when lives = 0
 					if (lifeCount == 0) {
 						gui.getTimeline().stop();
-						gui.drawGameOver();
-						break;
 					}
-					break;
 				}
 			}
 		}));

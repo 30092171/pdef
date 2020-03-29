@@ -179,6 +179,7 @@ public class GUI {
     }
     
     public void drawGameOver() {
+    	this.timeline.stop();
     	//Define VBox
     	VBox gameOverBox = new VBox();
     	gameOverBox.setPadding(new Insets(-95, 90, 0, 0));
@@ -191,7 +192,6 @@ public class GUI {
     	gameOverText.setTextFill(Color.ORANGERED);
     	gameOverBox.getChildren().add(gameOverText);
     }
-
 
 	public Timeline getTimeline() {
 		return this.timeline;
