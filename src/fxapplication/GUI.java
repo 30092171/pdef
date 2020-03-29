@@ -10,13 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pdef.PlayerPlanet;
@@ -40,8 +41,14 @@ public class GUI {
     //Screen Elements
     Label scoreValue;
     
-    private int LIFESIZE;
-    private Rectangle life1, life2, life3;
+    private ImageView life1, life2, life3;
+    private ImageView stars;
+    private ImageView pauseImage;
+    private ImageView resetImage;
+    private ImageView planet;
+    private int planetRadius = 75;
+    private double planetX = WINDOWSIZE.getHeight()/2;
+    private double planetY = WINDOWSIZE.getWidth()/2;
     
     private PlayerPlanet player;
     Barrier barrier;
@@ -57,15 +64,41 @@ public class GUI {
     	this.mainStage.setScene(this.scene);
     	this.root.getChildren().add(canvas);
     	this.root.setPrefSize(WINDOWSIZE.getWidth(), WINDOWSIZE.getHeight());
-    	this.root.setStyle("-fx-background-color: gray");
+    	this.root.setStyle("-fx-background-color:#08121c");
+    	this.stars = new ImageView(new Image("https://i.imgur.com/28YKGjT.png"));
+    	this.stars.setOpacity(0.7);
+    	this.root.getChildren().add(stars);
 
     	this.scoreValue = new Label("0");
-    	this.LIFESIZE = 35;
-    	this.life1 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.life2 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.life3 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.pauseButton = new Button("Pause");
-    	this.resetButton = new Button("Reset");
+    	this.life1 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life2 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life3 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life1.setScaleX(0.8);
+    	this.life1.setScaleY(0.8);
+    	this.life2.setScaleX(0.8);
+    	this.life2.setScaleY(0.8);
+    	this.life3.setScaleX(0.8);
+    	this.life3.setScaleY(0.8);
+    	this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
+    	this.resetImage = new ImageView(new Image("https://i.imgur.com/EoWQhfs.png"));
+    	this.pauseButton = new Button();
+    	this.pauseButton.setGraphic(pauseImage);
+    	this.pauseButton.setScaleX(0.75);
+    	this.pauseButton.setScaleY(0.75);
+    	this.resetButton = new Button();
+    	this.resetButton.setGraphic(resetImage);
+    	this.pauseButton.setScaleX(0.75);
+    	this.pauseButton.setScaleY(0.75);
+    	this.pauseButton.setStyle("-fx-background-color:#08121c");
+    	this.resetButton.setStyle("-fx-background-color:#08121c");
+    	
+    	this.planet = new ImageView(new Image("https://i.imgur.com/jgcrrYv.png"));
+    	this.planet.setFitHeight(planetRadius*2);
+    	this.planet.setFitWidth(planetRadius*2);
+    	this.planet.setX(planetX - 75);
+    	this.planet.setY(planetY - 75);
+    	this.root.getChildren().add(planet);
+    	
     	this.barrier = new Barrier(root);
     	
     	drawTopHUD();
@@ -170,6 +203,8 @@ public class GUI {
 		this.setLivesDisplay(3);
 		this.setScoreText("0");
 		this.barrier = new Barrier(root);
+		this.root.getChildren().add(stars);
+		this.root.getChildren().add(planet);
 		timeline.playFromStart();
 	}
 

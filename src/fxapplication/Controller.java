@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -13,6 +15,8 @@ public class Controller {
 
 	private int scoreCount = 0;
 	private int lifeCount = 3;
+	private ImageView playImage;
+	private ImageView pauseImage;
 
 	private PlayerPlanet planet;
 	private GUI gui;
@@ -23,6 +27,8 @@ public class Controller {
 		this.planet = new PlayerPlanet();
 		this.gui = gui;
 		this.spawnHandler = spawnHandler;
+		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
+		this.playImage = new ImageView(new Image("https://i.imgur.com/pH1dn5H.png"));
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
@@ -75,11 +81,11 @@ public class Controller {
 				if (timeline.getRate() > 0.0) {
 					timeline.setRate(0.0);
 					timeline.stop();
-					gui.pauseButton.setText("Play");
+					gui.pauseButton.setGraphic(playImage);
 				} else {
 					timeline.setRate(1.0);
 					timeline.play();
-					gui.pauseButton.setText("Pause");
+					gui.pauseButton.setGraphic(pauseImage);
 				}
 			}
 		});
