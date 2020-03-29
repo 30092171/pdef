@@ -1,6 +1,6 @@
 package pdef;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
@@ -29,7 +29,7 @@ public class SpawnHandler {
 		} else if (projType >= 0.6 && projType < 0.8){
 			newProjectile = new SpeedUpProjectile("Projectile " + (projectiles.size() + 1), p, circle);
 		} else {
-			newProjectile = new Projectile("Projectile " + (projectiles.size() + 1), p, circle);
+			newProjectile = new DefaultProjectile("Projectile " + (projectiles.size() + 1), p, circle);
 		}
 		return  newProjectile;
 		
@@ -39,7 +39,7 @@ public class SpawnHandler {
 		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 
 		double spawnAngle = (Math.random() * Math.PI * 2);
 		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(0,0));
-		return new Projectile(names.charAt(counter++) + "", p);
+		return new DefaultProjectile(names.charAt(counter++) + "", p);
 		
 	}
 	
@@ -70,8 +70,8 @@ public class SpawnHandler {
 			PolarCoord p = element.getPolarCoordinates();
 			Point2D p2 = p.getRawCoordinates();
 			System.out.println("Projectile " + element.getName() 
-					+ " is " + (int)p.getDistance() + " units away at" +
-					" (" + (int)p2.getX() + ", " + (int)p2.getY()+ ").");
+					+ " is " + p.getDistance() + " units away at" +
+					" (" + p2.getX() + ", " +p2.getY()+ ").");
 		}
 	}
 	
@@ -83,4 +83,3 @@ public class SpawnHandler {
 		System.out.println(sp.projectiles);
 	}
 }
-
