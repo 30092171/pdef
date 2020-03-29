@@ -28,7 +28,7 @@ public class Controller {
 		this.gui = gui;
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
-		this.playImage = new ImageView(new Image("https://i.imgur.com/pH1dn5H.png"));
+		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}

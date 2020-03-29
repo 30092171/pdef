@@ -86,9 +86,9 @@ public class GUI {
     	this.pauseButton.setScaleX(0.75);
     	this.pauseButton.setScaleY(0.75);
     	this.resetButton = new Button();
+    	this.resetButton.setScaleX(0.75);
+    	this.resetButton.setScaleY(0.75);
     	this.resetButton.setGraphic(resetImage);
-    	this.pauseButton.setScaleX(0.75);
-    	this.pauseButton.setScaleY(0.75);
     	this.pauseButton.setStyle("-fx-background-color:#08121c");
     	this.resetButton.setStyle("-fx-background-color:#08121c");
     	
