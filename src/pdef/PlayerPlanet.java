@@ -13,6 +13,7 @@ public class PlayerPlanet {
 	public PlayerPlanet() {
 		Point2D o = GUI.getOrigin();
 		this.circle = new Circle(o.getX(), o.getY(), 65);
+		this.circle.setOpacity(0);
 		numLives = 3;
 		score = 0;
 	}
