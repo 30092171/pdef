@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pdef.PlayerPlanet;
@@ -71,6 +72,7 @@ public class GUI {
     	this.root.getChildren().add(stars);
 
     	this.scoreValue = new Label("0");
+    	this.scoreValue.setTextFill(Color.WHITE);
     	this.life1 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
     	this.life2 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
     	this.life3 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
@@ -173,6 +175,7 @@ public class GUI {
         Label scoreText = new Label("SCORE");
         //Header Text
         scoreText.setFont(new Font("Arial", 14));
+        scoreText.setTextFill(Color.WHITE);
         scoreBox.getChildren().add(scoreText);
         //Score Value
         scoreValue.setFont(new Font("Arial", 48));
@@ -193,13 +196,20 @@ public class GUI {
     	gameOverBox.setPadding(new Insets(-75, 0, 0, -75));
     	gameOverBox.setAlignment(Pos.CENTER);
     	root.setCenter(gameOverBox);
+    	this.planet.setOpacity(0);
     	
     	//Populate GameOver VBox
+    	Rectangle gameOverBorder1 = new Rectangle(350,8);
+    	gameOverBorder1.setFill(Color.WHITE);
+    	gameOverBox.getChildren().add(gameOverBorder1);
     	Label gameOverText = new Label("GAME OVER");
     	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
-    	gameOverText.setTextFill(Color.ORANGERED);
+    	gameOverText.setTextFill(Color.WHITE);
     	gameOverBox.getChildren().add(gameOverText);
+    	Rectangle gameOverBorder2 = new Rectangle(350,8);
+    	gameOverBorder2.setFill(Color.WHITE);
+    	gameOverBox.getChildren().add(gameOverBorder2);
     }
 
 	public Timeline getTimeline() {
@@ -211,6 +221,7 @@ public class GUI {
 		this.drawTopHUD();
 		this.setLivesDisplay(3);
 		this.setScoreText("0");
+		this.planet.setOpacity(1);
 		this.barrier = new Barrier(root);
 		this.root.getChildren().add(stars);
 		this.root.getChildren().add(planet);
