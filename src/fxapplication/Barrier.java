@@ -11,7 +11,7 @@ public class Barrier {
 	
 	public Barrier (BorderPane root) {
 		this.circle = new Circle(20);
-		this.circle.setFill(Color.LIGHTYELLOW);
+		this.circle.setFill(Color.WHITE);
 		root.getChildren().add(this.circle);
 	}	
 	
