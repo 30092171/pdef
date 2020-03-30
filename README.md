@@ -9,7 +9,7 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 <https://github.com/30092171/pdef/releases/download/0.3/planetDefendersTEXT.jar><br/>
 2. Place .jar files in desired directory
 3. Double-click planetDefenders.GUI.jar to open the GUI version.
-4. Otherwise, open command line
+4. Otherwise for the text-based version, open command line
 5. java -jar \<path\>\planetDefendersTEXT.jar
 6. Enjoy!
 
@@ -29,8 +29,6 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 2. Download Planet Defenders source code (<https://github.com/30092171/pdef/releases/download/0.3/planetDefenders_SourceCode.zip>)
 
 3. Set your JAVA_HOME and PATH (<https://javatutorial.net/set-java-home-windows-10>)
-Steps to Compile Java Files<br/>
-
 
 4. Move to src directory and compile all the pdef files (<javac pdef/*.java>): <br/>
 ProjectileTemp.java<br/>
@@ -44,13 +42,13 @@ RotatingProjectile.java<br/>
 SpawnHandler.java<br/>
 SpeedUpProjectile.java<br/>
 
-6. Move to src directory and compile all the fxapplication files ((<javac fxapplication/*.java>):
+6. Move to src directory and compile all the fxapplication files (<javac fxapplication/*.java>):
 Barrier.java<br/>
 Controller.java<br/>
 Game.java<br/>
 GUI.java<br/>
 
-7. Run the following files by moving tosrc directory and type in the following:
+7. Run the following files by moving tosrc directory and type in the following:<br/>
 Text-Based --> \<java pdef.Main \> <br/>
 GUI-Based --> \<java fxapplication.Game \> <br/>
 
