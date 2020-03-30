@@ -45,6 +45,7 @@ public class Main {
 				Projectile pr = projectiles.get(i);
 				PolarCoord pc = pr.getPolarCoordinates();
 				pc.setDistance(pc.getDistance() - 5);
+				pr.setPolarCoordinates(pc);
 				if (pc.getDistance() + p.getPlanetRadius() <= p.getPlanetRadius() + 5) {
 					System.out.println("Impact Detected, -1 Life!");
 					p.lostLife();

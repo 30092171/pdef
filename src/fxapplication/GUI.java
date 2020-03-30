@@ -96,8 +96,8 @@ public class GUI {
     	this.planet = new ImageView(new Image("https://i.imgur.com/jgcrrYv.png"));
     	this.planet.setFitHeight(planetRadius*2);
     	this.planet.setFitWidth(planetRadius*2);
-    	this.planet.setX(planetX - 75);
-    	this.planet.setY(planetY - 75);
+    	this.planet.setX(planetX-75);
+    	this.planet.setY(planetY-75);
     	this.root.getChildren().add(planet);
     	
     	this.barrier = new Barrier(root);
@@ -159,6 +159,10 @@ public class GUI {
         controlsBox.setPadding(new Insets(-68, 20, 0, 0));
         controlsBox.setAlignment(Pos.TOP_RIGHT);
         root.setRight(controlsBox);
+        //VBox planetBox = new VBox();
+        //planetBox.setAlignment(Pos.CENTER);
+        //planetBox.setPadding(new Insets(-75,0,0,-75));
+        //root.setCenter(planetBox);
 
         //Populate Lives HBox
         livesBox.getChildren().add(life1);
@@ -177,14 +181,17 @@ public class GUI {
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
         controlsBox.getChildren().add(resetButton);
+        
+        //Populate Planet VBox
+        //planetBox.getChildren().add(planet);
     }
     
     public void drawGameOver() {
     	this.timeline.stop();
     	//Define VBox
     	VBox gameOverBox = new VBox();
-    	gameOverBox.setPadding(new Insets(-95, 90, 0, 0));
-    	gameOverBox.setAlignment(Pos.CENTER_LEFT);
+    	gameOverBox.setPadding(new Insets(-75, 0, 0, -75));
+    	gameOverBox.setAlignment(Pos.CENTER);
     	root.setCenter(gameOverBox);
     	
     	//Populate GameOver VBox

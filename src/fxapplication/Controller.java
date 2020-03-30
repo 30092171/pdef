@@ -119,6 +119,7 @@ public class Controller {
 			projectiles.clear();
 			gui.resetGui();
 			gui.addCircle(this.planet.getCircle());
+			
 		});
 	}
 
