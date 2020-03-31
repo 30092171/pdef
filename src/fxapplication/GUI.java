@@ -1,18 +1,18 @@
 package fxapplication;
 
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -21,17 +21,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import pdef.PolarCoord;
-import pdef.Projectile;
-import javafx.event.EventHandler;
-
-import java.awt.Event;
-import java.lang.Math;
-import java.util.ArrayList;
-import pdef.SpawnHandler;
+import pdef.PlayerPlanet;
 
 public class GUI {
     //this class provides all the necessary elements to update and control the gui.
@@ -39,26 +30,33 @@ public class GUI {
     //Root Components and Formatting Elements
     private static Dimension2D WINDOWSIZE = new Dimension2D(720, 720);
     private static Point2D ORIGIN = new Point2D(360, 360);
+    
+    public static Point2D getOrigin() {
+    	return new Point2D(ORIGIN.getX(), ORIGIN.getY());
+    }
 
     private Stage mainStage;
     private BorderPane root;
-    private Scene scene, gameOverScene;
+    private Scene scene;
     private Canvas canvas;
 
     //Screen Elements
-    private Label scoreValue;
-    private int scoreCount = 0;
-    private int LIFESIZE;
-    private Rectangle life1, life2, life3;
-    private int lifeCount = 3;
-    private Circle planet;
-    private int planetRadius = 65;
+    Label scoreValue;
+    
+    private ImageView life1, life2, life3;
+    private ImageView stars;
+    private ImageView pauseImage;
+    private ImageView resetImage;
+    private ImageView planet;
+    private int planetRadius = 75;
     private double planetX = WINDOWSIZE.getHeight()/2;
     private double planetY = WINDOWSIZE.getWidth()/2;
-    private Button pauseButton;
-    private Button resetButton;
-    private SpawnHandler spawnHandler;
-    private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+
+    
+    private PlayerPlanet player;
+    Barrier barrier;
+    Button pauseButton, resetButton;
+
     
     private Timeline timeline;
 
@@ -69,117 +67,62 @@ public class GUI {
     	this.canvas = new Canvas();
     	this.mainStage.setScene(this.scene);
     	this.root.getChildren().add(canvas);
-    	this.root.setPrefSize(720, 720);
-    	this.root.setStyle("-fx-background-color: gray");
+    	this.root.setPrefSize(WINDOWSIZE.getWidth(), WINDOWSIZE.getHeight());
+    	this.root.setStyle("-fx-background-color:#08121c");
+    	this.stars = new ImageView(new Image("https://i.imgur.com/28YKGjT.png"));
+    	this.stars.setOpacity(0.7);
+    	this.root.getChildren().add(stars);
 
     	this.scoreValue = new Label("0");
-    	this.LIFESIZE = 35;
-    	this.life1 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.life2 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.life3 = new Rectangle(LIFESIZE, LIFESIZE);
-    	this.pauseButton = new Button("Pause");
-    	this.resetButton = new Button("Reset");
-    	this.planet = new Circle(planetX,planetY,planetRadius);
-    	this.projectiles = new ArrayList<Projectile>();
-    	this.spawnHandler = new SpawnHandler(projectiles);
-    	this.root.getChildren().add (planet);
+
+    	this.scoreValue.setTextFill(Color.WHITE);
+    	this.life1 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life2 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life3 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
+    	this.life1.setScaleX(0.8);
+    	this.life1.setScaleY(0.8);
+    	this.life2.setScaleX(0.8);
+    	this.life2.setScaleY(0.8);
+    	this.life3.setScaleX(0.8);
+    	this.life3.setScaleY(0.8);
+    	this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
+    	this.resetImage = new ImageView(new Image("https://i.imgur.com/EoWQhfs.png"));
+    	this.pauseButton = new Button();
+    	this.pauseButton.setGraphic(pauseImage);
+    	this.pauseButton.setScaleX(0.75);
+    	this.pauseButton.setScaleY(0.75);
+    	this.resetButton = new Button();
+    	this.resetButton.setScaleX(0.75);
+    	this.resetButton.setScaleY(0.75);
+    	this.resetButton.setGraphic(resetImage);
+    	this.pauseButton.setStyle("-fx-background-color:#08121c");
+    	this.resetButton.setStyle("-fx-background-color:#08121c");
+    	
+    	this.planet = new ImageView(new Image("https://i.imgur.com/jgcrrYv.png"));
+    	this.planet.setFitHeight(planetRadius*2);
+    	this.planet.setFitWidth(planetRadius*2);
+    	this.planet.setX(planetX-75);
+    	this.planet.setY(planetY-75);
+    	this.root.getChildren().add(planet);
+    	
+    	this.barrier = new Barrier(root);
     	
     	drawTopHUD();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
-    	addProjectile();
     	
     	//draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-    		Barrier.moveBarrier((int)event.getX(), (int)event.getY(),root);
-    	}
+    		this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
+    		}
+
     	);
     
     
 	this.timeline = new Timeline();	
-	this.timeline.getKeyFrames().add(new KeyFrame(Duration.millis(20), new EventHandler <ActionEvent>(){
-		public void handle(ActionEvent event) {
-			
-			//Projectile respawning based on old trySpawn() method in spawnHandler
-			if (projectiles.size()<1) {
-				addProjectile();
-				addProjectile();
-			}
-			
-			if (projectiles.size() < 5) {
-				if (Math.random() > 0.5) {
-					addProjectile();
-					addProjectile();
-				}
-			}
-			
-			//Move Projectile
-			for (Projectile proj : projectiles) {
-				proj.turn();
-			}
-			
-			//Planet Collision Check
-			for (int projIndex = 0; projIndex < projectiles.size(); projIndex++) {
-				if (planetCollisionCheck(projectiles.get(projIndex)) == true) {
-					lifeCount = lifeCount - 1;
-					setLivesDisplay(lifeCount);
-					removeProjectile(projectiles.get(projIndex), projIndex);
-					
-					// Displays gameOver when lives = 0
-					if (lifeCount == 0) {
-						timeline.stop();
-						drawGameOver();
-					}
-				}
-			}
-			
-			//Barrier Collision Check
-			for (int projIndex = 0; projIndex < projectiles.size(); projIndex++) {
-				if (Barrier.barrierCollisionCheck(projectiles.get(projIndex)) == true) {
-					removeProjectile(projectiles.get(projIndex), projIndex);
-					scoreCount = scoreCount + 100;
-					setScoreText(Integer.toString(scoreCount));
-				}
-			}
-		}
-	}
-	)
-	);
+
 	timeline.setCycleCount(Animation.INDEFINITE);
-	timeline.play();
-	this.pauseButton.setOnAction((ActionEvent e) -> {
-		if (lifeCount != 0) {
-			if (this.timeline.getRate() > 0.0) {
-				this.timeline.setRate(0.0);
-				this.timeline.stop();
-				this.pauseButton.setText("Play");
-			} else {
-				this.timeline.setRate(1.0);
-				this.timeline.play();
-				this.pauseButton.setText("Pause");
-			}
-		}
-	});
-	
-	// Resets all variables back to starting state
-		this.resetButton.setOnAction((ActionEvent e) -> {
-			this.lifeCount = 3;
-			this.scoreCount = 0;
-			this.scoreValue.setText("0");
-			projectiles.clear();
-			root.getChildren().clear();
-			drawTopHUD();
-			this.root.getChildren().add (planet);
-			float full = 1.0f;
-			life1.setOpacity(full);
-	        life2.setOpacity(full);
-	        life3.setOpacity(full);
-			timeline.playFromStart();
-			
-		});
-	
+	//timeline.play();
+
+
     }
     
     public void setLivesDisplay(int lifeCount) {
@@ -224,6 +167,10 @@ public class GUI {
         controlsBox.setPadding(new Insets(-68, 20, 0, 0));
         controlsBox.setAlignment(Pos.TOP_RIGHT);
         root.setRight(controlsBox);
+        //VBox planetBox = new VBox();
+        //planetBox.setAlignment(Pos.CENTER);
+        //planetBox.setPadding(new Insets(-75,0,0,-75));
+        //root.setCenter(planetBox);
 
         //Populate Lives HBox
         livesBox.getChildren().add(life1);
@@ -234,6 +181,7 @@ public class GUI {
         Label scoreText = new Label("SCORE");
         //Header Text
         scoreText.setFont(new Font("Arial", 14));
+        scoreText.setTextFill(Color.WHITE);
         scoreBox.getChildren().add(scoreText);
         //Score Value
         scoreValue.setFont(new Font("Arial", 48));
@@ -242,54 +190,65 @@ public class GUI {
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
         controlsBox.getChildren().add(resetButton);
+
+        
+        //Populate Planet VBox
+        //planetBox.getChildren().add(planet);
+
     }
     
     public void drawGameOver() {
+    	this.timeline.stop();
     	//Define VBox
     	VBox gameOverBox = new VBox();
-    	gameOverBox.setPadding(new Insets(-95, 90, 0, 0));
+    	gameOverBox.setPadding(new Insets(-75, 0, 0, -75));
     	gameOverBox.setAlignment(Pos.CENTER);
     	root.setCenter(gameOverBox);
+    	this.planet.setOpacity(0);
     	
     	//Populate GameOver VBox
+    	Rectangle gameOverBorder1 = new Rectangle(350,8);
+    	gameOverBorder1.setFill(Color.WHITE);
+    	gameOverBox.getChildren().add(gameOverBorder1);
     	Label gameOverText = new Label("GAME OVER");
+
+    	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
-    	gameOverText.setTextFill(Color.ORANGERED);
+    	gameOverText.setTextFill(Color.WHITE);
+
     	gameOverBox.getChildren().add(gameOverText);
+    	Rectangle gameOverBorder2 = new Rectangle(350,8);
+    	gameOverBorder2.setFill(Color.WHITE);
+    	gameOverBox.getChildren().add(gameOverBorder2);
     }
 
-	//Draw a new projectile
-	public void addProjectile() {
-		Projectile newProj = spawnHandler.spawnProjectile();
-		this.projectiles.add(newProj);
-		System.out.println(newProj);
-    	root.getChildren().add(newProj.getCircle());
+	public Timeline getTimeline() {
+		return this.timeline;
+	}
+
+	
+	public void resetGui() {
+		this.root.getChildren().clear();
+		this.drawTopHUD();
+		this.setLivesDisplay(3);
+		this.setScoreText("0");
+		this.planet.setOpacity(1);
+		this.barrier = new Barrier(root);
+		this.root.getChildren().add(stars);
+		this.root.getChildren().add(planet);
+		timeline.playFromStart();
+	}
+
+	public void removeCircle(Circle circle) {
+		Platform.runLater(()->{
+			this.root.getChildren().remove(circle);
+		});
 	}
 	
-	//Removes a projectile from the screen and projectile list
-	public void removeProjectile(Projectile proj, int index) {
-		root.getChildren().remove(proj.getCircle());
-		projectiles.remove(index);
+	public void addCircle(Circle circle) {
+		Platform.runLater(()->{
+			this.root.getChildren().add(circle);
+		});
 	}
-	
-	//Checks if a projectile is clipping with the planet
-	public boolean planetCollisionCheck(Projectile proj) {
-		double planetXCoord = planet.getCenterX();
-		double planetYCoord = planet.getCenterY();
-		double planetRadius = planet.getRadius();
-		
-		//Calculations to determine if projectile collides with planet
-		double dist = Math.hypot(proj.getCircle().getCenterX() - planetXCoord, proj.getCircle().getCenterY() - planetYCoord);
-		double radSum = (proj.getCircleRadius() + planetRadius);
-		
-		//Checking if the projectile clips with the planet
-		if (dist < radSum) {
-			
-			//Returns boolean so we can check if projectile hits (for removing lives)
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+
 }

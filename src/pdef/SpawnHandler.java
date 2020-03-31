@@ -1,6 +1,6 @@
 package pdef;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
@@ -70,8 +70,9 @@ public class SpawnHandler {
 			PolarCoord p = element.getPolarCoordinates();
 			Point2D p2 = p.getRawCoordinates();
 			System.out.println("Projectile " + element.getName() 
-					+ " is " + p.getDistance() + " units away at" +
-					" (" + p2.getX() + ", " +p2.getY()+ ").");
+					+ " is " + (int)p.getDistance() + " units away at" +
+					" (" + (int)p2.getX() + ", " + (int)p2.getY()+ ").");
+
 		}
 	}
 	
@@ -83,4 +84,3 @@ public class SpawnHandler {
 		System.out.println(sp.projectiles);
 	}
 }
-
