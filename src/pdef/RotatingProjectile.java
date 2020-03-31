@@ -11,6 +11,7 @@ public class RotatingProjectile extends Projectile {
 	}
 	
 	public void turn() {
+
 		PolarCoord pc = this.getPolarCoordinates();
 		pc.setDistance(this.getPolarCoordinates().getDistance() - 0.6);
 		pc.setRadians(this.getPolarCoordinates().getRadians() - 0.005);

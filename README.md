@@ -5,6 +5,7 @@
 Planet Defenders is a 2D arcade-styled defense game. The player must defend their home planet from incoming projectiles.  
 
 ###### How to Run
+
 1. Download planetDefender.GUI.jar and planetDefender.TEXT.jar from the releases tab under "Demo 3" (or click links to download)<br/> <https://github.com/30092171/pdef/releases/download/0.3/planetDefendersGUI.jar><br/>
 <https://github.com/30092171/pdef/releases/download/0.3/planetDefendersTEXT.jar><br/>
 2. Place .jar files in desired directory
@@ -25,12 +26,14 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 3. Point and click on desired position to block projectiles from hitting the planet
 
 ###### How to Compile Separately
+
 1. Install Java JDK 8 (<https://www.oracle.com/java/technologies/javase-jdk8-downloads.html>)
 2. Download Planet Defenders source code (<https://github.com/30092171/pdef/releases/download/0.3/planetDefenders_SourceCode.zip>)
 
 3. Set your JAVA_HOME and PATH (<https://javatutorial.net/set-java-home-windows-10>)
 
 4. Move to src directory and compile all the pdef files (<javac pdef/*.java>): <br/>
+
 ProjectileTemp.java<br/>
 Collidable.java<br/>
 Main.java<br/>
@@ -42,15 +45,17 @@ RotatingProjectile.java<br/>
 SpawnHandler.java<br/>
 SpeedUpProjectile.java<br/>
 
-6. Move to src directory and compile all the fxapplication files (<javac fxapplication/*.java>):
+5. Move to src directory and compile all the fxapplication files (<javac fxapplication/*.java>):
+
 Barrier.java<br/>
 Controller.java<br/>
 Game.java<br/>
 GUI.java<br/>
 
-7. Run the following files by moving tosrc directory and type in the following:<br/>
+6. Run the following files by moving tosrc directory and type in the following:<br/>
 Text-Based --> \<java pdef.Main \> <br/>
 GUI-Based --> \<java fxapplication.Game \> <br/>
+
 
 ###### JUnit Testing
 Currently our JUnit test for the Projectile class only works within Eclipse. After installing Eclipse, follow these steps to run the JUnit test.

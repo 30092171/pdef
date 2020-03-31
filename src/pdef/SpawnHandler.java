@@ -72,6 +72,7 @@ public class SpawnHandler {
 			System.out.println("Projectile " + element.getName() 
 					+ " is " + (int)p.getDistance() + " units away at" +
 					" (" + (int)p2.getX() + ", " + (int)p2.getY()+ ").");
+
 		}
 	}
 	

@@ -29,6 +29,7 @@ public class Barrier {
 				other.getCenterY() - circle.getCenterY());
 		double radSum = other.getRadius() + circle.getRadius();
 		return dist < radSum;
+
 	}
 }
 

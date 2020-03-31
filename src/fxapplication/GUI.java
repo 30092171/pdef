@@ -51,10 +51,12 @@ public class GUI {
     private int planetRadius = 75;
     private double planetX = WINDOWSIZE.getHeight()/2;
     private double planetY = WINDOWSIZE.getWidth()/2;
+
     
     private PlayerPlanet player;
     Barrier barrier;
     Button pauseButton, resetButton;
+
     
     private Timeline timeline;
 
@@ -72,6 +74,7 @@ public class GUI {
     	this.root.getChildren().add(stars);
 
     	this.scoreValue = new Label("0");
+
     	this.scoreValue.setTextFill(Color.WHITE);
     	this.life1 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
     	this.life2 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
@@ -110,12 +113,15 @@ public class GUI {
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
     		this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
     		}
+
     	);
     
     
 	this.timeline = new Timeline();	
+
 	timeline.setCycleCount(Animation.INDEFINITE);
 	//timeline.play();
+
 
     }
     
@@ -184,9 +190,11 @@ public class GUI {
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
         controlsBox.getChildren().add(resetButton);
+
         
         //Populate Planet VBox
         //planetBox.getChildren().add(planet);
+
     }
     
     public void drawGameOver() {
@@ -203,9 +211,11 @@ public class GUI {
     	gameOverBorder1.setFill(Color.WHITE);
     	gameOverBox.getChildren().add(gameOverBorder1);
     	Label gameOverText = new Label("GAME OVER");
+
     	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
     	gameOverText.setTextFill(Color.WHITE);
+
     	gameOverBox.getChildren().add(gameOverText);
     	Rectangle gameOverBorder2 = new Rectangle(350,8);
     	gameOverBorder2.setFill(Color.WHITE);
@@ -215,6 +225,7 @@ public class GUI {
 	public Timeline getTimeline() {
 		return this.timeline;
 	}
+
 	
 	public void resetGui() {
 		this.root.getChildren().clear();
@@ -239,4 +250,5 @@ public class GUI {
 			this.root.getChildren().add(circle);
 		});
 	}
+
 }

@@ -11,6 +11,7 @@ public class DefaultProjectile extends Projectile {
 	public DefaultProjectile(String name, PolarCoord pc, Circle projCircle) {
 		super(name, pc, projCircle);
 	}
+
 	
 	public void turn() {
 		PolarCoord pc = this.getPolarCoordinates();
@@ -18,3 +19,4 @@ public class DefaultProjectile extends Projectile {
 		this.setPolarCoordinates(pc);
 	}
 }
+
