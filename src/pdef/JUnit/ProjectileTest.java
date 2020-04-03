@@ -1,9 +1,12 @@
-package pdef;
+package pdef.JUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import javafx.geometry.Point2D;
+import pdef.DefaultProjectile;
+import pdef.PolarCoord;
+import pdef.Projectile;
 
 import org.junit.*;
 

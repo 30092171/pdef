@@ -1,17 +1,35 @@
+/*
+ * 
+ */
 package pdef;
 
 import java.util.ArrayList;
 
 import javafx.geometry.Point2D;
 
+/**
+ * The Class PlayerInput handles all input for the text-based version
+ */
 public class PlayerInput {
 	
+	/** An arraylist that holds the projectile objects */
 	public ArrayList<Projectile> projectiles;
 	
+	/**
+	 * Instantiates a new player input.
+	 *
+	 * @param projectiles the projectiles
+	 */
 	public PlayerInput(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
 
+	/**
+	 * Command.
+	 *
+	 * @param input The player's typed input
+	 * @return the int
+	 */
 	//Does task user inputed
 	public int command(String input) {
 		int scoreToAdd = 0;
@@ -44,6 +62,12 @@ public class PlayerInput {
 		return scoreToAdd;
 	}
 	
+	/**
+	 * The main method used to quickly test the PlayerInput class by
+	 * creating a list of projectiles
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
 		Point2D origin = new Point2D(400,300);
