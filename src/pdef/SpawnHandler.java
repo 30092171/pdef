@@ -1,21 +1,42 @@
+/*
+ * 
+ */
 package pdef;
 
 import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
+/**
+ * The Class SpawnHandler represents the spawn handler for the projectiles.
+ */
 public class SpawnHandler {
+	
+	/** The projectile's unique name identifier */
 	//Instance variables
 	private static String names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	/** The counter. */
 	private int counter = 0;
 	
+	/** An arraylist that holds the projectiles */
 	public ArrayList<Projectile> projectiles;
 	
+	/**
+	 * Instantiates a new spawn handler
+	 *
+	 * @param projectiles the projectiles
+	 */
 	//Constructor, gets reference to projectile list and PlayerPlanet
 	public SpawnHandler(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
 	
+	/**
+	 * Spawn projectile.
+	 *
+	 * @return the projectile
+	 */
 	public Projectile spawnProjectile() {
 		double initialDistance = 400; // Spawns outside of screen 
 		double spawnAngle = (Math.random() * Math.PI * 2);
@@ -35,6 +56,11 @@ public class SpawnHandler {
 		
 	}
 	
+	/**
+	 * Old projectile.
+	 *
+	 * @return the projectile
+	 */
 	public Projectile oldProjectile() {
 		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 
 		double spawnAngle = (Math.random() * Math.PI * 2);
@@ -44,6 +70,10 @@ public class SpawnHandler {
 	}
 	
 	//Projectile spawning after the rest of the turn's game logic has occured. 
+	/**
+	 * Spawns projectiles based on number of projectiles on screen.
+	 * Ensures projectiles always exists by spawning 2 projectiles if none are on the screen
+	 */
 	//If there are no projectiles left, then more will always be spawned
 	public void trySpawn() {
 		if(projectiles.size() < 1) {
@@ -58,13 +88,21 @@ public class SpawnHandler {
 		}
 	}
 	
-	//Initially spawns 3 projectiles
+	/**
+	 * Initially spawns 3 projectiles
+	 */
 	public void initialSpawn() {
 		projectiles.add(oldProjectile());
 		projectiles.add(oldProjectile());
 		projectiles.add(oldProjectile());
 	}
 	
+	/**
+	 * Prints the projectile's unique name identifier, distance away from planet, and
+	 * x coordinate and y coordinate.
+	 *
+	 * @param player The player object
+	 */
 	public void printProjectileStatus(PlayerPlanet player) {
 		for(Projectile element : projectiles) {
 			PolarCoord p = element.getPolarCoordinates();
@@ -78,6 +116,11 @@ public class SpawnHandler {
 	
 	
 	
+	/**
+	 * The main method tests the spawnHandler class by creating a new spawnHandler object 
+	 * and printing the projectile's to the console.
+	 * @param args The arguments
+	 */
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();
 		SpawnHandler sp = new SpawnHandler(proj);

@@ -1,16 +1,37 @@
+/*
+ * 
+ */
 package pdef;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Class Main is the starting point for the text-based version 
+ * and controls all the game logic 
+ */
 public class Main {
 	
+	/** The sc. */
 	static Scanner sc = new Scanner(System.in); //string input
+	
+	/** The p. */
 	static PlayerPlanet p = new PlayerPlanet(); //player model
+	
+	/** The projectiles. */
 	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>(); //proj list
+	
+	/** The sp. */
 	static SpawnHandler sp = new SpawnHandler(projectiles); //Create the spawn handler
+	
+	/** The pi. */
 	static PlayerInput pi = new PlayerInput(projectiles); //Input handler
 	
+	/**
+	 * The main method contains the game loop and logic
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		//Initial projectile list
 		printInstructions();
@@ -59,6 +80,10 @@ public class Main {
 			//Prints game over messages, execute if the main game loop is broken by running out of lives
 			p.printGameOver(); // --> in playerPlanet
 	}
+	
+	/**
+	 * Prints the starting instructions.
+	 */
 	public static void printInstructions() {
 		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");

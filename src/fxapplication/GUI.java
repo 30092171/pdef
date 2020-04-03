@@ -62,6 +62,7 @@ public class GUI {
 
     public GUI(Stage mainStage) {
     	this.mainStage = mainStage;
+    	this.mainStage.setResizable(false);
     	this.root = new BorderPane();
     	this.scene = new Scene(root);
     	this.canvas = new Canvas();
