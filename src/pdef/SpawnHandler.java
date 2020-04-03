@@ -13,10 +13,9 @@ import javafx.scene.shape.Circle;
 public class SpawnHandler {
 	
 	/** The projectile's unique name identifier */
-	//Instance variables
 	private static String names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
-	/** The counter. */
+	/** A counter for the number of projectile's currently on screen */
 	private int counter = 0;
 	
 	/** An arraylist that holds the projectiles */
@@ -33,9 +32,9 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Spawn projectile.
+	 * Spawns a projectile
 	 *
-	 * @return the projectile
+	 * @return The spawned projectile
 	 */
 	public Projectile spawnProjectile() {
 		double initialDistance = 400; // Spawns outside of screen 
@@ -57,9 +56,9 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Old projectile.
+	 * Spawns projectile for text-based version
 	 *
-	 * @return the projectile
+	 * @return The spawned projectile
 	 */
 	public Projectile oldProjectile() {
 		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 

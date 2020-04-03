@@ -12,23 +12,23 @@ import java.util.Scanner;
  */
 public class Main {
 	
-	/** The sc. */
-	static Scanner sc = new Scanner(System.in); //string input
+	/** The scanner object to take in player input */
+	static Scanner sc = new Scanner(System.in);
 	
-	/** The p. */
-	static PlayerPlanet p = new PlayerPlanet(); //player model
+	/** The player's planet model. */
+	static PlayerPlanet p = new PlayerPlanet();
 	
-	/** The projectiles. */
-	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>(); //proj list
+	/** The arraylist holding the projectiles. */
+	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
-	/** The sp. */
-	static SpawnHandler sp = new SpawnHandler(projectiles); //Create the spawn handler
+	/** The spawn handler */
+	static SpawnHandler sp = new SpawnHandler(projectiles); 
 	
-	/** The pi. */
-	static PlayerInput pi = new PlayerInput(projectiles); //Input handler
+	/** The player input handler */
+	static PlayerInput pi = new PlayerInput(projectiles);
 	
 	/**
-	 * The main method contains the game loop and logic
+	 * The main method contains the text-based version's game loop and logic
 	 *
 	 * @param args the arguments
 	 */

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package fxapplication;
 
 import javafx.animation.Animation;
@@ -24,42 +27,87 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
+/**
+ * The Class GUI.
+ */
 public class GUI {
     //this class provides all the necessary elements to update and control the gui.
 
+    /** The windowsize. */
     //Root Components and Formatting Elements
     private static Dimension2D WINDOWSIZE = new Dimension2D(720, 720);
+    
+    /** The origin. */
     private static Point2D ORIGIN = new Point2D(360, 360);
     
+    /**
+     * Gets the origin.
+     *
+     * @return the origin
+     */
     public static Point2D getOrigin() {
     	return new Point2D(ORIGIN.getX(), ORIGIN.getY());
     }
 
+    /** The main stage. */
     private Stage mainStage;
+    
+    /** The root. */
     private BorderPane root;
+    
+    /** The scene. */
     private Scene scene;
+    
+    /** The canvas. */
     private Canvas canvas;
 
+    /** The score value. */
     //Screen Elements
     Label scoreValue;
     
+    /** The life 3. */
     private ImageView life1, life2, life3;
+    
+    /** The stars. */
     private ImageView stars;
+    
+    /** The pause image. */
     private ImageView pauseImage;
+    
+    /** The reset image. */
     private ImageView resetImage;
+    
+    /** The planet. */
     private ImageView planet;
+    
+    /** The planet radius. */
     private int planetRadius = 75;
+    
+    /** The planet X. */
     private double planetX = WINDOWSIZE.getHeight()/2;
+    
+    /** The planet Y. */
     private double planetY = WINDOWSIZE.getWidth()/2;
 
     
+    /** The player. */
     private PlayerPlanet player;
+    
+    /** The barrier. */
     Barrier barrier;
+    
+    /** The reset button. */
     Button pauseButton, resetButton;
 
     
+    /** The timeline. */
     private Timeline timeline;
 
+    /**
+     * Instantiates a new gui.
+     *
+     * @param mainStage the main stage
+     */
     public GUI(Stage mainStage) {
     	this.mainStage = mainStage;
     	this.mainStage.setResizable(false);
@@ -126,6 +174,11 @@ public class GUI {
 
     }
     
+    /**
+     * Sets the lives display.
+     *
+     * @param lifeCount The new lives display
+     */
     public void setLivesDisplay(int lifeCount) {
     	float full = 1.0f;
     	float half = 0.35f;
@@ -149,10 +202,18 @@ public class GUI {
         }
     }
 
+    /**
+     * Sets the score text.
+     *
+     * @param aScore the new score text
+     */
     public void setScoreText(String aScore) {
         scoreValue.setText(aScore);
     }
 
+    /**
+     * Draw top HUD.
+     */
     public void drawTopHUD() {
         //Define Boxes
         HBox livesBox = new HBox();
@@ -198,6 +259,9 @@ public class GUI {
 
     }
     
+    /**
+     * Draw game over.
+     */
     public void drawGameOver() {
     	this.timeline.stop();
     	//Define VBox
@@ -223,11 +287,19 @@ public class GUI {
     	gameOverBox.getChildren().add(gameOverBorder2);
     }
 
+	/**
+	 * Gets the timeline.
+	 *
+	 * @return the timeline
+	 */
 	public Timeline getTimeline() {
 		return this.timeline;
 	}
 
 	
+	/**
+	 * Resets the GUI after the reset button is pressed.
+	 */
 	public void resetGui() {
 		this.root.getChildren().clear();
 		this.drawTopHUD();
@@ -240,12 +312,22 @@ public class GUI {
 		timeline.playFromStart();
 	}
 
+	/**
+	 * Removes circle objects (i.e. projectiles) from the GUI
+	 *
+	 * @param circle The circle object to be removed
+	 */
 	public void removeCircle(Circle circle) {
 		Platform.runLater(()->{
 			this.root.getChildren().remove(circle);
 		});
 	}
 	
+	/**
+	 * Adds the circle object to the GUI.
+	 *
+	 * @param circle The circle object to be added
+	 */
 	public void addCircle(Circle circle) {
 		Platform.runLater(()->{
 			this.root.getChildren().add(circle);

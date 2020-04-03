@@ -13,7 +13,7 @@ public class PolarCoord implements Cloneable {
 	/** The radians from the positive horizontal axis in a counter-clockwise manner. */
 	private double distance, radians;
 	
-	/** The origin. */
+	/** A Point2D object representing the object's origin. */
 	private Point2D origin;
 	
 	/**
@@ -32,16 +32,16 @@ public class PolarCoord implements Cloneable {
 	/**
 	 * Gets the radians of the object counter-clockwise from the positive horizontal axis 
 	 *
-	 * @return The radians
+	 * @return The radians of the object counter-clockwise from the positive horizontal axis 
 	 */
 	public double getRadians() {
 		return radians;
 	}
 
 	/**
-	 * Sets the radians.
+	 * Sets the radians of the object counter-clockwise from the positive horizontal axis 
 	 *
-	 * @param radians The new radian value
+	 * @param radians The new radian value of the object counter-clockwise from the positive horizontal axis 
 	 */
 	public void setRadians(double radians) {
 		this.radians = radians;

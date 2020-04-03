@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package fxapplication;
 
 import java.util.ArrayList;
@@ -12,21 +15,45 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import pdef.*;
 
+/**
+ * The Class Controller represents the controller portion of the Model-View-Controller design.
+ * It contains all of the logic for modifying game data and the GUI 
+ */
 public class Controller {
-	// all of the logic for modifying data and the gui goes in here.
 
+	/** The score count. */
 	private int scoreCount = 0;
+	
+	/** The life count. */
 	private int lifeCount = 3;
+	
+	/** The play image. */
 	private ImageView playImage;
+	
+	/** The pause image. */
 	private ImageView pauseImage;
 
+	/** The planet. */
 	private PlayerPlanet planet;
+	
+	/** The GUI. */
 	private GUI gui;
+	
+	/** The spawn handler. */
 	private SpawnHandler spawnHandler;
+	
+	/** The projectiles. */
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
+	/** The projectile thread. */
 	private Thread spawnThread, projectileThread;
 
+	/**
+	 * Instantiates a new controller.
+	 *
+	 * @param gui the gui
+	 * @param spawnHandler the spawn handler
+	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler) {
 		this.planet = new PlayerPlanet();
 		this.gui = gui;
@@ -37,6 +64,9 @@ public class Controller {
 		init();
 	}
 
+	/**
+	 * Inits the.
+	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 			@Override
@@ -123,6 +153,9 @@ public class Controller {
 		});
 	}
 
+	/**
+	 * Adds the projectile.
+	 */
 	// Draw a new projectile
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
@@ -131,12 +164,20 @@ public class Controller {
 		gui.addCircle(newProj.getCircle());
 	}
 
+	/**
+	 * Removes the projectile.
+	 *
+	 * @param proj the proj
+	 */
 	// Removes a projectile from the screen and projectile list
 	private void removeProjectile(Projectile proj) {
 		gui.removeCircle(proj.getCircle());
 		projectiles.remove(proj);
 	}
 
+	/**
+	 * Post init.
+	 */
 	public void postInit() {
 		gui.getTimeline().play();
 	}

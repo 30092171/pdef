@@ -12,7 +12,7 @@ import javafx.geometry.Point2D;
  */
 public class PlayerInput {
 	
-	/** The projectiles. */
+	/** An arraylist that holds the projectile objects */
 	public ArrayList<Projectile> projectiles;
 	
 	/**
@@ -27,7 +27,7 @@ public class PlayerInput {
 	/**
 	 * Command.
 	 *
-	 * @param input the input
+	 * @param input The player's typed input
 	 * @return the int
 	 */
 	//Does task user inputed
@@ -63,7 +63,8 @@ public class PlayerInput {
 	}
 	
 	/**
-	 * The main method.
+	 * The main method used to quickly test the PlayerInput class by
+	 * creating a list of projectiles
 	 *
 	 * @param args the arguments
 	 */

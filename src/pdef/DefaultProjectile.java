@@ -33,7 +33,7 @@ public class DefaultProjectile extends Projectile {
 
 	
 	/**
-	 * Causes the projectile to move by 1 increment
+	 * Causes the projectile to move by 1 turn increment
 	 */
 	public void turn() {
 		PolarCoord pc = this.getPolarCoordinates();

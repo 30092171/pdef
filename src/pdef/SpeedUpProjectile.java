@@ -12,12 +12,12 @@ import javafx.scene.shape.Circle;
 public class SpeedUpProjectile extends Projectile {
 	
 
-	/** The speed. */
+	/** The projectile's speed. */
 	private double speed = 0.0;
 
 	
 	/**
-	 * Instantiates a new speed up projectile.
+	 * Instantiates a new speed up type projectile.
 	 *
 	 * @param name the name
 	 * @param pc the pc
@@ -29,7 +29,7 @@ public class SpeedUpProjectile extends Projectile {
 	}
 	
 	/**
-	 * Causes the projectile to move by 1 increment
+	 * Causes the projectile to move by 1 turn increment
 	 */
 	public void turn() {
 
