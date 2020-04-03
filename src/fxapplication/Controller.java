@@ -121,6 +121,13 @@ public class Controller {
 			gui.addCircle(this.planet.getCircle());
 			
 		});
+		
+		this.gui.menuPlayButton.setOnAction((ActionEvent e) -> {
+			Timeline timeline = this.gui.getTimeline();
+			timeline.setRate(1.0);
+			timeline.play();
+			gui.resetGui();
+		});
 	}
 
 	// Draw a new projectile
