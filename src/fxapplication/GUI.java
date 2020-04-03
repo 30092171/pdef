@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
@@ -88,6 +89,14 @@ public class GUI {
     
     /** The planet Y. */
     private double planetY = WINDOWSIZE.getWidth()/2;
+    private Rectangle menuBorder;
+    private ImageView menuLogo;
+    private Label menuInstructions;
+    private VBox menuVBox;
+    Button menuPlayButton;
+    private ImageView menuPlayImage;
+    private Label menuHighScore;
+    private ImageView menuStars;
 
     
     /** The player. */
@@ -154,9 +163,17 @@ public class GUI {
     	this.planet.setY(planetY-75);
     	this.root.getChildren().add(planet);
     	
-    	this.barrier = new Barrier(root);
+    	this.menuBorder = new Rectangle();
+    	this.menuLogo = new ImageView(new Image("https://i.imgur.com/jVapTTJ.png"));
+    	this.menuInstructions = new Label("Protect your planet against a barrage of \n asteroids for as long as possible! \n \n -Press LMB to place an asteroid barrier \n -Block asteroids to increase your score \n -If 3 asteroids make impact it's game over! \n \n");
+    	this.menuVBox = new VBox();
+    	this.menuPlayButton = new Button();
+    	this.menuPlayImage = new ImageView("https://i.imgur.com/PUiEP0c.png");
+    	this.menuHighScore = new Label("High Score: 0");
+    	this.menuStars = new ImageView(new Image("https://i.imgur.com/28YKGjT.png"));
+    	this.menuStars.setOpacity(0.7);
     	
-    	drawTopHUD();
+    	this.barrier = new Barrier(root);
     	
     	//draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
@@ -170,6 +187,9 @@ public class GUI {
 
 	timeline.setCycleCount(Animation.INDEFINITE);
 	//timeline.play();
+	
+	drawTopHUD();
+	drawMenuHUD();
 
 
     }
@@ -211,9 +231,44 @@ public class GUI {
         scoreValue.setText(aScore);
     }
 
+
     /**
      * Draw top HUD.
      */
+    public void drawMenuHUD() {
+    	menuBorder.setWidth(3000);
+    	menuBorder.setHeight(3000);
+    	menuBorder.setFill(Color.rgb(8, 18, 28));
+    	root.getChildren().add(menuBorder);
+    	root.getChildren().add(menuStars);
+    	
+    	root.setCenter(menuVBox);
+    	menuVBox.setPadding(new Insets(-150, 0, 0, -65));
+    	menuVBox.setAlignment(Pos.CENTER);
+    	menuVBox.setSpacing(25);
+    	
+    	menuVBox.getChildren().add(menuLogo);
+        
+    	menuInstructions.setTextAlignment(TextAlignment.CENTER);
+        menuInstructions.setFont(new Font("Arial", 18));
+        menuInstructions.setTextFill(Color.WHITE);
+        menuVBox.getChildren().add(menuInstructions);
+        
+        menuHighScore.setTextAlignment(TextAlignment.CENTER);
+        menuHighScore.setFont(new Font("Arial", 22));
+        menuHighScore.setTextFill(Color.WHITE);
+        
+        menuVBox.getChildren().add(menuHighScore);
+        
+        menuPlayButton.setGraphic(menuPlayImage);
+        menuPlayButton.setStyle("-fx-background-color: transparent");
+        menuVBox.getChildren().add(menuPlayButton);
+        //menuPlayButton.getChildrenUnmodifiable().add(playText);
+        
+        timeline.setRate(0.0);
+        timeline.stop();
+    }
+    
     public void drawTopHUD() {
         //Define Boxes
         HBox livesBox = new HBox();
