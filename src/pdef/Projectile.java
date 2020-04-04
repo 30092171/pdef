@@ -15,8 +15,8 @@ public abstract class Projectile {
 		this.setName(name);
 		this.setPolarCoordinates(pc);
 	}
+
 	
-	//
 	public Projectile(String name, PolarCoord pc, Circle projCircle) {
 		this.projCircle = projCircle;
 		this.setName(name);
@@ -60,6 +60,8 @@ public abstract class Projectile {
 		this.projCircle.setRadius(newRadius);
 	}
 	
+	//pretty sure this does nothing
+	//remove before demo/no junit test
 	public String toString() {
 		return "Projectile: " + this.getPolarCoordinates();
 	}
