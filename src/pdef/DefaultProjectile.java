@@ -6,7 +6,7 @@ package pdef;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class DefaultProjectile represents the default projectile 
+ * This class represents the default-type projectile 
  */
 public class DefaultProjectile extends Projectile {
 	

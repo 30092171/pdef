@@ -29,13 +29,12 @@ import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
 /**
- * The Class GUI.
+ * This class represents the GUI and all the necessary
+ * elements to update and control the GUI
  */
 public class GUI {
-    //this class provides all the necessary elements to update and control the gui.
-
-    /** The windowsize. */
-    //Root Components and Formatting Elements
+	//Root Components and Formatting Elements
+    /** The window size. */
     private static Dimension2D WINDOWSIZE = new Dimension2D(720, 720);
     
     /** The origin. */
@@ -197,7 +196,7 @@ public class GUI {
     /**
      * Sets the lives display.
      *
-     * @param lifeCount The new lives display
+     * @param lifeCount The given lifeCount
      */
     public void setLivesDisplay(int lifeCount) {
     	float full = 1.0f;
@@ -225,7 +224,7 @@ public class GUI {
     /**
      * Sets the score text.
      *
-     * @param aScore the new score text
+     * @param aScore The given score
      */
     public void setScoreText(String aScore) {
         scoreValue.setText(aScore);
@@ -315,7 +314,7 @@ public class GUI {
     }
     
     /**
-     * Draw game over.
+     * Draws the game over screen.
      */
     public void drawGameOver() {
     	this.timeline.stop();
@@ -343,9 +342,9 @@ public class GUI {
     }
 
 	/**
-	 * Gets the timeline.
+	 * Gets the timeline object.
 	 *
-	 * @return the timeline
+	 * @return The timeline object
 	 */
 	public Timeline getTimeline() {
 		return this.timeline;
@@ -353,7 +352,7 @@ public class GUI {
 
 	
 	/**
-	 * Resets the GUI after the reset button is pressed.
+	 * Resets the GUI to it's initial state
 	 */
 	public void resetGui() {
 		this.root.getChildren().clear();
@@ -379,9 +378,9 @@ public class GUI {
 	}
 	
 	/**
-	 * Adds the circle object to the GUI.
+	 * Adds the JavaFx screen circle object to the GUI.
 	 *
-	 * @param circle The circle object to be added
+	 * @param circle The JavaFX screen circle object to be added
 	 */
 	public void addCircle(Circle circle) {
 		Platform.runLater(()->{

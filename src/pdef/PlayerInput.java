@@ -25,12 +25,11 @@ public class PlayerInput {
 	}
 
 	/**
-	 * Command.
+	 * Deals with user input
 	 *
 	 * @param input The player's typed input
 	 * @return the int
 	 */
-	//Does task user inputed
 	public int command(String input) {
 		int scoreToAdd = 0;
 		//If input is potentially valid projectile name
@@ -64,7 +63,7 @@ public class PlayerInput {
 	
 	/**
 	 * The main method used to quickly test the PlayerInput class by
-	 * creating a list of projectiles
+	 * creating a list of projectiles and tests the command method.
 	 *
 	 * @param args the arguments
 	 */

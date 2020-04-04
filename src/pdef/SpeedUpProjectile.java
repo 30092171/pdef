@@ -19,9 +19,9 @@ public class SpeedUpProjectile extends Projectile {
 	/**
 	 * Instantiates a new speed up type projectile.
 	 *
-	 * @param name the name
-	 * @param pc the pc
-	 * @param c the c
+	 * @param name The speed up type's unique name identifier
+	 * @param pc The speed up type's polar coordinates
+	 * @param c The speed up type's JavaFx screen circle object
 	 */
 	public SpeedUpProjectile(String name, PolarCoord pc, Circle c) {
 		super(name, pc, c);

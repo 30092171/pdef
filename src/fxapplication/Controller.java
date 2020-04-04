@@ -45,7 +45,7 @@ public class Controller {
 	/** The projectiles. */
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
-	/** The projectile thread. */
+	/** The spawnThread and the projectileThread. */
 	private Thread spawnThread, projectileThread;
 
 	/**
@@ -65,7 +65,7 @@ public class Controller {
 	}
 
 	/**
-	 * Inits the.
+	 * Initializes the game's main loop
 	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
@@ -142,7 +142,7 @@ public class Controller {
 				}
 			}
 		});
-
+		
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
@@ -161,9 +161,8 @@ public class Controller {
 	}
 
 	/**
-	 * Adds the projectile.
+	 * Adds the projectile to the screen and the projectile list.
 	 */
-	// Draw a new projectile
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
@@ -172,11 +171,10 @@ public class Controller {
 	}
 
 	/**
-	 * Removes the projectile.
+	 * Removes the projectile from the screen and projectile list.
 	 *
 	 * @param proj the proj
 	 */
-	// Removes a projectile from the screen and projectile list
 	private void removeProjectile(Projectile proj) {
 		gui.removeCircle(proj.getCircle());
 		projectiles.remove(proj);

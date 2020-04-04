@@ -9,11 +9,11 @@ import javafx.scene.shape.Circle;
 import pdef.Projectile;
 
 /**
- * The Class Barrier represents the barrier object the player uses to block the projectiles
+ * This class represents the barrier object the player uses to block the projectiles
  */
 public class Barrier {
 
-	/** The circle. */
+	/** The JavaFx screen circle object. */
 	private Circle circle;
 	
 	/**
@@ -30,8 +30,8 @@ public class Barrier {
 	/**
 	 * Moves the barrier 
 	 *
-	 * @param xCoord The barrier's x coord
-	 * @param yCoord The barrier's y coord
+	 * @param xCoord The barrier's x coordinate
+	 * @param yCoord The barrier's y coordinate
 	 */
 	//Moves barrier removing old one and adding new one
 	public void moveBarrier(int xCoord, int yCoord) {

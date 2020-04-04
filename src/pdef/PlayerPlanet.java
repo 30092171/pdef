@@ -8,12 +8,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class PlayerPlanet creates an instance of the planet containing the  
- * center x, center y, and the planet's radius.
+ * This class represents the player's home planet
  */
 public class PlayerPlanet implements Collidable {
 	
-	/** A JavaFx screen circle object holding the planets center x, center y, and radius. */
+	/** The JavaFx screen circle object holding the planets center x, center y, and radius. */
 	private Circle circle;
 	
 	/** The number of lives. */

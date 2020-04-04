@@ -8,15 +8,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * The Abstract Class Projectile contains the abstract methods and instance variables
- * for the different types of projectiles
+ * This abstract class contains the abstract methods and instance variables
+ * for the different types of in-game projectiles
  */
 public abstract class Projectile {
 	
 	/** The projectile's polar coordinates. */
 	private PolarCoord pc;
 	
-	/** The projectile's unique name for use in the text-based version */
+	/** The projectile's unique name identifier for use in the text-based version */
 	private String name; 
 	
 	/** The projectile's JavaFX screen circle object. */
@@ -25,7 +25,7 @@ public abstract class Projectile {
 	/**
 	 * Instantiates a new projectile.
 	 *
-	 * @param name The projectile's unique name identifier
+	 * @param name The projectile's unique name identifier for use in the text-based version
 	 * @param pc The projectile's starting polar coordinates
 	 */
 	// This constructor gets a distance and a name from SpawnHandler
@@ -39,7 +39,7 @@ public abstract class Projectile {
 	 *
 	 * @param name The projectile's unique name identifier
 	 * @param pc The projectile's starting polar coordinates
-	 * @param projCircle the proj circle
+	 * @param projCircle The JavaFx screen circle object
 	 */
 	//
 	public Projectile(String name, PolarCoord pc, Circle projCircle) {
@@ -50,7 +50,6 @@ public abstract class Projectile {
 	}
 	
 	/**
-	 * Abtract method for turn
 	 * The method is supposed to cause the projectile to move by 1 increment
 	 */
 	public abstract void turn();
