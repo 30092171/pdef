@@ -13,18 +13,17 @@ import pdef.SpawnHandler;
 import pdef.PlayerInput;
 
 /**
- * The Class Game represents the entry point of Planet Defenders. 
- * All neccessary objects are instantiated in this class.
+ * This class represents the entry point of Planet Defenders. 
+ * All necessary game and GUI objects are instantiated in this class.
  */
 public class Game extends Application {
 	
 	/** The projectiles. */
-	//root class.
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	
 	/**
-	 * The main method.
+	 * The main method calls launch to start the game.
 	 *
 	 * @param args the arguments
 	 */
@@ -33,10 +32,10 @@ public class Game extends Application {
 	}
 	
 	/**
-	 * Start.
+	 * Starts the game.
 	 *
-	 * @param mainStage the main stage
-	 * @throws Exception the exception
+	 * @param mainStage The main stage of the JavaFx GUI
+	 * @throws Exception The exception
 	 */
 	public void start(Stage mainStage) throws Exception {
 		GUI gui = new GUI(mainStage); //frontend

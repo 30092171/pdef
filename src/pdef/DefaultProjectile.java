@@ -6,14 +6,14 @@ package pdef;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class DefaultProjectile represents the default projectile 
+ * This class represents the default-type projectile 
  */
 public class DefaultProjectile extends Projectile {
 	
 	/**
 	 * Instantiates a new default projectile.
 	 *
-	 * @param name The default projectile's unique name identifier
+	 * @param name The default projectile's unique name identifier 
 	 * @param pc The deafult projectile's polar coordinates
 	 */
 	public DefaultProjectile(String name, PolarCoord pc) {

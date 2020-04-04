@@ -4,7 +4,7 @@
 package pdef;
 
 /**
- * The Interface Collidable.
+ * The interface provides method signatures needed for collision detection
  */
 public interface Collidable {
 	

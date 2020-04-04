@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The Class Main is the starting point for the text-based version 
- * and controls all the game logic 
+ * This class is the entry point for the text-based version 
+ * and contains the game loop and controls all the game logic 
  */
 public class Main {
 	
@@ -62,13 +62,12 @@ public class Main {
 					p.addScore(result);
 			}
 			
+			//Updates projectiles after each turn
 			for (int i = 0; i < projectiles.size(); i++) {
 				Projectile pr = projectiles.get(i);
 				PolarCoord pc = pr.getPolarCoordinates();
 				pc.setDistance(pc.getDistance() - 5);
-
 				pr.setPolarCoordinates(pc);
-
 				if (pc.getDistance() + p.getPlanetRadius() <= p.getPlanetRadius() + 5) {
 					System.out.println("Impact Detected, -1 Life!");
 					p.lostLife();
@@ -82,10 +81,9 @@ public class Main {
 	}
 	
 	/**
-	 * Prints the starting instructions.
+	 * Prints the starting instructions. It displays game info and basic instructions
 	 */
 	public static void printInstructions() {
-		//Initial print statement, displays game info and basic instructions
 		System.out.println("----------------------------------");
 		System.out.println("Planet Defenders");
 		System.out.println("----------------------------------");

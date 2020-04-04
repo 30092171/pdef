@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class SpawnHandler represents the spawn handler for the projectiles.
+ * This class represents the spawn handler for the projectiles.
  */
 public class SpawnHandler {
 	

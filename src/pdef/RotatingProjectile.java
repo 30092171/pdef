@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class RotatingProjectile represents a projectile that rotates.
+ * This class represents a rotating-type projectile.
  */
 public class RotatingProjectile extends Projectile {
 	
