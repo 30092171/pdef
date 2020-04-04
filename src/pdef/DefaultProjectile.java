@@ -13,7 +13,7 @@ public class DefaultProjectile extends Projectile {
 	/**
 	 * Instantiates a new default projectile.
 	 *
-	 * @param name The default projectile's unique name identifier
+	 * @param name The default projectile's unique name identifier 
 	 * @param pc The deafult projectile's polar coordinates
 	 */
 	public DefaultProjectile(String name, PolarCoord pc) {

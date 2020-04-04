@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * The Class SpeedUpProjectile represents a projectile that speeds up as time passes
+ * This class represents a projectile that speeds up as time passes
  */
 public class SpeedUpProjectile extends Projectile {
 	

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The Class Main is the starting point for the text-based version 
+ * This class is the entry point for the text-based version 
  * and contains the game loop and controls all the game logic 
  */
 public class Main {

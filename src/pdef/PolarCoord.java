@@ -6,7 +6,7 @@ package pdef;
 import javafx.geometry.Point2D;
 
 /**
- * The Class PolarCoord represents the polar coordinates of each projectile and the planet
+ * This class represents the polar coordinates of each projectile and the planet
  */
 public class PolarCoord implements Cloneable {
 	

@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import pdef.*;
 
 /**
- * The Class Controller represents the controller portion of the Model-View-Controller design.
+ * This class represents the controller portion of the Model-View-Controller design.
  * It contains all of the logic for modifying game data and the GUI 
  */
 public class Controller {

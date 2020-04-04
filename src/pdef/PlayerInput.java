@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 
 /**
- * The Class PlayerInput handles all input for the text-based version
+ * This class handles all input for the text-based version
  */
 public class PlayerInput {
 	

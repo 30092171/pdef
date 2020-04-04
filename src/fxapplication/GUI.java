@@ -29,8 +29,8 @@ import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
 /**
- * This class represents the GUI and all the necessary
- * elements to update and control the GUI
+ * This class represents the Model portion of the Model-View Controller design.
+ * It contains all the necessary elements to update and control the GUI
  */
 public class GUI {
 	//Root Components and Formatting Elements
@@ -61,8 +61,9 @@ public class GUI {
     /** The canvas. */
     private Canvas canvas;
 
-    /** The score value. */
+    
     //Screen Elements
+    /** The score value. */
     Label scoreValue;
     
     /** The life 3. */
@@ -232,7 +233,7 @@ public class GUI {
 
 
     /**
-     * Draw top HUD.
+     * Draw the top HUD.
      */
     public void drawMenuHUD() {
     	menuBorder.setWidth(3000);
