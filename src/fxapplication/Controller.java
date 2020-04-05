@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package fxapplication;
 
 import java.util.ArrayList;
@@ -12,21 +15,45 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import pdef.*;
 
+/**
+ * This class represents the controller portion of the Model-View-Controller design.
+ * It contains all of the logic for modifying game data and the GUI 
+ */
 public class Controller {
-	// all of the logic for modifying data and the gui goes in here.
 
+	/** The score count. */
 	private int scoreCount = 0;
+	
+	/** The life count. */
 	private int lifeCount = 3;
+	
+	/** The play image. */
 	private ImageView playImage;
+	
+	/** The pause image. */
 	private ImageView pauseImage;
 
+	/** The planet. */
 	private PlayerPlanet planet;
+	
+	/** The GUI. */
 	private GUI gui;
+	
+	/** The spawn handler. */
 	private SpawnHandler spawnHandler;
+	
+	/** The projectiles. */
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
+	/** The spawnThread and the projectileThread. */
 	private Thread spawnThread, projectileThread;
 
+	/**
+	 * Instantiates a new controller.
+	 *
+	 * @param gui the gui
+	 * @param spawnHandler the spawn handler
+	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler) {
 		this.planet = new PlayerPlanet();
 		this.gui = gui;
@@ -37,6 +64,9 @@ public class Controller {
 		init();
 	}
 
+	/**
+	 * Initializes the game's main loop
+	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 			@Override
@@ -100,29 +130,37 @@ public class Controller {
 
 		this.gui.pauseButton.setOnAction((ActionEvent e) -> {
 			Timeline timeline = this.gui.getTimeline();
-			if (lifeCount != 0) {
+			if (lifeCount > 0) {
 				if (timeline.getRate() > 0.0) {
-					timeline.setRate(0.0);
-					timeline.stop();
+					gui.drawPause();
 					gui.pauseButton.setGraphic(playImage);
 				} else {
-					timeline.setRate(1.0);
-					timeline.play();
+					gui.drawPlay();
 					gui.pauseButton.setGraphic(pauseImage);
 				}
 			}
 		});
-
+		
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
 			projectiles.clear();
 			gui.resetGui();
 			gui.addCircle(this.planet.getCircle());
+			
+		});
+		
+		this.gui.menuPlayButton.setOnAction((ActionEvent e) -> {
+			Timeline timeline = this.gui.getTimeline();
+			timeline.setRate(1.0);
+			timeline.play();
+			gui.resetGui();
 		});
 	}
 
-	// Draw a new projectile
+	/**
+	 * Adds the projectile to the screen and the projectile list.
+	 */
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
@@ -130,12 +168,19 @@ public class Controller {
 		gui.addCircle(newProj.getCircle());
 	}
 
-	// Removes a projectile from the screen and projectile list
+	/**
+	 * Removes the projectile from the screen and projectile list.
+	 *
+	 * @param proj the proj
+	 */
 	private void removeProjectile(Projectile proj) {
 		gui.removeCircle(proj.getCircle());
 		projectiles.remove(proj);
 	}
 
+	/**
+	 * Post init.
+	 */
 	public void postInit() {
 		gui.getTimeline().play();
 	}
