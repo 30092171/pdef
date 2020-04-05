@@ -16,8 +16,8 @@ import javafx.util.Duration;
 import pdef.*;
 
 /**
- * This class represents the controller portion of the Model-View-Controller design.
- * It contains all of the logic for modifying game data and the GUI 
+ * This class contains all of the logic for modifying game data and sending
+ * those changes to the GUI 
  */
 public class Controller {
 
@@ -132,9 +132,13 @@ public class Controller {
 			Timeline timeline = this.gui.getTimeline();
 			if (lifeCount > 0) {
 				if (timeline.getRate() > 0.0) {
+					timeline.setRate(0.0);
+			    	timeline.stop();
 					gui.drawPause();
 					gui.pauseButton.setGraphic(playImage);
 				} else {
+					timeline.setRate(1.0);
+					timeline.play();
 					gui.drawPlay();
 					gui.pauseButton.setGraphic(pauseImage);
 				}
@@ -159,7 +163,7 @@ public class Controller {
 	}
 
 	/**
-	 * Adds the projectile to the screen and the projectile list.
+	 * Adds the projectile to the screen and the projectile arraylist.
 	 */
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
@@ -169,9 +173,9 @@ public class Controller {
 	}
 
 	/**
-	 * Removes the projectile from the screen and projectile list.
+	 * Removes the projectile from the screen and projectile arraylist.
 	 *
-	 * @param proj the proj
+	 * @param proj The reference to the projectile
 	 */
 	private void removeProjectile(Projectile proj) {
 		gui.removeCircle(proj.getCircle());

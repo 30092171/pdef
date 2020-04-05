@@ -29,8 +29,7 @@ import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
 /**
- * This class represents the Model portion of the Model-View Controller design.
- * It contains all the necessary elements to update and control the GUI
+ * This class contains all the necessary elements to update and control the GUI.
  */
 public class GUI {
 	//Root Components and Formatting Elements
@@ -320,9 +319,6 @@ public class GUI {
      * Draws the pause screen.
      */
     public void drawPause() {
-    	timeline.setRate(0.0);
-    	timeline.stop();
-    	//Define VBox
     	this.pauseVBox.setPadding(new Insets(-75, 0, 0, -75));
     	this.pauseVBox.setAlignment(Pos.CENTER);
     	root.setCenter(this.pauseVBox);
@@ -347,8 +343,6 @@ public class GUI {
      * Draws the play screen.
      */
     public void drawPlay() {
-    	timeline.setRate(1.0);
-		timeline.play();
 		this.pauseVBox.getChildren().clear();
     }
     
