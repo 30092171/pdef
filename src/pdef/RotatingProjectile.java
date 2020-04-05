@@ -8,11 +8,13 @@ import javafx.scene.shape.Circle;
 
 /**
  * This class represents a rotating-type projectile.
+ * The rotating-type projectile rotates towards the planet
+ * at a constant speed.
  */
 public class RotatingProjectile extends Projectile {
 	
 	/**
-	 * Instantiates a new rotating projectile.
+	 * Constructs and intializes a new rotating projectile.
 	 *
 	 * @param name The rotating projectile's unique name identifier
 	 * @param pc The rotating projectile's polar coordinates.

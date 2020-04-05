@@ -6,22 +6,25 @@ package pdef;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the default-type projectile 
+ * This class represents the default-type projectile. 
+ * The default-type projectile moves at a constant speed 
+ * directly towards the planet.
  */
 public class DefaultProjectile extends Projectile {
 	
 	/**
-	 * Instantiates a new default projectile.
+	 * Constructs and initializes a new default-type projectile.
 	 *
 	 * @param name The default projectile's unique name identifier 
-	 * @param pc The deafult projectile's polar coordinates
+	 * @param pc The default projectile's polar coordinates
 	 */
 	public DefaultProjectile(String name, PolarCoord pc) {
 		super(name, pc);
 	}
 
 	/**
-	 * Instantiates a new default projectile.
+	 * Constructs and initializes a new default-type projectile
+	 * with a JavaFx screen circle object.
 	 *
 	 * @param name The default projectile's unique name identifier
 	 * @param pc The default projectile's polar coordinates

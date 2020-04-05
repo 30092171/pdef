@@ -7,7 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents a projectile that speeds up as time passes
+ * This class represents the speedup-type projectile.
+ * The speedup-type projectile moves directly towards
+ * the planet, but speeds up as it gets closer.
  */
 public class SpeedUpProjectile extends Projectile {
 	
@@ -17,7 +19,7 @@ public class SpeedUpProjectile extends Projectile {
 
 	
 	/**
-	 * Instantiates a new speed up type projectile.
+	 * Constructs and initializes a new speedup type projectile.
 	 *
 	 * @param name The speed up type's unique name identifier
 	 * @param pc The speed up type's polar coordinates

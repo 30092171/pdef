@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the player's home planet
+ * This class represents the player's planet
  */
 public class PlayerPlanet implements Collidable {
 	
@@ -22,7 +22,7 @@ public class PlayerPlanet implements Collidable {
 	private int score;
 	
 	/**
-	 * Instantiates a new player planet.
+	 * Constructs and initializes a new player planet.
 	 */
 	public PlayerPlanet() {
 		Point2D o = GUI.getOrigin();
@@ -33,10 +33,10 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Checks for collision with the planet
+	 * Checks for collision between the planet and a projectile
 	 *
 	 * @param p The reference to a projectile object
-	 * @return true, if collision has occurred. false, if collision hasn't occurred
+	 * @return true, if collision has occurred. false, otherwise.
 	 */
 	public boolean checkCollision(Projectile p) {
 		Circle other = p.getCircle();
@@ -65,7 +65,7 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Increases lives by 1.
+	 * Increase lives by 1.
 	 */
 	public void addLife() {
 		numLives += 1;
@@ -90,7 +90,7 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Adds to the current score.
+	 * Adds givenScore to the current score.
 	 *
 	 * @param givenScore The given score to add
 	 */
@@ -99,7 +99,7 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Gets the lives.
+	 * Gets the number of lives.
 	 *
 	 * @return The number of lives
 	 */
@@ -108,7 +108,7 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Prints the player status for the text-based version
+	 * Prints the player's lives and score for the text-based version
 	 */
 	public void printPlayerStatus() {
 		System.out.println("----------------------------------");
@@ -117,7 +117,7 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Prints the game over status for the text-based version
+	 * Prints "Game Over!" and the final score for the text-based version
 	 */
 	public void printGameOver() {
 		System.out.println("----------------------------------");

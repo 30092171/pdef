@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import javafx.geometry.Point2D;
 
 /**
- * This class handles all input for the text-based version
+ * This class handles all player input for the text-based version
  */
 public class PlayerInput {
 	
-	/** An arraylist that holds the projectile objects */
+	/** The arraylist of projectiles */
 	public ArrayList<Projectile> projectiles;
 	
 	/**
-	 * Instantiates a new player input.
+	 * Constructs and initializes a new player input.
 	 *
-	 * @param projectiles the projectiles
+	 * @param projectiles The arraylist of projectiles
 	 */
 	public PlayerInput(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
@@ -62,10 +62,10 @@ public class PlayerInput {
 	}
 	
 	/**
-	 * The main method used to quickly test the PlayerInput class by
+	 * The main method is used to quickly test the PlayerInput class by
 	 * creating a list of projectiles and tests the command method.
 	 *
-	 * @param args the arguments
+	 * @param args The arguments
 	 */
 	public static void main(String[] args) {
 		ArrayList<Projectile> proj = new ArrayList<>();

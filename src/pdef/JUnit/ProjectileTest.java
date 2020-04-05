@@ -20,7 +20,7 @@ import pdef.Projectile;
 class ProjectileTest {
 	
 	/**
-	 * Test constructor without circle.
+	 * Test constructor without a JavaFx screen circle object.
 	 */
 	@Test
 	void testConstructorWithoutCircle() {
@@ -31,7 +31,7 @@ class ProjectileTest {
 	}
 	
 	/**
-	 * Tests constructor with circle.
+	 * Tests constructor with a JavaFx screen circle object.
 	 */
 	@Test
 	void testConstructorWithCircle() {
@@ -76,7 +76,7 @@ class ProjectileTest {
 	}
 	
 	/**
-	 * Tests setPolarCoordinates without circle.
+	 * Tests setPolarCoordinates without a JavaFx screen circle object.
 	 */
 	@Test
 	void testSetPolarCoordinatesWithoutCircle() {
@@ -87,7 +87,7 @@ class ProjectileTest {
 	}
 	
 	/**
-	 * Tests setPolarCoordinates with circle.
+	 * Tests setPolarCoordinates with a JavaFx screen circle object.
 	 */
 	@Test
 	void testSetPolarCoordinatesWithCircle() {
