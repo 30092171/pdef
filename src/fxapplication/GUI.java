@@ -92,6 +92,7 @@ public class GUI {
     private ImageView menuLogo;
     private Label menuInstructions;
     private VBox menuVBox;
+    private VBox pauseVBox;
     Button menuPlayButton;
     private ImageView menuPlayImage;
     private Label menuHighScore;
@@ -166,6 +167,7 @@ public class GUI {
     	this.menuLogo = new ImageView(new Image("https://i.imgur.com/jVapTTJ.png"));
     	this.menuInstructions = new Label("Protect your planet against a barrage of \n asteroids for as long as possible! \n \n -Press LMB to place an asteroid barrier \n -Block asteroids to increase your score \n -If 3 asteroids make impact it's game over! \n \n");
     	this.menuVBox = new VBox();
+    	this.pauseVBox = new VBox();
     	this.menuPlayButton = new Button();
     	this.menuPlayImage = new ImageView("https://i.imgur.com/PUiEP0c.png");
     	this.menuHighScore = new Label("High Score: 0");
@@ -314,6 +316,42 @@ public class GUI {
     }
     
     /**
+     * Draws the pause screen.
+     */
+    public void drawPause() {
+    	timeline.setRate(0.0);
+    	timeline.stop();
+    	//Define VBox
+    	this.pauseVBox.setPadding(new Insets(-75, 0, 0, -75));
+    	this.pauseVBox.setAlignment(Pos.CENTER);
+    	root.setCenter(this.pauseVBox);
+    	
+    	//Populate GameOver VBox
+    	Rectangle pauseBorder1 = new Rectangle(200,8);
+    	pauseBorder1.setFill(Color.WHITE);
+    	this.pauseVBox.getChildren().add(pauseBorder1);
+    	Label pauseText = new Label("PAUSE");
+
+    	pauseText.setMinSize(160, 90);
+    	pauseText.setFont(new Font("Arial", 59));
+    	pauseText.setTextFill(Color.ORANGERED);
+
+    	this.pauseVBox.getChildren().add(pauseText);
+    	Rectangle pauseBorder2 = new Rectangle(200,8);
+    	pauseBorder2.setFill(Color.WHITE);
+    	this.pauseVBox.getChildren().add(pauseBorder2);
+    }
+    
+    /**
+     * Draws the play screen.
+     */
+    public void drawPlay() {
+    	timeline.setRate(1.0);
+		timeline.play();
+		this.pauseVBox.getChildren().clear();
+    }
+    
+    /**
      * Draws the game over screen.
      */
     public void drawGameOver() {
@@ -333,7 +371,7 @@ public class GUI {
 
     	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
-    	gameOverText.setTextFill(Color.WHITE);
+    	gameOverText.setTextFill(Color.ORANGERED);
 
     	gameOverBox.getChildren().add(gameOverText);
     	Rectangle gameOverBorder2 = new Rectangle(350,8);

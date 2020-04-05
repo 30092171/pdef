@@ -130,14 +130,12 @@ public class Controller {
 
 		this.gui.pauseButton.setOnAction((ActionEvent e) -> {
 			Timeline timeline = this.gui.getTimeline();
-			if (lifeCount != 0) {
+			if (lifeCount > 0) {
 				if (timeline.getRate() > 0.0) {
-					timeline.setRate(0.0);
-					timeline.stop();
+					gui.drawPause();
 					gui.pauseButton.setGraphic(playImage);
 				} else {
-					timeline.setRate(1.0);
-					timeline.play();
+					gui.drawPlay();
 					gui.pauseButton.setGraphic(pauseImage);
 				}
 			}
