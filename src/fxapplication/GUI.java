@@ -29,7 +29,8 @@ import javafx.stage.Stage;
 import pdef.PlayerPlanet;
 
 /**
- * This class contains all the necessary elements to update and control the GUI.
+ * This class represents the Model portion of the Model-View Controller design.
+ * It contains all the necessary elements to update and control the GUI
  */
 public class GUI {
 	//Root Components and Formatting Elements

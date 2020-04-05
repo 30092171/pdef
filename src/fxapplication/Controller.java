@@ -16,8 +16,8 @@ import javafx.util.Duration;
 import pdef.*;
 
 /**
- * This class contains all of the logic for modifying game data and sending
- * those changes to the GUI 
+ * This class represents the controller portion of the Model-View-Controller design.
+ * It contains all of the logic for modifying game data and the GUI 
  */
 public class Controller {
 
@@ -159,7 +159,7 @@ public class Controller {
 	}
 
 	/**
-	 * Adds the projectile to the screen and the projectile arraylist.
+	 * Adds the projectile to the screen and the projectile list.
 	 */
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
@@ -169,9 +169,9 @@ public class Controller {
 	}
 
 	/**
-	 * Removes the projectile from the screen and projectile arraylist.
+	 * Removes the projectile from the screen and projectile list.
 	 *
-	 * @param proj The reference to the projectile
+	 * @param proj the proj
 	 */
 	private void removeProjectile(Projectile proj) {
 		gui.removeCircle(proj.getCircle());
