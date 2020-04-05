@@ -23,7 +23,8 @@ public abstract class Projectile {
 	private Circle projCircle;
 	
 	/**
-	 * Instantiates a new projectile.
+	 * Constructs and initializes a new projectile using a distance
+	 * and name from SpawnHandler
 	 *
 	 * @param name The projectile's unique name identifier for use in the text-based version
 	 * @param pc The projectile's starting polar coordinates
@@ -35,7 +36,8 @@ public abstract class Projectile {
 	}
 	
 	/**
-	 * Instantiates a new projectile.
+	 * Constructs and initializes a new projectile with a 
+	 * JavaFx screen circle object
 	 *
 	 * @param name The projectile's unique name identifier
 	 * @param pc The projectile's starting polar coordinates
@@ -55,9 +57,9 @@ public abstract class Projectile {
 	public abstract void turn();
 
 	/**
-	 * Sets the projectile's new unique name identifier.
+	 * Sets the projectile's unique name identifier.
 	 *
-	 * @param aName The projectile's new unique name identifier.
+	 * @param aName The projectile's unique name identifier.
 	 */
 	public void setName(String aName) {
 		name = aName;
@@ -84,7 +86,7 @@ public abstract class Projectile {
 	/**
 	 * Sets the projectile's polar coordinates.
 	 *
-	 * @param pc The projectile's new polar coordinates.
+	 * @param pc The projectile's polar coordinates.
 	 */
 	public void setPolarCoordinates(PolarCoord pc) {
 		this.pc = pc;

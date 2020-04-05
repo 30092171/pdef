@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * This class is the entry point for the text-based version 
- * and contains the game loop and controls all the game logic 
+ * and contains the game loop and handles all the game logic 
  */
 public class Main {
 	
@@ -18,7 +18,7 @@ public class Main {
 	/** The player's planet model. */
 	static PlayerPlanet p = new PlayerPlanet();
 	
-	/** The arraylist holding the projectiles. */
+	/** The arraylist of projectiles. */
 	static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	/** The spawn handler */
@@ -30,7 +30,7 @@ public class Main {
 	/**
 	 * The main method contains the text-based version's game loop and logic
 	 *
-	 * @param args the arguments
+	 * @param args The arguments
 	 */
 	public static void main(String[] args) {
 		//Initial projectile list

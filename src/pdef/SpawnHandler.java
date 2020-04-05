@@ -32,7 +32,8 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Spawns a projectile
+	 * Spawns a projectile a fixed initial distance away from the planet
+	 * with a random starting angle
 	 *
 	 * @return The spawned projectile
 	 */

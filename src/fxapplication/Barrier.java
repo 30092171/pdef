@@ -9,7 +9,8 @@ import javafx.scene.shape.Circle;
 import pdef.Projectile;
 
 /**
- * This class represents the barrier object the player uses to block the projectiles
+ * This class represents the barrier object used to block projectiles
+ * from hitting the planet
  */
 public class Barrier {
 
@@ -17,7 +18,7 @@ public class Barrier {
 	private Circle circle;
 	
 	/**
-	 * Instantiates a new barrier.
+	 * Constructs and initializes a new barrier.
 	 *
 	 * @param root The GUI's root node
 	 */
@@ -28,10 +29,10 @@ public class Barrier {
 	}	
 	
 	/**
-	 * Moves the barrier 
+	 * Moves the barrier to given x and y 
 	 *
-	 * @param xCoord The barrier's x coordinate
-	 * @param yCoord The barrier's y coordinate
+	 * @param xCoord The barrier's center x coordinate
+	 * @param yCoord The barrier's center y coordinate
 	 */
 	//Moves barrier removing old one and adding new one
 	public void moveBarrier(int xCoord, int yCoord) {
@@ -40,10 +41,10 @@ public class Barrier {
 	}
 	
 	/**
-	 * Checks barrier collision with projectile
+	 * Checks for barrier collision with projectile
 	 *
 	 * @param p The projectile's reference
-	 * @return true, if collision has occurred. false, if no collision has occurred.
+	 * @return true, if collision has occurred; false, otherwise.
 	 */
 	//Checks if the barrier collides with a projectile
 	public boolean barrierCollisionCheck(Projectile p) {

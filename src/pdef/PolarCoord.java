@@ -19,9 +19,9 @@ public class PolarCoord implements Cloneable {
 	/**
 	 * Instantiates a new polar coord.
 	 *
-	 * @param distance The distance away from the object's circumference
-	 * @param radians The radians of the object's counter-clockwise from the horizontal axis. 
-	 * @param origin A point object holding the origin's x and y.
+	 * @param distance The distance away from the planet's circumference
+	 * @param radians The radians counter-clockwise from the positive horizontal axis. 
+	 * @param origin A point object holding the center x and center y.
 	 */
 	public PolarCoord(double distance, double radians, Point2D origin) {
 		this.distance = distance;
@@ -30,36 +30,36 @@ public class PolarCoord implements Cloneable {
 	}
 	
 	/**
-	 * Gets the radians of the object counter-clockwise from the positive horizontal axis 
+	 * Gets the radians counter-clockwise from the positive horizontal axis. 
 	 *
-	 * @return The radians of the object counter-clockwise from the positive horizontal axis 
+	 * @return The radians counter-clockwise from the positive horizontal axis. 
 	 */
 	public double getRadians() {
 		return radians;
 	}
 
 	/**
-	 * Sets the radians of the object counter-clockwise from the positive horizontal axis 
+	 * Sets the radians counter-clockwise from the positive horizontal axis.
 	 *
-	 * @param radians The new radian value of the object counter-clockwise from the positive horizontal axis 
+	 * @param radians The radians counter-clockwise from the positive horizontal axis. 
 	 */
 	public void setRadians(double radians) {
 		this.radians = radians;
 	}
 
 	/**
-	 * Gets the distance away from the planet
+	 * Gets the distance between the object and the planet
 	 *
-	 * @return The distance away from the planet
+	 * @return The distance between the object and the planet
 	 */
 	public double getDistance() {
 		return distance;
 	}
 
 	/**
-	 * Sets the distance away from the planet.
+	 * Sets the distance between the object and the planet
 	 *
-	 * @param distance The new distance away from the planet.
+	 * @param distance The distance between the object and the planet
 	 */
 	public void setDistance(double distance) {
 		if (distance >= 0) {
@@ -86,9 +86,9 @@ public class PolarCoord implements Cloneable {
 	}
 	
 	/**
-	 * Gets the raw coordinates.
+	 * Gets the raw coordinates (cartesian coordinates).
 	 *
-	 * @return the raw coordinates
+	 * @return The raw coordinates (cartesian coordinates)
 	 */
 	public Point2D getRawCoordinates() {;
 		return new Point2D(this.getRawX(),this.getRawY());
@@ -105,9 +105,9 @@ public class PolarCoord implements Cloneable {
 	}
 	
 	/**
-	 * Creates a clone of the polar coord
+	 * Creates a clone of the polar coordinates
 	 *
-	 * @return The clone of the polar coord
+	 * @return The clone of the polar coordinates
 	 */
 	@Override
 	public PolarCoord clone() {
@@ -118,7 +118,7 @@ public class PolarCoord implements Cloneable {
 	 * Checks if 2 polar coordinates are equal to each other
 	 *
 	 * @param other The other polar coordinate
-	 * @return true, if successful
+	 * @return true, if successful; false, otherwise.
 	 */
 	@Override
 	public boolean equals(Object other) {
