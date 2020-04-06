@@ -3,6 +3,7 @@
  */
 package fxapplication;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
@@ -23,6 +24,9 @@ public class Controller {
 
 	/** The score count. */
 	private int scoreCount = 0;
+	
+	/** The highscore count. */
+	private int highScoreCount;
 	
 	/** The life count. */
 	private int lifeCount = 3;
@@ -93,9 +97,12 @@ public class Controller {
 						// Barrier Collision Check
 						if (gui.barrier.barrierCollisionCheck(proj)) {
 							removeProjectile(proj);
-							scoreCount = scoreCount + 100;
 							Platform.runLater(()->{
+								scoreCount = scoreCount + 100;
 								gui.setScoreText(Integer.toString(scoreCount));
+								if (scoreCount > highScoreCount) {
+									highScoreCount = scoreCount;
+								}
 							});
 							continue;
 						}
@@ -107,6 +114,7 @@ public class Controller {
 							// Displays gameOver when lives = 0
 							if (lifeCount == 0) {
 								Platform.runLater(()->{
+									saveHighscore();
 									gui.drawGameOver();
 								});
 							}
@@ -186,7 +194,42 @@ public class Controller {
 	 * Post init.
 	 */
 	public void postInit() {
+		this.loadHighscore();
 		gui.getTimeline().play();
+		Platform.runLater(()->{
+			gui.setHighScoreText("Highscore: " + this.highScoreCount);
+		});
 	}
 
+	public void saveHighscore() {
+		try {
+			File f = new File("highscore.dat");
+			if (!f.exists()) {
+				f.createNewFile();
+			}
+			FileOutputStream fos = new FileOutputStream(f);
+			DataOutputStream dos = new DataOutputStream(fos);
+			dos.writeInt(this.highScoreCount);
+			dos.close();
+			fos.close();
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+	}
+	
+	public void loadHighscore() {
+		try {
+			File f = new File("highscore.dat");
+			if (!f.exists()) {
+				return;
+			}
+			FileInputStream fis = new FileInputStream(f);
+			DataInputStream dis = new DataInputStream(fis);
+			this.highScoreCount = dis.readInt();
+			dis.close();
+			fis.close();
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+	}
 }

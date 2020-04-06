@@ -26,7 +26,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import pdef.PlayerPlanet;
 
 /**
  * This class contains all the necessary elements to update and control the GUI.
@@ -97,15 +96,11 @@ public class GUI {
     private ImageView menuPlayImage;
     private Label menuHighScore;
     private ImageView menuStars;
-
-    
-    /** The player. */
-    private PlayerPlanet player;
     
     /** The barrier. */
     Barrier barrier;
     
-    /** The reset button. */
+    /** The pause and reset buttons. */
     Button pauseButton, resetButton;
 
     
@@ -113,7 +108,7 @@ public class GUI {
     private Timeline timeline;
 
     /**
-     * Instantiates a new gui.
+     * Instantiates and builds new gui.
      *
      * @param mainStage the main stage
      */
@@ -180,7 +175,6 @@ public class GUI {
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
     		this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
     		}
-
     	);
     
     
@@ -231,10 +225,18 @@ public class GUI {
     public void setScoreText(String aScore) {
         scoreValue.setText(aScore);
     }
-
+    
+    /**
+     * Sets the highscore text.
+     *
+     * @param aScore The given score
+     */
+    public void setHighScoreText(String aScore) {
+        this.menuHighScore.setText(aScore);
+    }
 
     /**
-     * Draw the top HUD.
+     * Draws the main menu.
      */
     public void drawMenuHUD() {
     	menuBorder.setWidth(3000);
@@ -270,6 +272,9 @@ public class GUI {
         timeline.stop();
     }
     
+    /**
+     * Draws the top HUD.
+     */
     public void drawTopHUD() {
         //Define Boxes
         HBox livesBox = new HBox();
@@ -385,7 +390,7 @@ public class GUI {
 
 	
 	/**
-	 * Resets the GUI to it's initial state
+	 * Resets the GUI to its initial state
 	 */
 	public void resetGui() {
 		this.root.getChildren().clear();
@@ -420,5 +425,4 @@ public class GUI {
 			this.root.getChildren().add(circle);
 		});
 	}
-
 }
