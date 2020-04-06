@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -40,6 +41,10 @@ public class Controller {
 	/** The planet. */
 	private PlayerPlanet planet;
 	
+	/** The asteroid */
+	private Image asteroid;
+	 
+	
 	/** The GUI. */
 	private GUI gui;
 	
@@ -57,13 +62,15 @@ public class Controller {
 	 *
 	 * @param gui the gui
 	 * @param spawnHandler the spawn handler
+	 * @throws FileNotFoundException 
 	 */
-	public Controller(GUI gui, SpawnHandler spawnHandler) {
+	public Controller(GUI gui, SpawnHandler spawnHandler) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();
 		this.gui = gui;
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
+		this.asteroid = new Image(new FileInputStream("src/images/Asteroid1.png"));
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
@@ -177,6 +184,7 @@ public class Controller {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
 		System.out.println(newProj);
+		newProj.getCircle().setFill(new ImagePattern(asteroid));
 		gui.addCircle(newProj.getCircle());
 	}
 
