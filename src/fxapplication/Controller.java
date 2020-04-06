@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -76,9 +77,9 @@ public class Controller {
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
-		this.defaultProjectile = new Image(new FileInputStream("src/images/defaultProjectile.png"));
-		this.rotatingProjectile = new Image(new FileInputStream("src/images/rotatingProjectile.png"));
-		this.speedupProjectile = new Image(new FileInputStream("src/images/speedupProjectile.png"));
+		this.defaultProjectile = new Image("https://i.imgur.com/7fviQFm.png");
+		this.rotatingProjectile = new Image("https://i.imgur.com/cT4QMzd.png");
+		this.speedupProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
