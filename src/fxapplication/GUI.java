@@ -173,7 +173,9 @@ public class GUI {
     	
     	//draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-    		this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
+    		if (timeline.getRate() > 0.0) {
+    			this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
+    		}
     		}
     	);
     
@@ -355,6 +357,7 @@ public class GUI {
      * Draws the game over screen.
      */
     public void drawGameOver() {
+    	this.timeline.setRate(0.0);
     	this.timeline.stop();
     	//Define VBox
     	VBox gameOverBox = new VBox();
@@ -394,6 +397,7 @@ public class GUI {
 	 */
 	public void resetGui() {
 		this.root.getChildren().clear();
+		this.pauseVBox.getChildren().clear();
 		this.drawTopHUD();
 		this.setLivesDisplay(3);
 		this.setScoreText("0");
@@ -401,6 +405,7 @@ public class GUI {
 		this.barrier = new Barrier(root);
 		this.root.getChildren().add(stars);
 		this.root.getChildren().add(planet);
+		timeline.setRate(1.0);
 		timeline.playFromStart();
 	}
 

@@ -165,6 +165,7 @@ public class Controller {
 			this.scoreCount = 0;
 			projectiles.clear();
 			gui.resetGui();
+			gui.pauseButton.setGraphic(pauseImage);
 			gui.addCircle(this.planet.getCircle());
 			
 		});
