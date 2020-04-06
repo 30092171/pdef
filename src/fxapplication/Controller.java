@@ -41,8 +41,14 @@ public class Controller {
 	/** The planet. */
 	private PlayerPlanet planet;
 	
-	/** The asteroid */
-	private Image asteroid;
+	/** The default projectile */
+	private Image defaultProjectile;
+	
+	/** The rotating projectile */
+	private Image rotatingProjectile;
+	
+	/** The speedup projectile */
+	private Image speedupProjectile;
 	 
 	
 	/** The GUI. */
@@ -70,7 +76,9 @@ public class Controller {
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
-		this.asteroid = new Image(new FileInputStream("src/images/Asteroid1.png"));
+		this.defaultProjectile = new Image(new FileInputStream("src/images/defaultProjectile.png"));
+		this.rotatingProjectile = new Image(new FileInputStream("src/images/rotatingProjectile.png"));
+		this.speedupProjectile = new Image(new FileInputStream("src/images/speedupProjectile.png"));
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
@@ -185,7 +193,13 @@ public class Controller {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
 		System.out.println(newProj);
-		newProj.getCircle().setFill(new ImagePattern(asteroid));
+		if (newProj instanceof DefaultProjectile) {
+			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
+		} else if (newProj instanceof SpeedUpProjectile) {
+			newProj.getCircle().setFill(new ImagePattern(speedupProjectile));
+		} else {
+			newProj.getCircle().setFill(new ImagePattern(rotatingProjectile));
+		}
 		gui.addCircle(newProj.getCircle());
 	}
 
