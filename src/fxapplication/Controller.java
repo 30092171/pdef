@@ -49,9 +49,11 @@ public class Controller {
 	private Image rotatingProjectile;
 	
 	/** The speedup projectile */
-	private Image speedupProjectile;
-	 
+	private Image speedUpProjectile;
 	
+	/** The unstable projectile */
+	private Image unstableProjectile;
+	 
 	/** The GUI. */
 	private GUI gui;
 	
@@ -79,7 +81,8 @@ public class Controller {
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
 		this.defaultProjectile = new Image("https://i.imgur.com/7fviQFm.png");
 		this.rotatingProjectile = new Image("https://i.imgur.com/cT4QMzd.png");
-		this.speedupProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
+		this.speedUpProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
+		this.unstableProjectile = new Image("https://i.imgur.com/8i4UqVG.png");
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
@@ -112,15 +115,30 @@ public class Controller {
 						proj.turn();
 						// Barrier Collision Check
 						if (gui.barrier.barrierCollisionCheck(proj)) {
-							removeProjectile(proj);
-							Platform.runLater(()->{
-								scoreCount = scoreCount + 100;
-								gui.setScoreText(Integer.toString(scoreCount));
-								if (scoreCount > highScoreCount) {
-									highScoreCount = scoreCount;
+							if (proj instanceof UnstableProjectile) {
+								for (int j = projectiles.size() - 1; j >= 0; j--) {
+									removeProjectile(projectiles.get(j));
+									Platform.runLater(()->{
+										scoreCount = scoreCount + 100;
+										gui.setScoreText(Integer.toString(scoreCount));
+										if (scoreCount > highScoreCount) {
+											highScoreCount = scoreCount;
+										}
+									});
 								}
-							});
-							continue;
+							break;
+							}
+							else {
+								removeProjectile(proj);
+								Platform.runLater(()->{
+									scoreCount = scoreCount + 100;
+									gui.setScoreText(Integer.toString(scoreCount));
+									if (scoreCount > highScoreCount) {
+										highScoreCount = scoreCount;
+									}
+								});
+								continue;
+							}
 						}
 						// Planet Collision Check
 						if (planet.checkCollision(proj)) {
@@ -198,7 +216,9 @@ public class Controller {
 		if (newProj instanceof DefaultProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
 		} else if (newProj instanceof SpeedUpProjectile) {
-			newProj.getCircle().setFill(new ImagePattern(speedupProjectile));
+			newProj.getCircle().setFill(new ImagePattern(speedUpProjectile));
+		} else if (newProj instanceof UnstableProjectile) {
+			newProj.getCircle().setFill(new ImagePattern(unstableProjectile));
 		} else {
 			newProj.getCircle().setFill(new ImagePattern(rotatingProjectile));
 		}
