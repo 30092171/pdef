@@ -172,6 +172,7 @@ public class Controller {
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
+			saveHighscore();
 			projectiles.clear();
 			gui.resetGui();
 			gui.pauseButton.setGraphic(pauseImage);
