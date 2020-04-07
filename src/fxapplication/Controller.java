@@ -207,6 +207,14 @@ public class Controller {
 	}
 
 	/**
+	 * Adds subtle variations in scale and rotation for newly spawned projectiles.
+	 */
+	public void projectileVariation(Projectile newProj) {
+		newProj.getCircle().setRotate(Math.random() * 360);
+		newProj.setCircleRadius((int)(9 + Math.random() * 6));
+	}
+	
+	/**
 	 * Adds the projectile to the screen and the projectile arraylist.
 	 */
 	private void addProjectile() {
@@ -215,12 +223,16 @@ public class Controller {
 		System.out.println(newProj);
 		if (newProj instanceof DefaultProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
+			projectileVariation(newProj);
 		} else if (newProj instanceof SpeedUpProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(speedUpProjectile));
+			projectileVariation(newProj);
 		} else if (newProj instanceof UnstableProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(unstableProjectile));
+			projectileVariation(newProj);
 		} else {
 			newProj.getCircle().setFill(new ImagePattern(rotatingProjectile));
+			projectileVariation(newProj);
 		}
 		gui.addCircle(newProj.getCircle());
 	}
