@@ -10,14 +10,17 @@ import javafx.geometry.Point2D;
  */
 public class PolarCoord implements Cloneable {
 	
+	/** The distance away from the planet. */
+	private double distance;
+	
 	/** The radians from the positive horizontal axis in a counter-clockwise manner. */
-	private double distance, radians;
+	private double radians;
 	
 	/** A Point2D object representing the object's origin. */
 	private Point2D origin;
 	
 	/**
-	 * Instantiates a new polar coord.
+	 * Constructs and initializes the object holding the polar coordinates.
 	 *
 	 * @param distance The distance away from the planet's circumference
 	 * @param radians The radians counter-clockwise from the positive horizontal axis. 
@@ -118,7 +121,7 @@ public class PolarCoord implements Cloneable {
 	 * Checks if 2 polar coordinates are equal to each other
 	 *
 	 * @param other The other polar coordinate
-	 * @return true, if successful; false, otherwise.
+	 * @return true, if the two polar coordinates are equal; false, otherwise.
 	 */
 	@Override
 	public boolean equals(Object other) {

@@ -67,7 +67,7 @@ public class GUI {
     /** The life 3. */
     private ImageView life1, life2, life3;
     
-    /** The stars. */
+    /** The stars background image. */
     private ImageView stars;
     
     /** The pause image. */
@@ -76,7 +76,7 @@ public class GUI {
     /** The reset image. */
     private ImageView resetImage;
     
-    /** The planet. */
+    /** The planet image. */
     private ImageView planet;
     
     /** The planet radius. */
@@ -108,7 +108,7 @@ public class GUI {
     private Timeline timeline;
 
     /**
-     * Instantiates and builds new gui.
+     * Constructs and initializes a new GUI.
      *
      * @param mainStage the main stage
      */

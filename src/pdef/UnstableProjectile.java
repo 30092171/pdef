@@ -7,9 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the unstable-type projectile.
- * The unstable-type projectile moves directly towards
- * the planet, but speeds up as it gets closer.
+ * This class represents the unstable-type projectile 
+ * which moves directly towards the planet at a high speed.
+ * It removes all other projectiles when destroyed.
  */
 public class UnstableProjectile extends Projectile {
 
@@ -17,9 +17,9 @@ public class UnstableProjectile extends Projectile {
 	/**
 	 * Constructs and initializes a new unstable type projectile.
 	 *
-	 * @param name The speed up type's unique name identifier
-	 * @param pc The speed up type's polar coordinates
-	 * @param c The speed up type's JavaFx screen circle object
+	 * @param name The unstable-type projectile's unique name identifier
+	 * @param pc The unstable-type projectile's polar coordinates
+	 * @param c The unstable-type projectile's JavaFx screen circle object
 	 */
 	public UnstableProjectile(String name, PolarCoord pc, Circle c) {
 		super(name, pc, c);

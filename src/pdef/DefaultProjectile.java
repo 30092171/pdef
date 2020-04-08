@@ -6,9 +6,8 @@ package pdef;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the default-type projectile. 
- * The default-type projectile moves at a constant speed 
- * directly towards the planet.
+ * This class represents the default-type projectile which
+ * moves at a constant speed directly towards the planet.
  */
 public class DefaultProjectile extends Projectile {
 	

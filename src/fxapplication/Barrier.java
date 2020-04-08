@@ -14,7 +14,7 @@ import pdef.Projectile;
  */
 public class Barrier {
 
-	/** The JavaFx screen circle object. */
+	/** The JavaFx screen circle object holding the planets center x, center y, and radius. */
 	private Circle circle;
 	
 	/**

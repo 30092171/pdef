@@ -7,9 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the speedup-type projectile.
- * The speedup-type projectile moves directly towards
- * the planet, but speeds up as it gets closer.
+ * This class represents the speedup-type projectile
+ * which moves directly towards the planet, but speeds
+ * up as it gets closer.
  */
 public class SpeedUpProjectile extends Projectile {
 	

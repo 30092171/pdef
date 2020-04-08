@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents the spawn handler for the projectiles.
+ * This class handles projectile spawning.
  */
 public class SpawnHandler {
 	
@@ -22,7 +22,7 @@ public class SpawnHandler {
 	public ArrayList<Projectile> projectiles;
 	
 	/**
-	 * Instantiates a new spawn handler
+	 * Constructs and initializes a new spawn handler
 	 *
 	 * @param projectiles the projectiles
 	 */
@@ -32,8 +32,8 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Spawns a projectile a fixed initial distance away from the planet
-	 * with a random starting angle
+	 * Spawns a projectile with a fixed initial 
+	 * distance away from the planet with a random starting angle
 	 *
 	 * @return The spawned projectile
 	 */
@@ -71,12 +71,11 @@ public class SpawnHandler {
 		
 	}
 	
-	//Projectile spawning after the rest of the turn's game logic has occured. 
 	/**
 	 * Spawns projectiles based on number of projectiles on screen.
 	 * Ensures projectiles always exists by spawning 2 projectiles if none are on the screen
+	 * If there are no projectiles left, then more will always be spawned.
 	 */
-	//If there are no projectiles left, then more will always be spawned
 	public void trySpawn() {
 		if(projectiles.size() < 1) {
 			projectiles.add(oldProjectile());
@@ -91,7 +90,7 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Initially spawns 3 projectiles
+	 * Initially spawns 3 projectiles for the text-based version
 	 */
 	public void initialSpawn() {
 		projectiles.add(oldProjectile());

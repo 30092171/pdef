@@ -7,14 +7,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * This class represents a rotating-type projectile.
- * The rotating-type projectile rotates towards the planet
- * at a constant speed.
+ * This class represents a rotating-type projectile
+ * which rotates towards the planet at a constant speed.
  */
 public class RotatingProjectile extends Projectile {
 	
 	/**
-	 * Constructs and intializes a new rotating projectile.
+	 * Constructs and initializes a new rotating-type projectile.
 	 *
 	 * @param name The rotating projectile's unique name identifier
 	 * @param pc The rotating projectile's polar coordinates.
@@ -26,7 +25,7 @@ public class RotatingProjectile extends Projectile {
 	}
 	
 	/**
-	 * Causes the projectile to move by 1 turn increment
+	 * Causes the rotating-type projectile to move by 1 turn increment
 	 */
 	public void turn() {
 

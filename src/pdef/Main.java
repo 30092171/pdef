@@ -28,7 +28,7 @@ public class Main {
 	static PlayerInput pi = new PlayerInput(projectiles);
 	
 	/**
-	 * The main method contains the text-based version's game loop and logic
+	 * Contains the text-based version's game loop and logic
 	 *
 	 * @param args The arguments
 	 */

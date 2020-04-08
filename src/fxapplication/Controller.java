@@ -42,16 +42,16 @@ public class Controller {
 	/** The planet. */
 	private PlayerPlanet planet;
 	
-	/** The default projectile */
+	/** The default projectile image */
 	private Image defaultProjectile;
 	
-	/** The rotating projectile */
+	/** The rotating projectile image */
 	private Image rotatingProjectile;
 	
-	/** The speedup projectile */
+	/** The speedup projectile image */
 	private Image speedUpProjectile;
 	
-	/** The unstable projectile */
+	/** The unstable projectile image */
 	private Image unstableProjectile;
 	 
 	/** The GUI. */
