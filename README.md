@@ -28,29 +28,14 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 ###### How to Compile Separately
 
 1. Install Java JDK 8 (<https://www.oracle.com/java/technologies/javase-jdk8-downloads.html>)
+
 2. Download Planet Defenders source code (<https://github.com/30092171/pdef/releases/download/0.3/planetDefenders_SourceCode.zip>)
 
 3. Set your JAVA_HOME and PATH (<https://javatutorial.net/set-java-home-windows-10>)
 
 4. Move to src directory and compile all the pdef files (<javac pdef/*.java>): <br/>
 
-ProjectileTemp.java<br/>
-Collidable.java<br/>
-Main.java<br/>
-PlayerInput.java<br/>
-PlayerPlanet.java<br/>
-PolarCoord.java<br/>
-Projectile.java<br/>
-RotatingProjectile.java<br/>
-SpawnHandler.java<br/>
-SpeedUpProjectile.java<br/>
-
 5. Move to src directory and compile all the fxapplication files (<javac fxapplication/*.java>):
-
-Barrier.java<br/>
-Controller.java<br/>
-Game.java<br/>
-GUI.java<br/>
 
 6. Run the following files by moving tosrc directory and type in the following:<br/>
 Text-Based --> \<java pdef.Main \> <br/>
@@ -60,7 +45,7 @@ GUI-Based --> \<java fxapplication.Game \> <br/>
 ###### JUnit Testing
 Currently our JUnit test for the Projectile class only works within Eclipse. After installing Eclipse, follow these steps to run the JUnit test.
 1. Create a new project in Eclipse and ensure the JUnit 5 library is added
-2. Import all files except images folder within the game's src folder (including ProjectileTest.java) into the new project's src folder 
-3. Right click ProjectileTest.java > Run As > JUnit Test
+2. Import all files within the game's src folder (including ProjectileTest.java) into the new project's src folder 
+3. Right click ProjectileTest.java inside pdef.JUnit > Run As > JUnit Test
 
 Written By: Alex Tran
