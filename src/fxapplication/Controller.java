@@ -19,8 +19,8 @@ import javafx.util.Duration;
 import pdef.*;
 
 /**
- * This class contains all of the logic for modifying game data and sending
- * those changes to the GUI 
+ * This class contains all of the logic for modifying
+ * game data and sending those changes to the GUI 
  */
 public class Controller {
 
