@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * This abstract class contains the abstract methods and instance variables
- * for the different types of in-game projectiles
+ * This abstract class contains the abstract methods and instance
+ * variables for the different types of in-game projectiles
  */
 public abstract class Projectile {
 	
@@ -52,7 +52,7 @@ public abstract class Projectile {
 	}
 	
 	/**
-	 * The method is supposed to cause the projectile to move by 1 increment
+	 * The method causes the projectile to move by 1 turn increment
 	 */
 	public abstract void turn();
 

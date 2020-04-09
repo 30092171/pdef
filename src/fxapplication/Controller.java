@@ -67,10 +67,10 @@ public class Controller {
 	private Thread spawnThread, projectileThread;
 
 	/**
-	 * Instantiates a new controller.
+	 * Constructs and initializes a new controller.
 	 *
-	 * @param gui the gui
-	 * @param spawnHandler the spawn handler
+	 * @param gui The gui
+	 * @param spawnHandler The spawn handler
 	 * @throws FileNotFoundException 
 	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler) throws FileNotFoundException {

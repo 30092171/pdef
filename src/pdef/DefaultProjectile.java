@@ -14,8 +14,8 @@ public class DefaultProjectile extends Projectile {
 	/**
 	 * Constructs and initializes a new default-type projectile.
 	 *
-	 * @param name The default projectile's unique name identifier 
-	 * @param pc The default projectile's polar coordinates
+	 * @param name The default-type projectile's unique name identifier 
+	 * @param pc The default-type projectile's polar coordinates
 	 */
 	public DefaultProjectile(String name, PolarCoord pc) {
 		super(name, pc);
@@ -35,7 +35,7 @@ public class DefaultProjectile extends Projectile {
 
 	
 	/**
-	 * Causes the projectile to move by 1 turn increment
+	 * Causes the default-type projectile to move by 1 turn increment
 	 */
 	public void turn() {
 		PolarCoord pc = this.getPolarCoordinates();

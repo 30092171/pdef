@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This class is the entry point for the text-based version 
+ * This class is the entry point for Planet Defenders text-based version 
  * and contains the game loop and handles all the game logic 
  */
 public class Main {

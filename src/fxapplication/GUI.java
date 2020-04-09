@@ -41,7 +41,7 @@ public class GUI {
     /**
      * Gets the origin.
      *
-     * @return the origin
+     * @return The origin
      */
     public static Point2D getOrigin() {
     	return new Point2D(ORIGIN.getX(), ORIGIN.getY());
@@ -59,12 +59,11 @@ public class GUI {
     /** The canvas. */
     private Canvas canvas;
 
-    
     //Screen Elements
     /** The score value. */
     Label scoreValue;
     
-    /** The life 3. */
+    /** The 3 life images. */
     private ImageView life1, life2, life3;
     
     /** The stars background image. */
@@ -87,14 +86,32 @@ public class GUI {
     
     /** The planet Y. */
     private double planetY = WINDOWSIZE.getWidth()/2;
+    
+    /** The menu border. */
     private Rectangle menuBorder;
+    
+    /** The menu logo. */
     private ImageView menuLogo;
+    
+    /** The menu instructions. */
     private Label menuInstructions;
+    
+    /** The menu V box. */
     private VBox menuVBox;
+    
+    /** The pause V box. */
     private VBox pauseVBox;
+    
+    /** The menu play button. */
     Button menuPlayButton;
+    
+    /** The menu play button image. */
     private ImageView menuPlayImage;
+    
+    /** The menu high score. */
     private Label menuHighScore;
+    
+    /** The menu stars background. */
     private ImageView menuStars;
     
     /** The barrier. */
@@ -292,10 +309,6 @@ public class GUI {
         controlsBox.setPadding(new Insets(-68, 20, 0, 0));
         controlsBox.setAlignment(Pos.TOP_RIGHT);
         root.setRight(controlsBox);
-        //VBox planetBox = new VBox();
-        //planetBox.setAlignment(Pos.CENTER);
-        //planetBox.setPadding(new Insets(-75,0,0,-75));
-        //root.setCenter(planetBox);
 
         //Populate Lives HBox
         livesBox.getChildren().add(life1);
@@ -315,10 +328,6 @@ public class GUI {
         //Populate Controls HBox
         controlsBox.getChildren().add(pauseButton);
         controlsBox.getChildren().add(resetButton);
-
-        
-        //Populate Planet VBox
-        //planetBox.getChildren().add(planet);
 
     }
     
@@ -393,7 +402,7 @@ public class GUI {
 
 	
 	/**
-	 * Resets the GUI to its initial state
+	 * Resets the GUI to its initial state.
 	 */
 	public void resetGui() {
 		this.root.getChildren().clear();

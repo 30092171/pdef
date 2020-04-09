@@ -13,8 +13,8 @@ import pdef.SpawnHandler;
 import pdef.PlayerInput;
 
 /**
- * This class represents the entry point of Planet Defenders. 
- * All necessary game and GUI objects are instantiated in this class.
+ * This class represents the entry point of Planet Defenders GUI version. 
+ * All necessary game logic and GUI objects are instantiated in this class.
  */
 public class Game extends Application {
 	

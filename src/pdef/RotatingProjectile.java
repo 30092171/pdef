@@ -15,9 +15,9 @@ public class RotatingProjectile extends Projectile {
 	/**
 	 * Constructs and initializes a new rotating-type projectile.
 	 *
-	 * @param name The rotating projectile's unique name identifier
-	 * @param pc The rotating projectile's polar coordinates.
-	 * @param c The rotating projectile's JavaFx screen circle object
+	 * @param name The rotating-type projectile's unique name identifier
+	 * @param pc The rotating-type projectile's polar coordinates.
+	 * @param c The rotating-type projectile's JavaFx screen circle object
 	 */
 	public RotatingProjectile(String name, PolarCoord pc, Circle c) {
 		super(name, pc, c);

@@ -32,8 +32,8 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Spawns a projectile with a fixed initial 
-	 * distance away from the planet with a random starting angle
+	 * Spawns a projectile a fixed initial distance
+	 * away from the planet with a random starting angle
 	 *
 	 * @return The spawned projectile
 	 */
@@ -44,6 +44,7 @@ public class SpawnHandler {
 		Circle circle = new Circle(p.getRawX(), p.getRawY(), 10);
 		
 		Projectile newProjectile;
+		//Randomly generates different projectile types.
 		double projType = Math.random();
 		if (projType >= 0.8) {
 			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
@@ -73,8 +74,8 @@ public class SpawnHandler {
 	
 	/**
 	 * Spawns projectiles based on number of projectiles on screen.
-	 * Ensures projectiles always exists by spawning 2 projectiles if none are on the screen
-	 * If there are no projectiles left, then more will always be spawned.
+	 * Ensures projectiles always exists by spawning 2 projectiles
+	 * if none are on the screen
 	 */
 	public void trySpawn() {
 		if(projectiles.size() < 1) {

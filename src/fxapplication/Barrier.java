@@ -9,8 +9,8 @@ import javafx.scene.shape.Circle;
 import pdef.Projectile;
 
 /**
- * This class represents the barrier object used to block projectiles
- * from hitting the planet
+ * This class represents the barrier object
+ * used to block projectiles from hitting the planet
  */
 public class Barrier {
 

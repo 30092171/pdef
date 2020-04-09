@@ -27,7 +27,7 @@ public class UnstableProjectile extends Projectile {
 	}
 	
 	/**
-	 * Causes the projectile to move by 1 turn increment
+	 * Causes the unstable-type projectile to move by 1 turn increment
 	 */
 	public void turn() {
 		

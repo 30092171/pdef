@@ -135,7 +135,7 @@ public class PolarCoord implements Cloneable {
 	
 	/**
 	 * Returns a string representation of the polar coordinates.
-	 * The string representation consists of the Class, the distnace 
+	 * The string representation consists of the Class, the distance 
 	 * away from the planet, and the radians from the positive horizontal axis.
 	 *
 	 * @return A string representation of the polar coordinates.

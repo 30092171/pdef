@@ -14,16 +14,16 @@ import javafx.scene.shape.Circle;
 public class SpeedUpProjectile extends Projectile {
 	
 
-	/** The projectile's speed. */
+	/** The speedup-type projectile's speed. */
 	private double speed = 0.0;
 
 	
 	/**
-	 * Constructs and initializes a new speedup type projectile.
+	 * Constructs and initializes a new speedup-type projectile.
 	 *
-	 * @param name The speed up type's unique name identifier
-	 * @param pc The speed up type's polar coordinates
-	 * @param c The speed up type's JavaFx screen circle object
+	 * @param name The speedup type projectile's unique name identifier
+	 * @param pc The speedup type projectile's polar coordinates
+	 * @param c The speedup type projectile's JavaFx screen circle object
 	 */
 	public SpeedUpProjectile(String name, PolarCoord pc, Circle c) {
 		super(name, pc, c);
@@ -31,7 +31,7 @@ public class SpeedUpProjectile extends Projectile {
 	}
 	
 	/**
-	 * Causes the projectile to move by 1 turn increment
+	 * Causes the speedup-type projectile to move by 1 turn increment
 	 */
 	public void turn() {
 
