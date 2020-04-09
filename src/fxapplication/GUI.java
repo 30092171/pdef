@@ -117,9 +117,10 @@ public class GUI {
     /** The barrier. */
     Barrier barrier;
     
+    private ImageView explosion;
+    
     /** The pause and reset buttons. */
     Button pauseButton, resetButton;
-
     
     /** The timeline. */
     private Timeline timeline;
@@ -171,9 +172,14 @@ public class GUI {
     	this.planet = new ImageView(new Image("https://i.imgur.com/jgcrrYv.png"));
     	this.planet.setFitHeight(planetRadius*2);
     	this.planet.setFitWidth(planetRadius*2);
-    	this.planet.setX(planetX-75);
-    	this.planet.setY(planetY-75);
+    	this.planet.setX(planetX-72);
+    	this.planet.setY(planetY-72);
     	this.root.getChildren().add(planet);
+    	this.explosion = new ImageView(new Image("https://i.imgur.com/WirxLxw.png"));
+    	this.explosion.setScaleX(0.5);
+    	this.explosion.setScaleY(0.5);
+    	this.explosion.setX(5);
+    	this.explosion.setY(20);
     	
     	this.menuBorder = new Rectangle();
     	this.menuLogo = new ImageView(new Image("https://i.imgur.com/jVapTTJ.png"));
@@ -372,10 +378,12 @@ public class GUI {
     	VBox gameOverBox = new VBox();
     	gameOverBox.setPadding(new Insets(-75, 0, 0, -75));
     	gameOverBox.setAlignment(Pos.CENTER);
+    	root.getChildren().add(explosion);
     	root.setCenter(gameOverBox);
     	this.planet.setOpacity(0);
     	
     	//Populate GameOver VBox
+    	
     	Rectangle gameOverBorder1 = new Rectangle(350,8);
     	gameOverBorder1.setFill(Color.WHITE);
     	gameOverBox.getChildren().add(gameOverBorder1);
@@ -383,7 +391,7 @@ public class GUI {
 
     	gameOverText.setMinSize(360, 90);
     	gameOverText.setFont(new Font("Arial", 59));
-    	gameOverText.setTextFill(Color.ORANGERED);
+    	gameOverText.setTextFill(Color.RED);
 
     	gameOverBox.getChildren().add(gameOverText);
     	Rectangle gameOverBorder2 = new Rectangle(350,8);
