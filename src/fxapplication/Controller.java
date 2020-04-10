@@ -14,7 +14,6 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -220,7 +219,6 @@ public class Controller {
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
-		System.out.println(newProj);
 		if (newProj instanceof DefaultProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
 			projectileVariation(newProj);
