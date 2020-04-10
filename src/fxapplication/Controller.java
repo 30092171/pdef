@@ -15,7 +15,7 @@ import pdef.*;
 
 /**
  * This class contains all of the logic for modifying
- * game data and sending those changes to the GUI 
+ * game data and sending those changes to the GUI.
  */
 public class Controller {
 
@@ -36,14 +36,14 @@ public class Controller {
 
 	/** The planet model. */
 	private PlayerPlanet planet;
-	 
+ 
 	/** The GUI. */
 	private GUI gui;
 	
 	/** The spawn handler. */
 	private SpawnHandler spawnHandler;
 	
-	/** The projectiles. */
+	/** The arraylist of projectiles. */
 	private ArrayList<Projectile> projectiles;
 	
 	/** The spawnThread and the projectileThread. */
@@ -54,7 +54,7 @@ public class Controller {
 	 *
 	 * @param gui The gui
 	 * @param spawnHandler The spawn handler
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException the file not found exception
 	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler, ArrayList<Projectile> projectiles) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();
@@ -168,7 +168,7 @@ public class Controller {
 			gui.resetGui();
 		});
 	}
-	
+
 	/**
 	 * Adds the projectile to the screen and the projectile arraylist.
 	 * 
@@ -238,6 +238,7 @@ public class Controller {
 	}
 	
 	/**
+
 	 * Reads players previous high score from data file.
 	 */
 	public void loadHighscore() {
