@@ -117,6 +117,7 @@ public class GUI {
     /** The barrier. */
     Barrier barrier;
     
+    /** The explosion image */
     private ImageView explosion;
     
     /** The pause and reset buttons. */
@@ -383,7 +384,6 @@ public class GUI {
     	this.planet.setOpacity(0);
     	
     	//Populate GameOver VBox
-    	
     	Rectangle gameOverBorder1 = new Rectangle(350,8);
     	gameOverBorder1.setFill(Color.WHITE);
     	gameOverBox.getChildren().add(gameOverBorder1);
