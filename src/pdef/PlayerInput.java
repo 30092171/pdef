@@ -16,7 +16,7 @@ public class PlayerInput {
 	public ArrayList<Projectile> projectiles;
 	
 	/**
-	 * Constructs and initializes a new player input.
+	 * Constructs and initializes a new player input handler.
 	 *
 	 * @param projectiles The arraylist of projectiles
 	 */
@@ -28,7 +28,7 @@ public class PlayerInput {
 	 * Deals with user input
 	 *
 	 * @param input The player's typed input
-	 * @return the int
+	 * @return 
 	 */
 	public int command(String input) {
 		int scoreToAdd = 0;

@@ -18,15 +18,14 @@ public class SpawnHandler {
 	/** A counter for the number of projectile's currently on screen */
 	private int counter = 0;
 	
-	/** An arraylist that holds the projectiles */
+	/** The arraylist of projectiles. */
 	public ArrayList<Projectile> projectiles;
 	
 	/**
 	 * Constructs and initializes a new spawn handler
 	 *
-	 * @param projectiles the projectiles
+	 * @param projectiles The reference to the arraylist of projectiles.
 	 */
-	//Constructor, gets reference to projectile list and PlayerPlanet
 	public SpawnHandler(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
@@ -100,8 +99,8 @@ public class SpawnHandler {
 	}
 	
 	/**
-	 * Prints the projectile's unique name identifier, distance away from planet, and
-	 * x coordinate and y coordinate.
+	 * Prints the projectile's unique name identifier, distance away from
+	 * the planet, and x coordinate and y coordinate.
 	 *
 	 * @param player The player object
 	 */
