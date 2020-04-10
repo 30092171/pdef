@@ -18,7 +18,7 @@ import pdef.PlayerInput;
  */
 public class Game extends Application {
 	
-	/** The projectiles. */
+	/** The arraylist of projectiles. */
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	

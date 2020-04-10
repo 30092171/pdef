@@ -36,12 +36,11 @@ public class Barrier {
 	}	
 	
 	/**
-	 * Moves the barrier to given x and y 
+	 * Moves the barrier to the given x and y 
 	 *
 	 * @param xCoord The barrier's center x coordinate
 	 * @param yCoord The barrier's center y coordinate
 	 */
-	//Moves barrier removing old one and adding new one
 	public void moveBarrier(int xCoord, int yCoord) {
 		this.circle.setCenterX(xCoord);
 		this.circle.setCenterY(yCoord);

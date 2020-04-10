@@ -20,7 +20,7 @@ import pdef.*;
 
 /**
  * This class contains all of the logic for modifying
- * game data and sending those changes to the GUI 
+ * game data and sending those changes to the GUI.
  */
 public class Controller {
 
@@ -42,16 +42,16 @@ public class Controller {
 	/** The planet. */
 	private PlayerPlanet planet;
 	
-	/** The default projectile image */
+	/**  The default projectile image. */
 	private Image defaultProjectile;
 	
-	/** The rotating projectile image */
+	/**  The rotating projectile image. */
 	private Image rotatingProjectile;
 	
-	/** The speedup projectile image */
+	/**  The speedup projectile image. */
 	private Image speedUpProjectile;
 	
-	/** The unstable projectile image */
+	/**  The unstable projectile image. */
 	private Image unstableProjectile;
 	 
 	/** The GUI. */
@@ -60,7 +60,7 @@ public class Controller {
 	/** The spawn handler. */
 	private SpawnHandler spawnHandler;
 	
-	/** The projectiles. */
+	/** The arraylist of projectiles. */
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	/** The spawnThread and the projectileThread. */
@@ -71,7 +71,7 @@ public class Controller {
 	 *
 	 * @param gui The gui
 	 * @param spawnHandler The spawn handler
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException the file not found exception
 	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();
@@ -88,7 +88,7 @@ public class Controller {
 	}
 
 	/**
-	 * Initializes the game's main loop
+	 * Initializes the game's main loop.
 	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
@@ -208,6 +208,8 @@ public class Controller {
 
 	/**
 	 * Adds subtle variations in scale and rotation for newly spawned projectiles.
+	 *
+	 * @param newProj the new proj
 	 */
 	public void projectileVariation(Projectile newProj) {
 		newProj.getCircle().setRotate(Math.random() * 360);
@@ -258,6 +260,9 @@ public class Controller {
 		});
 	}
 
+	/**
+	 * Saves the highscore to a file.
+	 */
 	public void saveHighscore() {
 		try {
 			File f = new File("highscore.dat");
@@ -274,6 +279,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Loads highscore from a file.
+	 */
 	public void loadHighscore() {
 		try {
 			File f = new File("highscore.dat");

@@ -29,15 +29,14 @@ public abstract class Projectile {
 	 * @param name The projectile's unique name identifier for use in the text-based version
 	 * @param pc The projectile's starting polar coordinates
 	 */
-	// This constructor gets a distance and a name from SpawnHandler
 	public Projectile(String name, PolarCoord pc) {
 		this.setName(name);
 		this.setPolarCoordinates(pc);
 	}
 	
 	/**
-	 * Constructs and initializes a new projectile with a 
-	 * JavaFx screen circle object
+	 * Constructs and initializes a new projectile 
+	 * with a JavaFx screen circle object
 	 *
 	 * @param name The projectile's unique name identifier
 	 * @param pc The projectile's starting polar coordinates
