@@ -185,7 +185,7 @@ public class Controller {
 				}
 			}
 		});
-		
+
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
@@ -196,7 +196,7 @@ public class Controller {
 			gui.addCircle(this.planet.getCircle());
 			
 		});
-		
+
 		this.gui.menuPlayButton.setOnAction((ActionEvent e) -> {
 			Timeline timeline = this.gui.getTimeline();
 			timeline.setRate(1.0);
@@ -255,7 +255,12 @@ public class Controller {
 			gui.setHighScoreText("Highscore: " + this.highScoreCount);
 		});
 	}
-
+	
+	/**
+	 * Write players highest score to data file.
+	 *
+	 * @throws IOException
+	 */
 	public void saveHighscore() {
 		try {
 			File f = new File("highscore.dat");
@@ -272,6 +277,11 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Reads players previous high score from data file.
+	 *
+	 * @throws IOException
+	 */
 	public void loadHighscore() {
 		try {
 			File f = new File("highscore.dat");
