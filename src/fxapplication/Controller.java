@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -36,6 +37,18 @@ public class Controller {
 
 	/** The planet model. */
 	private PlayerPlanet planet;
+	
+	/** The default projectile image */
+	private Image defaultProjectile;
+	
+	/** The rotating projectile image */
+	private Image rotatingProjectile;
+	
+	/** The speedup projectile image */
+	private Image speedUpProjectile;
+	
+	/** The unstable projectile image */
+	private Image unstableProjectile;
  
 	/** The GUI. */
 	private GUI gui;
@@ -63,6 +76,10 @@ public class Controller {
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
+		this.defaultProjectile = new Image("https://i.imgur.com/7fviQFm.png");
+		this.rotatingProjectile = new Image("https://i.imgur.com/cT4QMzd.png");
+		this.speedUpProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
+		this.unstableProjectile = new Image("https://i.imgur.com/8i4UqVG.png");
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
@@ -178,6 +195,19 @@ public class Controller {
 		for (int i = 0; i < count; i++) {
 			Projectile newProj = spawnHandler.spawnProjectile();
 			this.projectiles.add(newProj);
+			if (newProj instanceof DefaultProjectile) {
+				newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
+				projectileVariation(newProj);
+			} else if (newProj instanceof SpeedUpProjectile) {
+				newProj.getCircle().setFill(new ImagePattern(speedUpProjectile));
+				projectileVariation(newProj);
+			} else if (newProj instanceof UnstableProjectile) {
+				newProj.getCircle().setFill(new ImagePattern(unstableProjectile));
+				projectileVariation(newProj);
+			} else {
+				newProj.getCircle().setFill(new ImagePattern(rotatingProjectile));
+				projectileVariation(newProj);
+			}
 			gui.addCircle(newProj.getCircle());
 		}
 	}
@@ -205,6 +235,14 @@ public class Controller {
 				highScoreCount = scoreCount;
 			}
 		});
+	}
+
+	/**
+	 * Adds subtle variations in scale and rotation for newly spawned projectiles.
+	 */
+	public void projectileVariation(Projectile newProj) {
+		newProj.getCircle().setRotate(Math.random() * 360);
+		newProj.setCircleRadius((int)(9 + Math.random() * 6));
 	}
 
 	/**
