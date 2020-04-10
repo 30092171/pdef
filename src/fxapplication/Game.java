@@ -38,7 +38,7 @@ public class Game extends Application {
 	public void start(Stage mainStage) throws Exception {
 		GUI gui = new GUI(mainStage); //frontend
 		SpawnHandler spawnHandler = new SpawnHandler(projectiles);
-		Controller c = new Controller(gui, spawnHandler); //logic
+		Controller c = new Controller(gui, spawnHandler, projectiles); //logic
 		
 		mainStage.setTitle("Planet Defenders");
 		mainStage.show();

@@ -1,6 +1,3 @@
-/*
- * 
- */
 package fxapplication;
 
 import java.io.*;
@@ -13,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -38,21 +34,9 @@ public class Controller {
 	/** The pause image. */
 	private ImageView pauseImage;
 
-	/** The planet. */
+	/** The planet model. */
 	private PlayerPlanet planet;
-	
-	/**  The default projectile image. */
-	private Image defaultProjectile;
-	
-	/**  The rotating projectile image. */
-	private Image rotatingProjectile;
-	
-	/**  The speedup projectile image. */
-	private Image speedUpProjectile;
-	
-	/**  The unstable projectile image. */
-	private Image unstableProjectile;
-	 
+ 
 	/** The GUI. */
 	private GUI gui;
 	
@@ -60,7 +44,7 @@ public class Controller {
 	private SpawnHandler spawnHandler;
 	
 	/** The arraylist of projectiles. */
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	private ArrayList<Projectile> projectiles;
 	
 	/** The spawnThread and the projectileThread. */
 	private Thread spawnThread, projectileThread;
@@ -72,22 +56,19 @@ public class Controller {
 	 * @param spawnHandler The spawn handler
 	 * @throws FileNotFoundException the file not found exception
 	 */
-	public Controller(GUI gui, SpawnHandler spawnHandler) throws FileNotFoundException {
+	public Controller(GUI gui, SpawnHandler spawnHandler, ArrayList<Projectile> projectiles) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();
+		this.projectiles = projectiles;
 		this.gui = gui;
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
 		this.playImage = new ImageView(new Image("https://i.imgur.com/7zDd1B5.png"));
-		this.defaultProjectile = new Image("https://i.imgur.com/7fviQFm.png");
-		this.rotatingProjectile = new Image("https://i.imgur.com/cT4QMzd.png");
-		this.speedUpProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
-		this.unstableProjectile = new Image("https://i.imgur.com/8i4UqVG.png");
 		gui.addCircle(this.planet.getCircle());
 		init();
 	}
 
 	/**
-	 * Initializes the game's main loop.
+	 * Initializes the game's logic per keyframe of the timeline
 	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
@@ -96,14 +77,11 @@ public class Controller {
 				spawnThread = new Thread(()-> {
 					// Projectile respawning based on old trySpawn() method in spawnHandler
 					if (projectiles.size() < 1) {
-						addProjectile();
-						addProjectile();
+						addProjectile(2);
 					}
-
 					if (projectiles.size() < 5) {
 						if (Math.random() > 0.5) {
-							addProjectile();
-							addProjectile();
+							addProjectile(2);
 						}
 					}
 				});
@@ -115,34 +93,20 @@ public class Controller {
 						// Barrier Collision Check
 						if (gui.barrier.barrierCollisionCheck(proj)) {
 							if (proj instanceof UnstableProjectile) {
-								for (int j = projectiles.size() - 1; j >= 0; j--) {
+								addUpdateScore(projectiles.size());
+								for (int j = projectiles.size()-1; j >= 0; j--) {
 									removeProjectile(projectiles.get(j));
-									Platform.runLater(()->{
-										scoreCount = scoreCount + 100;
-										gui.setScoreText(Integer.toString(scoreCount));
-										if (scoreCount > highScoreCount) {
-											highScoreCount = scoreCount;
-										}
-									});
 								}
-							break;
-							}
-							else {
+							break; //breaks for loop since playfield is empty
+							} else {
 								removeProjectile(proj);
-								Platform.runLater(()->{
-									scoreCount = scoreCount + 100;
-									gui.setScoreText(Integer.toString(scoreCount));
-									if (scoreCount > highScoreCount) {
-										highScoreCount = scoreCount;
-									}
-								});
-								continue;
+								addUpdateScore(1);
+								continue; //move on to next projectile since it won't collide with the planet after being removed
 							}
 						}
 						// Planet Collision Check
 						if (planet.checkCollision(proj)) {
-							lifeCount = lifeCount - 1;
-							gui.setLivesDisplay(lifeCount);
+							gui.setLivesDisplay(--lifeCount);
 							removeProjectile(proj);
 							// Displays gameOver when lives = 0
 							if (lifeCount == 0) {
@@ -206,35 +170,16 @@ public class Controller {
 	}
 
 	/**
-	 * Adds subtle variations in scale and rotation for newly spawned projectiles.
-	 *
-	 * @param newProj the new proj
-	 */
-	public void projectileVariation(Projectile newProj) {
-		newProj.getCircle().setRotate(Math.random() * 360);
-		newProj.setCircleRadius((int)(9 + Math.random() * 6));
-	}
-	
-	/**
 	 * Adds the projectile to the screen and the projectile arraylist.
+	 * 
+	 * @param count The number of projectiles to spawn.
 	 */
-	private void addProjectile() {
-		Projectile newProj = spawnHandler.spawnProjectile();
-		this.projectiles.add(newProj);
-		if (newProj instanceof DefaultProjectile) {
-			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
-			projectileVariation(newProj);
-		} else if (newProj instanceof SpeedUpProjectile) {
-			newProj.getCircle().setFill(new ImagePattern(speedUpProjectile));
-			projectileVariation(newProj);
-		} else if (newProj instanceof UnstableProjectile) {
-			newProj.getCircle().setFill(new ImagePattern(unstableProjectile));
-			projectileVariation(newProj);
-		} else {
-			newProj.getCircle().setFill(new ImagePattern(rotatingProjectile));
-			projectileVariation(newProj);
+	private void addProjectile(int count) {
+		for (int i = 0; i < count; i++) {
+			Projectile newProj = spawnHandler.spawnProjectile();
+			this.projectiles.add(newProj);
+			gui.addCircle(newProj.getCircle());
 		}
-		gui.addCircle(newProj.getCircle());
 	}
 
 	/**
@@ -246,9 +191,24 @@ public class Controller {
 		gui.removeCircle(proj.getCircle());
 		projectiles.remove(proj);
 	}
+	
+	/**
+	 * Update and add score after a projectile is destroyed.
+	 * 
+	 * @param destroyed The number of projectiles destroyed
+	 */
+	private void addUpdateScore(int destroyed) {
+		Platform.runLater(()->{
+			scoreCount = scoreCount + 100 * destroyed;
+			gui.setScoreText(Integer.toString(scoreCount));
+			if (scoreCount > highScoreCount) {
+				highScoreCount = scoreCount;
+			}
+		});
+	}
 
 	/**
-	 * Post init.
+	 * Post initialization including loading and setting of highscore and playing the timeline.
 	 */
 	public void postInit() {
 		this.loadHighscore();
@@ -260,8 +220,6 @@ public class Controller {
 	
 	/**
 	 * Write players highest score to data file.
-	 *
-	 * @throws IOException
 	 */
 	public void saveHighscore() {
 		try {
@@ -282,8 +240,6 @@ public class Controller {
 	/**
 
 	 * Reads players previous high score from data file.
-	 *
-	 * @throws IOException
 	 */
 	public void loadHighscore() {
 		try {
