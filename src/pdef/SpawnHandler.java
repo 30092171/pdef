@@ -5,6 +5,8 @@ package pdef;
 
 import java.util.ArrayList;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
@@ -21,6 +23,18 @@ public class SpawnHandler {
 	/** An arraylist that holds the projectiles */
 	public ArrayList<Projectile> projectiles;
 	
+	/** The default projectile image */
+	private Image defaultProjectile;
+	
+	/** The rotating projectile image */
+	private Image rotatingProjectile;
+	
+	/** The speedup projectile image */
+	private Image speedUpProjectile;
+	
+	/** The unstable projectile image */
+	private Image unstableProjectile;
+	
 	/**
 	 * Constructs and initializes a new spawn handler
 	 *
@@ -29,6 +43,10 @@ public class SpawnHandler {
 	//Constructor, gets reference to projectile list and PlayerPlanet
 	public SpawnHandler(ArrayList<Projectile> projectiles) {
 		this.projectiles = projectiles;
+		this.defaultProjectile = new Image("https://i.imgur.com/7fviQFm.png");
+		this.rotatingProjectile = new Image("https://i.imgur.com/cT4QMzd.png");
+		this.speedUpProjectile = new Image("https://i.imgur.com/I4Tiqy3.png");
+		this.unstableProjectile = new Image("https://i.imgur.com/8i4UqVG.png");
 	}
 	
 	/**
@@ -48,13 +66,19 @@ public class SpawnHandler {
 		double projType = Math.random();
 		if (projType >= 0.8) {
 			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+			circle.setFill(new ImagePattern(rotatingProjectile));
 		} else if (projType >= 0.6 && projType < 0.8){
 			newProjectile = new SpeedUpProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+			circle.setFill(new ImagePattern(speedUpProjectile));
 		}else if (projType >= 0.55 && projType < 0.6){
 			newProjectile = new UnstableProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+			circle.setFill(new ImagePattern(unstableProjectile));
 		} else {
 			newProjectile = new DefaultProjectile("Projectile " + (projectiles.size() + 1), p, circle);
+			circle.setFill(new ImagePattern(defaultProjectile));
 		}
+		circle.setRotate(Math.random() * 360);
+		newProjectile.setCircleRadius((int)(9 + Math.random() * 6));
 		return  newProjectile;
 		
 	}
