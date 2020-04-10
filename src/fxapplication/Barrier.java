@@ -3,8 +3,10 @@
  */
 package fxapplication;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import pdef.Projectile;
 
@@ -17,6 +19,9 @@ public class Barrier {
 	/** The JavaFx screen circle object holding the planets center x, center y, and radius. */
 	private Circle circle;
 	
+	/** The barrier image */
+	private Image barrier;
+	
 	/**
 	 * Constructs and initializes a new barrier.
 	 *
@@ -24,7 +29,9 @@ public class Barrier {
 	 */
 	public Barrier (BorderPane root) {
 		this.circle = new Circle(20);
-		this.circle.setFill(Color.WHITE);
+		this.barrier = new Image("https://i.imgur.com/uHEYA5I.png");
+		this.circle.setFill(new ImagePattern(barrier));
+		
 		root.getChildren().add(this.circle);
 	}	
 	
