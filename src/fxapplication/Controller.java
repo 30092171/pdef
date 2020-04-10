@@ -1,5 +1,6 @@
-/*
- * 
+/**
+ * This class contains the logic for the game, as well as initializing threading
+ * for operations that happen often to take load off the main thread.
  */
 package fxapplication;
 
@@ -13,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -80,14 +80,12 @@ public class Controller {
 				spawnThread = new Thread(()-> {
 					// Projectile respawning based on old trySpawn() method in spawnHandler
 					if (projectiles.size() < 1) {
-						addProjectile();
-						addProjectile();
+						addProjectile(2);
 					}
 
 					if (projectiles.size() < 5) {
 						if (Math.random() > 0.5) {
-							addProjectile();
-							addProjectile();
+							addProjectile(2);
 						}
 					}
 				});
@@ -99,14 +97,12 @@ public class Controller {
 						// Barrier Collision Check
 						if (gui.barrier.barrierCollisionCheck(proj)) {
 							if (proj instanceof UnstableProjectile) {
-								for (int j = projectiles.size() - 1; j >= 0; j--) {
-									removeProjectile(projectiles.get(j));
-									addUpdateScore();
-								}
+								addUpdateScore(projectiles.size());
+								projectiles.clear();
 							break; //breaks for loop since playfield is empty
 							} else {
 								removeProjectile(proj);
-								addUpdateScore();
+								addUpdateScore(1);
 								continue; //move on to next projectile since it won't collide with the planet after being removed
 							}
 						}
@@ -178,11 +174,15 @@ public class Controller {
 	
 	/**
 	 * Adds the projectile to the screen and the projectile arraylist.
+	 * 
+	 * @param count The number of projectiles to spawn.
 	 */
-	private void addProjectile() {
-		Projectile newProj = spawnHandler.spawnProjectile();
-		this.projectiles.add(newProj);
-		gui.addCircle(newProj.getCircle());
+	private void addProjectile(int count) {
+		for (int i = 0; i < count; i++) {
+			Projectile newProj = spawnHandler.spawnProjectile();
+			this.projectiles.add(newProj);
+			gui.addCircle(newProj.getCircle());
+		}
 	}
 
 	/**
@@ -195,9 +195,9 @@ public class Controller {
 		projectiles.remove(proj);
 	}
 	
-	private void addUpdateScore() {
+	private void addUpdateScore(int destroyed) {
 		Platform.runLater(()->{
-			scoreCount = scoreCount + 100;
+			scoreCount = scoreCount + 100 * destroyed;
 			gui.setScoreText(Integer.toString(scoreCount));
 			if (scoreCount > highScoreCount) {
 				highScoreCount = scoreCount;
