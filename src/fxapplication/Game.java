@@ -7,10 +7,8 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pdef.PlayerPlanet;
 import pdef.Projectile;
 import pdef.SpawnHandler;
-import pdef.PlayerInput;
 
 /**
  * This class represents the entry point of Planet Defenders GUI version. 

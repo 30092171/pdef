@@ -14,7 +14,6 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import pdef.*;
 
@@ -186,7 +185,7 @@ public class Controller {
 				}
 			}
 		});
-		
+
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
@@ -197,7 +196,7 @@ public class Controller {
 			gui.addCircle(this.planet.getCircle());
 			
 		});
-		
+
 		this.gui.menuPlayButton.setOnAction((ActionEvent e) -> {
 			Timeline timeline = this.gui.getTimeline();
 			timeline.setRate(1.0);
@@ -222,7 +221,6 @@ public class Controller {
 	private void addProjectile() {
 		Projectile newProj = spawnHandler.spawnProjectile();
 		this.projectiles.add(newProj);
-		System.out.println(newProj);
 		if (newProj instanceof DefaultProjectile) {
 			newProj.getCircle().setFill(new ImagePattern(defaultProjectile));
 			projectileVariation(newProj);
@@ -259,9 +257,11 @@ public class Controller {
 			gui.setHighScoreText("Highscore: " + this.highScoreCount);
 		});
 	}
-
+	
 	/**
-	 * Saves the highscore to a file.
+	 * Write players highest score to data file.
+	 *
+	 * @throws IOException
 	 */
 	public void saveHighscore() {
 		try {
@@ -280,7 +280,10 @@ public class Controller {
 	}
 	
 	/**
-	 * Loads highscore from a file.
+
+	 * Reads players previous high score from data file.
+	 *
+	 * @throws IOException
 	 */
 	public void loadHighscore() {
 		try {
