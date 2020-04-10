@@ -1,7 +1,3 @@
-/**
- * This class contains the logic for the game, as well as initializing threading
- * for operations that happen often to take load off the main thread.
- */
 package fxapplication;
 
 import java.io.*;
@@ -38,7 +34,7 @@ public class Controller {
 	/** The pause image. */
 	private ImageView pauseImage;
 
-	/** The planet. */
+	/** The planet model. */
 	private PlayerPlanet planet;
 	 
 	/** The GUI. */
@@ -48,7 +44,7 @@ public class Controller {
 	private SpawnHandler spawnHandler;
 	
 	/** The projectiles. */
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	private ArrayList<Projectile> projectiles;
 	
 	/** The spawnThread and the projectileThread. */
 	private Thread spawnThread, projectileThread;
@@ -60,8 +56,9 @@ public class Controller {
 	 * @param spawnHandler The spawn handler
 	 * @throws FileNotFoundException 
 	 */
-	public Controller(GUI gui, SpawnHandler spawnHandler) throws FileNotFoundException {
+	public Controller(GUI gui, SpawnHandler spawnHandler, ArrayList<Projectile> projectiles) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();
+		this.projectiles = projectiles;
 		this.gui = gui;
 		this.spawnHandler = spawnHandler;
 		this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
@@ -71,7 +68,7 @@ public class Controller {
 	}
 
 	/**
-	 * Initializes the game's main loop
+	 * Initializes the game's logic per keyframe of the timeline
 	 */
 	private void init() {
 		gui.getTimeline().getKeyFrames().add(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
@@ -82,7 +79,6 @@ public class Controller {
 					if (projectiles.size() < 1) {
 						addProjectile(2);
 					}
-
 					if (projectiles.size() < 5) {
 						if (Math.random() > 0.5) {
 							addProjectile(2);
@@ -98,7 +94,9 @@ public class Controller {
 						if (gui.barrier.barrierCollisionCheck(proj)) {
 							if (proj instanceof UnstableProjectile) {
 								addUpdateScore(projectiles.size());
-								projectiles.clear();
+								for (int j = projectiles.size()-1; j >= 0; j--) {
+									removeProjectile(projectiles.get(j));
+								}
 							break; //breaks for loop since playfield is empty
 							} else {
 								removeProjectile(proj);
@@ -108,8 +106,7 @@ public class Controller {
 						}
 						// Planet Collision Check
 						if (planet.checkCollision(proj)) {
-							lifeCount = lifeCount - 1;
-							gui.setLivesDisplay(lifeCount);
+							gui.setLivesDisplay(--lifeCount);
 							removeProjectile(proj);
 							// Displays gameOver when lives = 0
 							if (lifeCount == 0) {
@@ -195,6 +192,11 @@ public class Controller {
 		projectiles.remove(proj);
 	}
 	
+	/**
+	 * Update and add score after a projectile is destroyed.
+	 * 
+	 * @param destroyed The number of projectiles destroyed
+	 */
 	private void addUpdateScore(int destroyed) {
 		Platform.runLater(()->{
 			scoreCount = scoreCount + 100 * destroyed;
@@ -206,7 +208,7 @@ public class Controller {
 	}
 
 	/**
-	 * Post init.
+	 * Post initialization including loading and setting of highscore and playing the timeline.
 	 */
 	public void postInit() {
 		this.loadHighscore();
@@ -218,8 +220,6 @@ public class Controller {
 	
 	/**
 	 * Write players highest score to data file.
-	 *
-	 * @throws IOException
 	 */
 	public void saveHighscore() {
 		try {
@@ -239,8 +239,6 @@ public class Controller {
 	
 	/**
 	 * Reads players previous high score from data file.
-	 *
-	 * @throws IOException
 	 */
 	public void loadHighscore() {
 		try {
