@@ -67,6 +67,7 @@ public class Controller {
 	 *
 	 * @param gui The gui
 	 * @param spawnHandler The spawn handler
+	 * @param projectiles The arraylist of projectiles
 	 * @throws FileNotFoundException The file not found exception
 	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler, ArrayList<Projectile> projectiles) throws FileNotFoundException {
@@ -239,10 +240,11 @@ public class Controller {
 
 	/**
 	 * Adds subtle variations in scale and rotation for newly spawned projectiles.
+	 * @param projectile Projectile reference 
 	 */
-	public void projectileVariation(Projectile newProj) {
-		newProj.getCircle().setRotate(Math.random() * 360);
-		newProj.setCircleRadius((int)(9 + Math.random() * 6));
+	public void projectileVariation(Projectile projectile) {
+		projectile.getCircle().setRotate(Math.random() * 360);
+		projectile.setCircleRadius((int)(9 + Math.random() * 6));
 	}
 
 	/**

@@ -28,7 +28,8 @@ public class PlayerInput {
 	 * Deals with user input
 	 *
 	 * @param input The player's typed input
-	 * @return 
+	 * @return -1, invalid input; scoreToAdd The score to add
+	 * 
 	 */
 	public int command(String input) {
 		int scoreToAdd = 0;
