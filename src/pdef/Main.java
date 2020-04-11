@@ -44,6 +44,8 @@ public class Main {
 			//Input prompt
 			System.out.print("Enter projectile to shoot:");
 			String input = sc.nextLine();
+			
+			//Handles reset input
 			if (input.toUpperCase().equals("RESET")) {
 				p = new PlayerPlanet();
 				sp.initialSpawn();
@@ -53,7 +55,7 @@ public class Main {
 				continue;
 			}
 			//Determine the input of user and print line + modify projectiles list accordingly
-			//Also adds to score if projectile was destroyed
+			//Adds to score if projectile was destroyed
 			int result = pi.command(input);
 			switch(result) { //switch case for command result codes
 				case -1:
@@ -62,7 +64,7 @@ public class Main {
 					p.addScore(result);
 			}
 			
-			//Updates projectiles after each turn
+			//Updates projectile distance and checks for collision after each turn
 			for (int i = 0; i < projectiles.size(); i++) {
 				Projectile pr = projectiles.get(i);
 				PolarCoord pc = pr.getPolarCoordinates();

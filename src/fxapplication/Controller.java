@@ -35,7 +35,7 @@ public class Controller {
 	/** The pause image. */
 	private ImageView pauseImage;
 
-	/** The planet model. */
+	/** The player's planet model. */
 	private PlayerPlanet planet;
 	
 	/** The default projectile image */
@@ -67,7 +67,7 @@ public class Controller {
 	 *
 	 * @param gui The gui
 	 * @param spawnHandler The spawn handler
-	 * @throws FileNotFoundException the file not found exception
+	 * @throws FileNotFoundException The file not found exception
 	 */
 	public Controller(GUI gui, SpawnHandler spawnHandler, ArrayList<Projectile> projectiles) throws FileNotFoundException {
 		this.planet = new PlayerPlanet();

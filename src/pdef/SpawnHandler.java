@@ -40,10 +40,10 @@ public class SpawnHandler {
 		double initialDistance = 400; // Spawns outside of screen 
 		double spawnAngle = (Math.random() * Math.PI * 2);
 		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(360,360));
-		Circle circle = new Circle(p.getRawX(), p.getRawY(), 10);
+		Circle circle = new Circle(p.getXCoord(), p.getYCoord(), 10);
 		
-		Projectile newProjectile;
 		//Randomly generates different projectile types.
+		Projectile newProjectile;
 		double projType = Math.random();
 		if (projType >= 0.8) {
 			newProjectile = new RotatingProjectile("Projectile " + (projectiles.size() + 1), p, circle);
@@ -63,7 +63,7 @@ public class SpawnHandler {
 	 * @return The spawned projectile
 	 */
 	public Projectile oldProjectile() {
-		double initialDistance = Math.random() * 70 + 10; // Spawns outside of screen 
+		double initialDistance = Math.random() * 70 + 10; 
 		double spawnAngle = (Math.random() * Math.PI * 2);
 		PolarCoord p = new PolarCoord(initialDistance, spawnAngle, new Point2D(0,0));
 		return new DefaultProjectile(names.charAt(counter++) + "", p);
@@ -106,7 +106,7 @@ public class SpawnHandler {
 	public void printProjectileStatus(PlayerPlanet player) {
 		for(Projectile element : projectiles) {
 			PolarCoord p = element.getPolarCoordinates();
-			Point2D p2 = p.getRawCoordinates();
+			Point2D p2 = p.getCartesianCoordinates();
 			System.out.println("Projectile " + element.getName() 
 					+ " is " + (int)p.getDistance() + " units away at" +
 					" (" + (int)p2.getX() + ", " + (int)p2.getY()+ ").");
