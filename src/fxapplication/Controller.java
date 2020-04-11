@@ -129,7 +129,7 @@ public class Controller {
 							// Displays gameOver when lives = 0
 							if (lifeCount == 0) {
 								Platform.runLater(()->{
-									saveHighscore();
+									saveHighScore();
 									gui.drawGameOver();
 								});
 							}
@@ -171,7 +171,7 @@ public class Controller {
 		this.gui.resetButton.setOnAction((ActionEvent e) -> {
 			this.lifeCount = 3;
 			this.scoreCount = 0;
-			saveHighscore();
+			saveHighScore();
 			projectiles.clear();
 			gui.resetGui();
 			gui.pauseButton.setGraphic(pauseImage);
@@ -251,7 +251,7 @@ public class Controller {
 	 * Post initialization including loading and setting of highscore and playing the timeline.
 	 */
 	public void postInit() {
-		this.loadHighscore();
+		this.loadHighScore();
 		gui.getTimeline().play();
 		Platform.runLater(()->{
 			gui.setHighScoreText("Highscore: " + this.highScoreCount);
@@ -261,7 +261,7 @@ public class Controller {
 	/**
 	 * Write players highest score to data file.
 	 */
-	public void saveHighscore() {
+	public void saveHighScore() {
 		try {
 			File f = new File("highscore.dat");
 			if (!f.exists()) {
@@ -281,7 +281,7 @@ public class Controller {
 
 	 * Reads players previous high score from data file.
 	 */
-	public void loadHighscore() {
+	public void loadHighScore() {
 		try {
 			File f = new File("highscore.dat");
 			if (!f.exists()) {
