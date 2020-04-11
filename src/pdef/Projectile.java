@@ -16,17 +16,17 @@ public abstract class Projectile {
 	/** The projectile's polar coordinates. */
 	private PolarCoord pc;
 	
-	/** The projectile's unique name identifier for use in the text-based version */
+	/** The projectile's unique name identifier */
 	private String name; 
 	
-	/** The projectile's JavaFX screen circle object. */
+	/** The JavaFx screen circle object that contains the screen x, screen y, and radius. */
 	private Circle projCircle;
 	
 	/**
-	 * Constructs and initializes a new projectile using a distance
-	 * and name from SpawnHandler
+	 * Constructs and initializes a new projectile using 
+	 * a distance and name from SpawnHandler
 	 *
-	 * @param name The projectile's unique name identifier for use in the text-based version
+	 * @param name The projectile's unique name identifier
 	 * @param pc The projectile's starting polar coordinates
 	 */
 	public Projectile(String name, PolarCoord pc) {
@@ -89,7 +89,7 @@ public abstract class Projectile {
 	 */
 	public void setPolarCoordinates(PolarCoord pc) {
 		this.pc = pc;
-		Point2D p = pc.getJCoordinates();
+		Point2D p = pc.getScreenCoordinates();
 		if (this.projCircle != null) {
 			this.projCircle.setCenterX(p.getX());
 			this.projCircle.setCenterY(p.getY());
@@ -97,9 +97,9 @@ public abstract class Projectile {
 	}
 	
 	/**
-	 * Gets the JavaFx screen circle object.
+	 * Gets the JavaFx screen circle object that contains the screen x, screen y, and radius
 	 *
-	 * @return The JavaFX screen circle object.
+	 * @return The JavaFx screen circle object that contains the screen x, screen y, and radius
 	 */
 	public Circle getCircle() {
 		return this.projCircle;

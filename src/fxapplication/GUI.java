@@ -141,13 +141,17 @@ public class GUI {
     	this.root.getChildren().add(canvas);
     	this.root.setPrefSize(WINDOWSIZE.getWidth(), WINDOWSIZE.getHeight());
     	this.root.setStyle("-fx-background-color:#08121c");
+    	
+    	//Star background
     	this.stars = new ImageView(new Image("https://i.imgur.com/28YKGjT.png"));
     	this.stars.setOpacity(0.7);
     	this.root.getChildren().add(stars);
 
+    	//Score Label
     	this.scoreValue = new Label("0");
-
     	this.scoreValue.setTextFill(Color.WHITE);
+    	
+    	//Lives
     	this.life1 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
     	this.life2 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
     	this.life3 = new ImageView(new Image("https://i.imgur.com/FzTRe09.png"));
@@ -157,6 +161,8 @@ public class GUI {
     	this.life2.setScaleY(0.8);
     	this.life3.setScaleX(0.8);
     	this.life3.setScaleY(0.8);
+    	
+    	//Buttons
     	this.pauseImage = new ImageView(new Image("https://i.imgur.com/YyHnk0H.png"));
     	this.resetImage = new ImageView(new Image("https://i.imgur.com/EoWQhfs.png"));
     	this.pauseButton = new Button();
@@ -170,18 +176,22 @@ public class GUI {
     	this.pauseButton.setStyle("-fx-background-color:#08121c");
     	this.resetButton.setStyle("-fx-background-color:#08121c");
     	
+    	//Planet
     	this.planet = new ImageView(new Image("https://i.imgur.com/jgcrrYv.png"));
     	this.planet.setFitHeight(planetRadius*2);
     	this.planet.setFitWidth(planetRadius*2);
     	this.planet.setX(planetX-72);
     	this.planet.setY(planetY-72);
     	this.root.getChildren().add(planet);
+    	
+    	//Game over explosion image
     	this.explosion = new ImageView(new Image("https://i.imgur.com/WirxLxw.png"));
     	this.explosion.setScaleX(0.5);
     	this.explosion.setScaleY(0.5);
     	this.explosion.setX(5);
     	this.explosion.setY(20);
     	
+    	//Start menu
     	this.menuBorder = new Rectangle();
     	this.menuLogo = new ImageView(new Image("https://i.imgur.com/jVapTTJ.png"));
     	this.menuInstructions = new Label("Protect your planet against a barrage of \n asteroids for as long as possible! \n \n -Press LMB to place an asteroid barrier \n -Block asteroids to increase your score \n -If 3 asteroids make impact it's game over! \n \n");
@@ -193,9 +203,10 @@ public class GUI {
     	this.menuStars = new ImageView(new Image("https://i.imgur.com/28YKGjT.png"));
     	this.menuStars.setOpacity(0.7);
     	
+    	//Barrier
     	this.barrier = new Barrier(root);
     	
-    	//draws the barriers where mouse is clicked
+    	//Draws the barriers where mouse is clicked
     	root.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
     		if (timeline.getRate() > 0.0) {
     			this.barrier.moveBarrier((int)event.getX(), (int)event.getY());
@@ -427,7 +438,7 @@ public class GUI {
 	}
 
 	/**
-	 * Removes circle objects (i.e. projectiles) from the GUI
+	 * Removes circle object (i.e. projectile) from the GUI
 	 *
 	 * @param circle The circle object to be removed
 	 */

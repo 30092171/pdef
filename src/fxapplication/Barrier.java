@@ -14,7 +14,7 @@ import pdef.Projectile;
  */
 public class Barrier {
 
-	/** The JavaFx screen circle object holding the planets center x, center y, and radius. */
+	/** The JavaFx screen circle object holding the barrier's screen x, screen y, and radius. */
 	private Circle circle;
 	
 	/**
@@ -46,7 +46,6 @@ public class Barrier {
 	 * @param p The projectile's reference
 	 * @return true, if collision has occurred; false, otherwise.
 	 */
-	//Checks if the barrier collides with a projectile
 	public boolean barrierCollisionCheck(Projectile p) {
 		Circle other = p.getCircle(); //have to encapsulate this circle
 		//Calculations to determine if projectile collides with barrier

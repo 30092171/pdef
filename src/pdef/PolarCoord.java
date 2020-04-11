@@ -6,7 +6,7 @@ package pdef;
 import javafx.geometry.Point2D;
 
 /**
- * This class represents the polar coordinates of each projectile and the planet
+ * This class represents the polar coordinates of the projectiles
  */
 public class PolarCoord implements Cloneable {
 	
@@ -16,7 +16,7 @@ public class PolarCoord implements Cloneable {
 	/** The radians from the positive horizontal axis in a counter-clockwise manner. */
 	private double radians;
 	
-	/** A Point2D object representing the object's origin. */
+	/** A Point2D object representing the screen's origin. */
 	private Point2D origin;
 	
 	/**
@@ -71,40 +71,40 @@ public class PolarCoord implements Cloneable {
 	}
 	
 	/**
-	 * Gets the raw X coordinate.
+	 * Gets the x coordinate.
 	 *
-	 * @return The raw X coordinate
+	 * @return The x coordinate
 	 */
-	public double getRawX() {
+	public double getXCoord() {
 		return Math.cos(this.radians) * this.distance;
 	}
 	
 	/**
-	 * Gets the raw Y coordinate
+	 * Gets the y coordinate
 	 *
-	 * @return The raw Y coordinate
+	 * @return The y coordinate
 	 */
-	public double getRawY() {
+	public double getYCoord() {
 		return Math.sin(this.radians) * this.distance;
 	}
 	
 	/**
-	 * Gets the raw coordinates (cartesian coordinates).
+	 * Gets the cartesian coordinates
 	 *
-	 * @return The raw coordinates (cartesian coordinates)
+	 * @return The cartesian coordinates
 	 */
-	public Point2D getRawCoordinates() {;
-		return new Point2D(this.getRawX(),this.getRawY());
+	public Point2D getCartesianCoordinates() {;
+		return new Point2D(this.getXCoord(),this.getYCoord());
 	}
 	
 	/**
-	 * Gets the j coordinates.
+	 * Gets the screen coordinates
 	 *
-	 * @return the j coordinates
+	 * @return The screen coordinates
 	 */
-	public Point2D getJCoordinates() {
-		Point2D p = this.getRawCoordinates();
-		return new Point2D(p.getX() + origin.getX(),p.getY() + origin.getY());
+	public Point2D getScreenCoordinates() {
+		Point2D p = this.getCartesianCoordinates();
+		return new Point2D(p.getX() + origin.getX(),p.getY() + origin.getY()); // Adds base x and y to screen origin 
 	}
 	
 	/**

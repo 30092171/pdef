@@ -12,7 +12,7 @@ import javafx.scene.shape.Circle;
  */
 public class PlayerPlanet implements Collidable {
 	
-	/** The JavaFx screen circle object holding the planets center x, center y, and radius. */
+	/** The JavaFx screen circle object that contains the screen x, screen y, and radius. */
 	private Circle circle;
 	
 	/** The number of lives. */
@@ -33,9 +33,9 @@ public class PlayerPlanet implements Collidable {
 	}
 	
 	/**
-	 * Checks for collision between the planet and a projectile
+	 * Checks for collision between the planet and the projectile
 	 *
-	 * @param p The reference to a projectile object
+	 * @param p The reference to the projectile object
 	 * @return true, if collision has occurred. false, otherwise.
 	 */
 	public boolean checkCollision(Projectile p) {
@@ -137,9 +137,9 @@ public class PlayerPlanet implements Collidable {
 	}
 
 	/**
-	 * Gets the JavaFx screen circle object.
+	 * Gets the JavaFx screen circle object that contains the screen x, screen y, and radius
 	 *
-	 * @return The JavaFx screen circle object that contains the center x, center y, and radius
+	 * @return The JavaFx screen circle object that contains the screen x, screen y, and radius
 	 */
 	public Circle getCircle() {
 		return this.circle;

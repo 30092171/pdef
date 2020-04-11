@@ -35,7 +35,7 @@ public class PlayerInput {
 		//If input is potentially valid projectile name
 		input = input.toUpperCase();
 		int initalP = projectiles.size();
-		if (input.length() == 1) { //it's a character
+		if (input.length() == 1) { //Checks to see if it's a character
 			for (int projectile = 0; projectile < projectiles.size(); projectile++) { //search for said projectile
 				Projectile t = projectiles.get(projectile);
 				if (input.equals(t.getName())) { //If we find it
@@ -52,7 +52,7 @@ public class PlayerInput {
 				System.out.println("Miss!");
 			}
 		}
-		//if input isn't potentially a projectile name and isn't valid command
+		//If input isn't potentially a projectile name and isn't valid command
 		else { //empty or length > 1
 			System.out.println("----------------------------------");
 			System.out.println("Invalid input");
