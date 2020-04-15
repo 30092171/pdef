@@ -6,12 +6,12 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 
 ###### How to Run
 
-1. Download planetDefender.GUI.jar and planetDefender.TEXT.jar from the releases tab under "Version 1.0" (or click links to download)<br/> <https://github.com/30092171/pdef/releases/download/0.3/planetDefendersGUI.jar><br/>
-<https://github.com/30092171/pdef/releases/download/0.3/planetDefendersTEXT.jar><br/>
+1. Download planetDefender.GUI.jar and planetDefender.TEXT.jar from the releases tab under "Version 1.0" (or click links to download)<br/> <https://github.com/30092171/pdef/releases/download/1.0/planetDefendersGUI.jar><br/>
+<https://github.com/30092171/pdef/releases/download/1.0/planetDefendersText.jar><br/>
 2. Place .jar files in desired directory
 3. Double-click planetDefendersGUI.jar to open the GUI version.
 4. Otherwise for the text-based version, open command line
-5. java -jar \<path\>\planetDefendersTEXT.jar
+5. java -jar \<path\>\planetDefendersText.jar
 6. Enjoy!
 
 ###### Game Instructions (Text-Based)
@@ -28,7 +28,7 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 ###### How to Compile Separately
 
 1. Install Java JDK 8 (<https://www.oracle.com/java/technologies/javase-jdk8-downloads.html>)
-2. Download Planet Defenders source code (<https://github.com/30092171/pdef/releases/download/0.3/planetDefenders_SourceCode.zip>)
+2. Download Planet Defenders source code (<https://github.com/30092171/pdef/releases/download/1.0/planetDefenders_SourceCode.zip>)
 3. Set your JAVA_HOME and PATH (<https://javatutorial.net/set-java-home-windows-10>)
 4. Move to src directory and compile all the pdef files by typing <javac pdef/*.java>. <br/>
 5. Move to src directory and compile all the fxapplication files by typing <javac fxapplication/*.java>. <br/>
