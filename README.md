@@ -33,8 +33,8 @@ Planet Defenders is a 2D arcade-styled defense game. The player must defend thei
 4. Move to src directory and compile all the pdef files by typing <javac pdef/*.java>. <br/>
 5. Move to src directory and compile all the fxapplication files by typing <javac fxapplication/*.java>. <br/>
 6. Run the following versions by moving to the src directory and type in the following:<br/>
-Text-Based --> \<java pdef.Main \> <br/>
-GUI-Based --> \<java fxapplication.Game \> <br/>
+Text-Based --> \<java pdef.Main\> <br/>
+GUI-Based --> \<java fxapplication.Game\> <br/>
 
 
 ###### JUnit Testing
